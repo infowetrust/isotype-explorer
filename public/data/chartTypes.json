@@ -1,0 +1,18 @@
+[
+  {
+    "id": "bar-chart",
+    "label": "Bar"
+  },
+  {
+    "id": "column-chart",
+    "label": "Column"
+  },
+  {
+    "id": "map",
+    "label": "Map"
+  },
+  {
+    "id": "area-chart",
+    "label": "Area"
+  }
+]

@@ -1,0 +1,319 @@
+[
+  {
+    "id": "w0001-p0038-f99",
+    "workId": "w0001",
+    "page": 38,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0038-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0038-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Development of Men's and Women's Occupations",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0042-f99",
+    "workId": "w0001",
+    "page": 42,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0042-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0042-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial",
+      "diverging"
+    ],
+    "colors": [
+      "red",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Age Groups and Occupations",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0046-f99",
+    "workId": "w0001",
+    "page": 46,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0046-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0046-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Professions of Women in 1911 and 1931",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0067-f00",
+    "workId": "w0001",
+    "page": 67,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0001-p0067-f00_h0500.webp",
+    "view": "/webp/views/w0001-p0067-f00_h2400.webp",
+    "chartTypePrimary": "map",
+    "chartTypes": [
+      "map"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Women's Occupations by Regions",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0070-f99",
+    "workId": "w0001",
+    "page": 70,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0070-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0070-f99_h2400.webp",
+    "chartTypePrimary": "column-chart",
+    "chartTypes": [
+      "column-chart",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Weekly Earnings of Men and Women",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0074-f99",
+    "workId": "w0001",
+    "page": 74,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0074-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0074-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Trade Union Membership",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0078-f99",
+    "workId": "w0001",
+    "page": 78,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0078-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0078-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Percentage of Women Occupied and Number of Births",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0082-f99",
+    "workId": "w0001",
+    "page": 82,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0082-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0082-f99_h2400.webp",
+    "chartTypePrimary": "area-chart",
+    "chartTypes": [
+      "area-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Women at Work in Greater London and in South Wales",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0086-f99",
+    "workId": "w0001",
+    "page": 86,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0086-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0086-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "100"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "The Changing Home before the 19th Century",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0090-f99",
+    "workId": "w0001",
+    "page": 90,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0090-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0090-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "100"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "The Changing Home To-day",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0094-f99",
+    "workId": "w0001",
+    "page": 94,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0094-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0094-f99_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Birth Rates and Social Class",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0098-f99",
+    "workId": "w0001",
+    "page": 98,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0001-p0098-f99_h0500.webp",
+    "view": "/webp/views/w0001-p0098-f99_h2400.webp",
+    "chartTypePrimary": null,
+    "chartTypes": [],
+    "colors": [],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Family Sizes",
+    "workYear": 1945
+  },
+  {
+    "id": "w0001-p0103-f00",
+    "workId": "w0001",
+    "page": 103,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0001-p0103-f00_h0500.webp",
+    "view": "/webp/views/w0001-p0103-f00_h2400.webp",
+    "chartTypePrimary": "bar-chart",
+    "chartTypes": [
+      "bar-chart",
+      "unit",
+      "pictorial",
+      "100"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "title": "Occupations of Women about 1930",
+    "workYear": 1945
+  }
+]

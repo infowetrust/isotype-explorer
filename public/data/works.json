@@ -1,0 +1,19 @@
+[
+  {
+    "workId": "w0001",
+    "year": 1945,
+    "title": "Women and work",
+    "series": "The new democracy",
+    "authors": [
+      "Williams",
+      "Gertrude"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Nicholson & Watson",
+    "publisherCity": "London",
+    "heightCm": 22,
+    "language": "English"
+  }
+]
