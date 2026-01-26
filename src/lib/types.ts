@@ -18,7 +18,8 @@ export type FigureRecord = {
   height?: number;
   thumb: string;
   view: string;
-  chartTypes: string[];
+  chartType?: string | string[];
+  chartTypes?: string[];
   chartTypePrimary?: string;
   colors: string[];
   onlyBlack?: boolean;

@@ -4,14 +4,18 @@ import type { SortKey } from "../lib/sort";
 
 type FiltersBarProps = {
   chartTypes: ChartTypeConfig[];
+  availableFeatures: string[];
   colors: ColorConfig[];
   works: WorkRecord[];
   selectedTypes: string[];
+  selectedFeatures: string[];
   selectedColors: string[];
   onlyBlack: boolean;
   selectedWorkId: string | null;
   sortKey: SortKey;
   onToggleType: (id: string) => void;
+  onToggleFeature: (id: string) => void;
+  onClearFeatures: () => void;
   onToggleColor: (id: string) => void;
   onWorkChange: (id: string | null) => void;
   onSortChange: (sort: SortKey) => void;
@@ -19,22 +23,27 @@ type FiltersBarProps = {
 
 const FiltersBar = ({
   chartTypes,
+  availableFeatures,
   colors,
   works,
   selectedTypes,
+  selectedFeatures,
   selectedColors,
   onlyBlack,
   selectedWorkId,
   sortKey,
   onToggleType,
+  onToggleFeature,
+  onClearFeatures,
   onToggleColor,
   onWorkChange,
   onSortChange
 }: FiltersBarProps) => {
+  const showFeatures = selectedTypes.length === 1;
   return (
     <div className="filters-bar">
       <div className="filter-group">
-        <span className="filter-label">Chart types</span>
+        <span className="filter-label">Type</span>
         {chartTypes.map((type) => (
           <button
             key={type.id}
@@ -45,7 +54,30 @@ const FiltersBar = ({
             <span>{type.label}</span>
           </button>
         ))}
+        <span className="filter-helper">Select a type to see feature refinements.</span>
       </div>
+      {showFeatures ? (
+        <div className="filter-group features-row">
+          <span className="filter-label">Features</span>
+          <div className="features-scroll">
+            {availableFeatures.map((feature) => (
+              <button
+                key={feature}
+                type="button"
+                className={clsx("chip", selectedFeatures.includes(feature) && "selected")}
+                onClick={() => onToggleFeature(feature)}
+              >
+                <span>{feature}</span>
+              </button>
+            ))}
+          </div>
+          {selectedFeatures.length > 0 ? (
+            <button type="button" className="features-clear" onClick={onClearFeatures}>
+              Clear
+            </button>
+          ) : null}
+        </div>
+      ) : null}
       <div className="filter-group">
         <span className="filter-label">Colors</span>
         {colors.map((color) => {

@@ -2,6 +2,7 @@ import type { FigureWithWork } from "./types";
 
 export type FiltersState = {
   selectedTypes: string[];
+  selectedFeatures: string[];
   selectedColors: string[];
   onlyBlack: boolean;
   workId: string | null;
@@ -13,6 +14,19 @@ const hasAny = (source: string[], target: string[]): boolean =>
 const hasAll = (source: string[], target: string[]): boolean =>
   target.every((item) => source.includes(item));
 
+export const extractFeatures = (figure: FigureWithWork): string[] => {
+  const raw: string[] = [];
+  if (Array.isArray(figure.chartType)) {
+    raw.push(...figure.chartType);
+  } else if (typeof figure.chartType === "string") {
+    raw.push(figure.chartType);
+  }
+  if (Array.isArray(figure.chartTypes)) {
+    raw.push(...figure.chartTypes);
+  }
+  return raw.map((item) => item.trim()).filter(Boolean);
+};
+
 export const matchesFilters = (
   figure: FigureWithWork,
   filters: FiltersState
@@ -22,7 +36,16 @@ export const matchesFilters = (
   }
 
   if (filters.selectedTypes.length > 0) {
-    if (!hasAny(figure.chartTypes ?? [], filters.selectedTypes)) {
+    const primary = figure.chartTypePrimary ?? "";
+    if (!filters.selectedTypes.includes(primary)) {
+      return false;
+    }
+  }
+
+  if (filters.selectedFeatures.length > 0) {
+    const primary = figure.chartTypePrimary ?? "";
+    const features = extractFeatures(figure).filter((item) => item !== primary);
+    if (!hasAny(features, filters.selectedFeatures)) {
       return false;
     }
   }
