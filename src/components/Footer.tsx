@@ -1,9 +1,8 @@
 const Footer = () => (
   <footer className="footer">
-    <div>Isotype Chart Explorer v1. Figures shown for research and teaching.</div>
+    <div>Isotype Atlas v1 by RJ Andrews.</div>
     <div>
-      Images remain under their respective rights holders. Contact
-      takedown@example.com for removals.
+      Images are presented for research and educational purposes under fair use/fair dealing. Photography and metadata © Andrews Collection of Information Graphics.
     </div>
   </footer>
 );

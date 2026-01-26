@@ -241,6 +241,28 @@ const App = () => {
       .filter((figure): figure is FigureWithWork => Boolean(figure));
   }, [figuresWithWork, figureMap, query, searchIds]);
 
+  const filterBase = useCallback(
+    ({
+      useTypes,
+      useColors,
+      useFeatures
+    }: {
+      useTypes: boolean;
+      useColors: boolean;
+      useFeatures: boolean;
+    }) =>
+      searchBase.filter((figure) =>
+        matchesFilters(figure, {
+          selectedTypes: useTypes ? selectedTypes : [],
+          selectedFeatures: useFeatures ? selectedFeatures : [],
+          selectedColors: useColors ? selectedColors : [],
+          onlyBlack: useColors ? onlyBlack : false,
+          workId: selectedWorkId
+        })
+      ),
+    [searchBase, selectedTypes, selectedFeatures, selectedColors, onlyBlack, selectedWorkId]
+  );
+
   const filteredFigures = useMemo(() => {
     return searchBase.filter((figure) =>
       matchesFilters(figure, {
@@ -252,6 +274,33 @@ const App = () => {
       })
     );
   }, [searchBase, selectedTypes, selectedFeatures, selectedColors, onlyBlack, selectedWorkId]);
+
+  const typeCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    const base = filterBase({ useTypes: false, useColors: true, useFeatures: false });
+    base.forEach((figure) => {
+      const primary = figure.chartTypePrimary;
+      if (!primary) {
+        return;
+      }
+      counts[primary] = (counts[primary] ?? 0) + 1;
+    });
+    return counts;
+  }, [filterBase]);
+
+  const colorCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    const base = filterBase({ useTypes: true, useColors: false, useFeatures: true });
+    base.forEach((figure) => {
+      if (figure.onlyBlack) {
+        counts["only-black"] = (counts["only-black"] ?? 0) + 1;
+      }
+      (figure.colors ?? []).forEach((color) => {
+        counts[color] = (counts[color] ?? 0) + 1;
+      });
+    });
+    return counts;
+  }, [filterBase]);
 
   const sortedFigures = useMemo(
     () => sortFigures(filteredFigures, sortKey, scoreById, chartTypeLabels),
@@ -281,7 +330,9 @@ const App = () => {
       <FiltersBar
         chartTypes={chartTypes}
         availableFeatures={availableFeatures}
+        typeCounts={typeCounts}
         colors={colors}
+        colorCounts={colorCounts}
         works={works}
         selectedTypes={selectedTypes}
         selectedFeatures={selectedFeatures}
