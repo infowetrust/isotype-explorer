@@ -3,11 +3,10 @@ import type { ChangeEvent } from "react";
 type HeaderProps = {
   query: string;
   onQueryChange: (value: string) => void;
-  onReset: () => void;
   onAboutClick: () => void;
 };
 
-const Header = ({ query, onQueryChange, onReset, onAboutClick }: HeaderProps) => {
+const Header = ({ query, onQueryChange, onAboutClick }: HeaderProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onQueryChange(event.target.value);
   };

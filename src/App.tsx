@@ -405,15 +405,6 @@ const App = () => {
     };
   }, [filteredFigures]);
 
-  const hasActiveFilters = Boolean(
-    query.trim() ||
-    selectedTypes.length ||
-    selectedFeatures.length ||
-    selectedColors.length ||
-    onlyBlack ||
-    selectedWorkId
-  );
-
   const activeFigure = lightboxId ? figureMap.get(lightboxId) ?? null : null;
   const activeWork = activeFigure ? workMap.get(activeFigure.workId) : undefined;
   const figuresInWork = useMemo(() => {
@@ -428,7 +419,6 @@ const App = () => {
       <Header
         query={query}
         onQueryChange={handleQueryChange}
-        onReset={handleReset}
         onAboutClick={handleAboutOpen}
       />
       <FiltersBar
@@ -447,12 +437,11 @@ const App = () => {
         selectedWorkId={selectedWorkId}
         sortKey={sortKey}
         viewMode={viewMode}
-        viewCounts={viewCounts}
-        onToggleType={handleToggleType}
-        onToggleFeature={handleToggleFeature}
-        onClearFeatures={handleClearFeatures}
-        onToggleColor={handleToggleColor}
-        onWorkChange={handleWorkChange}
+          viewCounts={viewCounts}
+          onToggleType={handleToggleType}
+          onToggleFeature={handleToggleFeature}
+          onToggleColor={handleToggleColor}
+          onWorkChange={handleWorkChange}
         onSortChange={handleSortChange}
         onViewChange={handleViewChange}
         onClearAll={handleReset}

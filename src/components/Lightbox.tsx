@@ -355,29 +355,3 @@ const normalizeAuthors = (work: WorkRecord): string[] => {
     .filter(Boolean)
     .map(formatAuthor);
 };
-
-const FIGURE_TYPE_LABELS = new Map<string, string>([
-  ["bar", "Bar chart"],
-  ["bar-chart", "Bar chart"],
-  ["column", "Column chart"],
-  ["column-chart", "Column chart"],
-  ["map", "Map"],
-  ["area", "Area chart"],
-  ["area-chart", "Area chart"]
-]);
-
-const getFigureTypeLabel = (
-  value: string,
-  chartTypeLabels: Map<string, string>
-): string => {
-  const trimmed = value.trim();
-  const lower = trimmed.toLowerCase();
-  return (
-    FIGURE_TYPE_LABELS.get(lower) ??
-    FIGURE_TYPE_LABELS.get(trimmed) ??
-    chartTypeLabels.get(value) ??
-    chartTypeLabels.get(trimmed) ??
-    chartTypeLabels.get(lower) ??
-    value
-  );
-};

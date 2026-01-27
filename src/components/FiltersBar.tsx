@@ -26,7 +26,6 @@ type FiltersBarProps = {
   viewCounts: { figures: number; publications: number };
   onToggleType: (id: string) => void;
   onToggleFeature: (id: string) => void;
-  onClearFeatures: () => void;
   onToggleColor: (id: string) => void;
   onWorkChange: (id: string | null) => void;
   onSortChange: (sort: SortKey) => void;
@@ -53,7 +52,6 @@ const FiltersBar = ({
   viewCounts,
   onToggleType,
   onToggleFeature,
-  onClearFeatures,
   onToggleColor,
   onWorkChange,
   onSortChange,
