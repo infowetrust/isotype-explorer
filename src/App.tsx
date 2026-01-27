@@ -11,10 +11,13 @@ import { sortFigures, type SortKey } from "./lib/sort";
 import type {
   ChartTypeConfig,
   ColorConfig,
+  FeatureConfig,
   FigureRecord,
   FigureWithWork,
   WorkRecord
 } from "./lib/types";
+
+type ViewMode = "figures" | "publications";
 
 const splitParam = (value: string | null): string[] =>
   value
@@ -29,17 +32,20 @@ const App = () => {
   const [works, setWorks] = useState<WorkRecord[]>([]);
   const [figures, setFigures] = useState<FigureRecord[]>([]);
   const [chartTypes, setChartTypes] = useState<ChartTypeConfig[]>([]);
+  const [features, setFeatures] = useState<FeatureConfig[]>([]);
   const [colors, setColors] = useState<ColorConfig[]>([]);
   const [aboutOpen, setAboutOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
-      const [worksRes, figuresRes, chartTypesRes, colorsRes] = await Promise.all([
-        fetch("/data/works.json"),
-        fetch("/data/figures.json"),
-        fetch("/data/chartTypes.json"),
-        fetch("/data/colors.json")
-      ]);
+      const [worksRes, figuresRes, chartTypesRes, featuresRes, colorsRes] =
+        await Promise.all([
+          fetch("/data/works.json"),
+          fetch("/data/figures.json"),
+          fetch("/data/chartTypes.json"),
+          fetch("/data/features.json"),
+          fetch("/data/colors.json")
+        ]);
 
       if (worksRes.ok) {
         setWorks(await worksRes.json());
@@ -49,6 +55,9 @@ const App = () => {
       }
       if (chartTypesRes.ok) {
         setChartTypes(await chartTypesRes.json());
+      }
+      if (featuresRes.ok) {
+        setFeatures(await featuresRes.json());
       }
       if (colorsRes.ok) {
         setColors(await colorsRes.json());
@@ -94,8 +103,9 @@ const App = () => {
   const selectedColors = colorParam.filter((color) => color !== "only-black");
   const selectedWorkId = searchParams.get("work");
   const sortKey = (searchParams.get("sort") as SortKey) || "relevance";
+  const viewMode = (searchParams.get("view") as ViewMode) || "figures";
   const lightboxId = searchParams.get("id");
-  const selectedPrimaryType = selectedTypes.length === 1 ? selectedTypes[0] : null;
+  const selectedFeatureType = selectedTypes.length === 1 ? selectedTypes[0] : null;
   const prevPrimaryTypeRef = useRef<string | null>(null);
 
   const updateParams = useCallback(
@@ -159,7 +169,7 @@ const App = () => {
   };
 
   const handleToggleFeature = (id: string) => {
-    if (!selectedPrimaryType) {
+    if (!selectedFeatureType) {
       return;
     }
     const next = new Set(selectedFeatures);
@@ -179,6 +189,10 @@ const App = () => {
     updateParams({ sort });
   };
 
+  const handleViewChange = (view: ViewMode) => {
+    updateParams({ view: view === "figures" ? null : view });
+  };
+
   const handleSelectFigure = (id: string) => {
     updateParams({ id });
   };
@@ -189,18 +203,31 @@ const App = () => {
 
   useEffect(() => {
     const prevPrimary = prevPrimaryTypeRef.current;
-    if (!selectedPrimaryType) {
+    if (!selectedFeatureType) {
       if (selectedFeatures.length) {
         updateParams({ features: null });
       }
       prevPrimaryTypeRef.current = null;
       return;
     }
-    if (prevPrimary && prevPrimary !== selectedPrimaryType && selectedFeatures.length) {
+    if (prevPrimary && prevPrimary !== selectedFeatureType && selectedFeatures.length) {
       updateParams({ features: null });
     }
-    prevPrimaryTypeRef.current = selectedPrimaryType;
-  }, [selectedPrimaryType, selectedFeatures.length, updateParams]);
+    prevPrimaryTypeRef.current = selectedFeatureType;
+  }, [selectedFeatureType, selectedFeatures.length, updateParams]);
+
+  useEffect(() => {
+    if (!aboutOpen) {
+      return;
+    }
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleAboutClose();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [aboutOpen]);
 
   const chartTypeLabels = useMemo(() => {
     const labels: Record<string, string> = {};
@@ -210,21 +237,31 @@ const App = () => {
     return labels;
   }, [chartTypes]);
 
+  const featureLabels = useMemo(() => {
+    const labels: Record<string, string> = {};
+    features.forEach((feature) => {
+      labels[feature.id] = feature.label;
+    });
+    return labels;
+  }, [features]);
+
   const availableFeatures = useMemo(() => {
-    if (!selectedPrimaryType) {
+    if (!selectedFeatureType) {
       return [];
     }
     const set = new Set<string>();
     figuresWithWork.forEach((figure) => {
-      if (figure.chartTypePrimary !== selectedPrimaryType) {
+      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
+      if (!figureTypes.includes(selectedFeatureType)) {
         return;
       }
-      extractFeatures(figure)
-        .filter((item) => item !== selectedPrimaryType)
-        .forEach((item) => set.add(item));
+      extractFeatures(figure).forEach((item) => set.add(item));
     });
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
-  }, [figuresWithWork, selectedPrimaryType]);
+    return Array.from(set)
+      .sort((a, b) => a.localeCompare(b))
+      .map((id) => ({ id, label: featureLabels[id] ?? id }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [featureLabels, figuresWithWork, selectedFeatureType]);
 
   const { ids: searchIds, scoreById } = useMemo(
     () => runSearch(searchIndex, query),
@@ -279,14 +316,32 @@ const App = () => {
     const counts: Record<string, number> = {};
     const base = filterBase({ useTypes: false, useColors: true, useFeatures: false });
     base.forEach((figure) => {
-      const primary = figure.chartTypePrimary;
-      if (!primary) {
+      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
+      if (!figureTypes.length) {
         return;
       }
-      counts[primary] = (counts[primary] ?? 0) + 1;
+      const unique = new Set(figureTypes);
+      unique.forEach((type) => {
+        counts[type] = (counts[type] ?? 0) + 1;
+      });
     });
     return counts;
   }, [filterBase]);
+
+  const typeSortCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    figuresWithWork.forEach((figure) => {
+      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
+      if (!figureTypes.length) {
+        return;
+      }
+      const unique = new Set(figureTypes);
+      unique.forEach((type) => {
+        counts[type] = (counts[type] ?? 0) + 1;
+      });
+    });
+    return counts;
+  }, [figuresWithWork]);
 
   const colorCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -302,10 +357,36 @@ const App = () => {
     return counts;
   }, [filterBase]);
 
+  const colorSortCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    figuresWithWork.forEach((figure) => {
+      if (figure.onlyBlack) {
+        counts["only-black"] = (counts["only-black"] ?? 0) + 1;
+      }
+      (figure.colors ?? []).forEach((color) => {
+        counts[color] = (counts[color] ?? 0) + 1;
+      });
+    });
+    return counts;
+  }, [figuresWithWork]);
+
   const sortedFigures = useMemo(
-    () => sortFigures(filteredFigures, sortKey, scoreById, chartTypeLabels),
-    [filteredFigures, sortKey, scoreById, chartTypeLabels]
+    () => sortFigures(filteredFigures, sortKey, scoreById),
+    [filteredFigures, sortKey, scoreById]
   );
+
+  const viewCounts = useMemo(() => {
+    const publications = new Set<string>();
+    filteredFigures.forEach((figure) => {
+      if (figure.workId) {
+        publications.add(figure.workId);
+      }
+    });
+    return {
+      figures: filteredFigures.length,
+      publications: publications.size
+    };
+  }, [filteredFigures]);
 
   const hasActiveFilters = Boolean(
     query.trim() ||
@@ -318,6 +399,12 @@ const App = () => {
 
   const activeFigure = lightboxId ? figureMap.get(lightboxId) ?? null : null;
   const activeWork = activeFigure ? workMap.get(activeFigure.workId) : undefined;
+  const figuresInWork = useMemo(() => {
+    if (!activeFigure) {
+      return [];
+    }
+    return figuresWithWork.filter((figure) => figure.workId === activeFigure.workId);
+  }, [activeFigure, figuresWithWork]);
 
   return (
     <div className="app">
@@ -327,54 +414,64 @@ const App = () => {
         onReset={handleReset}
         onAboutClick={handleAboutOpen}
       />
-      <FiltersBar
-        chartTypes={chartTypes}
-        availableFeatures={availableFeatures}
-        typeCounts={typeCounts}
-        colors={colors}
-        colorCounts={colorCounts}
-        works={works}
-        selectedTypes={selectedTypes}
-        selectedFeatures={selectedFeatures}
-        selectedColors={selectedColors}
-        onlyBlack={onlyBlack}
-        selectedWorkId={selectedWorkId}
-        sortKey={sortKey}
-        onToggleType={handleToggleType}
-        onToggleFeature={handleToggleFeature}
-        onClearFeatures={handleClearFeatures}
-        onToggleColor={handleToggleColor}
-        onWorkChange={handleWorkChange}
-        onSortChange={handleSortChange}
-      />
+        <FiltersBar
+          chartTypes={chartTypes}
+          availableFeatures={availableFeatures}
+          typeCounts={typeCounts}
+          typeSortCounts={typeSortCounts}
+          colors={colors}
+          colorCounts={colorCounts}
+          colorSortCounts={colorSortCounts}
+          works={works}
+          selectedTypes={selectedTypes}
+          selectedFeatures={selectedFeatures}
+          selectedColors={selectedColors}
+          onlyBlack={onlyBlack}
+          selectedWorkId={selectedWorkId}
+          sortKey={sortKey}
+          viewMode={viewMode}
+          viewCounts={viewCounts}
+          onToggleType={handleToggleType}
+          onToggleFeature={handleToggleFeature}
+          onClearFeatures={handleClearFeatures}
+          onToggleColor={handleToggleColor}
+          onWorkChange={handleWorkChange}
+          onSortChange={handleSortChange}
+          onViewChange={handleViewChange}
+          onClearAll={handleReset}
+        />
       <main className="gallery-wrap">
-        <div className="results-meta">
-          <span>{sortedFigures.length} figures</span>
-          {hasActiveFilters ? (
-            <button type="button" className="results-reset" onClick={handleReset}>
-              {`Show all ${figuresWithWork.length} figures`}
-            </button>
-          ) : (
-            <span>All figures</span>
-          )}
-        </div>
-        <Gallery figures={sortedFigures} onSelect={handleSelectFigure} />
+        <Gallery
+          figures={sortedFigures}
+          allFigures={figuresWithWork}
+          sortKey={sortKey}
+          viewMode={viewMode}
+          onSelect={handleSelectFigure}
+        />
       </main>
       {activeFigure ? (
-        <Lightbox
-          figure={activeFigure}
-          work={activeWork}
-          chartTypes={chartTypes}
-          colors={colors}
-          onClose={handleCloseLightbox}
-        />
+      <Lightbox
+        figure={activeFigure}
+        work={activeWork}
+        figuresInWork={figuresInWork}
+        chartTypes={chartTypes}
+        features={features}
+        colors={colors}
+        onClose={handleCloseLightbox}
+        onSelect={handleSelectFigure}
+      />
       ) : null}
       {aboutOpen ? (
-        <div className="about-modal" role="dialog" aria-modal="true">
-          <button type="button" className="about-close" onClick={handleAboutClose}>
-            Close
-          </button>
-          <div className="about-card">
+        <div
+          className="about-modal"
+          role="dialog"
+          aria-modal="true"
+          onClick={handleAboutClose}
+        >
+          <div className="about-card" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="about-close" onClick={handleAboutClose}>
+              ×
+            </button>
             <h2>About</h2>
             <p>
               The Isotype Institute advances the original mission of ISOTYPE: turning complex

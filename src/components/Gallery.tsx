@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import type { FigureWithWork } from "../lib/types";
+import type { SortKey } from "../lib/sort";
 
 type GalleryProps = {
   figures: FigureWithWork[];
+  allFigures: FigureWithWork[];
+  sortKey: SortKey;
+  viewMode: "figures" | "publications";
   onSelect: (id: string) => void;
 };
 
-const Gallery = ({ figures, onSelect }: GalleryProps) => {
+const Gallery = ({
+  figures,
+  allFigures,
+  sortKey,
+  viewMode,
+  onSelect
+}: GalleryProps) => {
   const [rowHeight, setRowHeight] = useState(
     window.innerWidth < 700 ? 210 : 260
   );
@@ -21,6 +31,76 @@ const Gallery = ({ figures, onSelect }: GalleryProps) => {
 
   if (figures.length === 0) {
     return <div className="empty-state">No figures match this view.</div>;
+  }
+
+  if (viewMode === "publications") {
+    const visibleIds = new Set(figures.map((figure) => figure.id));
+    const visibleWorkIds = new Set(figures.map((figure) => figure.workId ?? "unknown"));
+    const grouped = groupByWork(
+      allFigures.filter((figure) => visibleWorkIds.has(figure.workId ?? "unknown"))
+    );
+    const rows = Array.from(grouped.entries())
+      .map(([workId, items]) => {
+        const sorted = sortFiguresByPage(items);
+        const first = sorted[0];
+        const visibleCount = sorted.reduce(
+          (count, figure) => count + (visibleIds.has(figure.id) ? 1 : 0),
+          0
+        );
+        return {
+          workId,
+          workTitle: first?.workTitle ?? "Unknown work",
+          workYear: first?.workYear ?? null,
+          figures: sorted,
+          count: visibleCount
+        };
+      })
+      .filter((row) => row.count > 0)
+      .sort((a, b) => {
+        if (sortKey === "oldest" || sortKey === "newest") {
+          const yearA = a.workYear ?? Number.POSITIVE_INFINITY;
+          const yearB = b.workYear ?? Number.POSITIVE_INFINITY;
+          if (yearA !== yearB) {
+            return sortKey === "newest" ? yearB - yearA : yearA - yearB;
+          }
+        }
+        const diff = b.count - a.count;
+        if (diff !== 0) {
+          return diff;
+        }
+        return a.workTitle.localeCompare(b.workTitle);
+      });
+
+    return (
+      <div className="gallery-work-rows">
+        {rows.map((row) => (
+          <div key={row.workId} className="gallery-work-row">
+            <div className="lightbox-carousel-title">
+              <em>{row.workTitle}</em>
+              {row.workYear ? ` (${row.workYear})` : ""}
+            </div>
+            <div className="lightbox-carousel-row">
+              {row.figures.map((figure) => (
+                <button
+                  key={figure.id}
+                  type="button"
+                  className={`lightbox-thumb${
+                    visibleIds.has(figure.id) ? "" : " is-muted"
+                  }`}
+                  onClick={() => onSelect(figure.id)}
+                >
+                  <img
+                    src={figure.thumb}
+                    alt={figure.title ?? figure.workTitle ?? figure.id}
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -56,3 +136,23 @@ const Gallery = ({ figures, onSelect }: GalleryProps) => {
 };
 
 export default Gallery;
+
+const sortFiguresByPage = (figures: FigureWithWork[]): FigureWithWork[] => {
+  const sorted = [...figures];
+  sorted.sort((a, b) => a.id.localeCompare(b.id));
+  return sorted;
+};
+
+const groupByWork = (figures: FigureWithWork[]): Map<string, FigureWithWork[]> => {
+  const map = new Map<string, FigureWithWork[]>();
+  figures.forEach((figure) => {
+    const workId = figure.workId ?? "unknown";
+    const existing = map.get(workId);
+    if (existing) {
+      existing.push(figure);
+    } else {
+      map.set(workId, [figure]);
+    }
+  });
+  return map;
+};

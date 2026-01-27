@@ -11,11 +11,15 @@ Outputs:
   public/data/figures.json
 
 Notes:
-- Tolerant of column name variations (spaces, case, etc.).
-- Auto-generates thumb/view paths from figure_id:
+- Supports newer figure CSV headers:
+    figure_type, features, figure_title
+  and older ones:
+    basic chart, chart facets, etc.
+- Normalizes work ids: 1 -> w0001, w1 -> w0001, w0001 -> w0001
+- Parses page + fcode from figure_id: w0001-p0038-f99
+- Auto-generates image paths:
     /webp/thumbs/<id>_h0500.webp
     /webp/views/<id>_h2400.webp
-- Parses workId/page/figureCode from figure_id if possible.
 """
 
 from __future__ import annotations
@@ -28,31 +32,20 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-# ---- Helpers -------------------------------------------------------------
+# -------------------- helpers --------------------
 
 def norm_key(s: str) -> str:
-    s = s.strip().lower()
+    s = (s or "").strip().lower()
     s = s.replace("\ufeff", "")  # BOM
     s = re.sub(r"[\s\-\/\(\)\.]+", "_", s)
     s = re.sub(r"[^a-z0-9_]", "", s)
     s = re.sub(r"_+", "_", s).strip("_")
     return s
 
-def clean_cell(s: Any) -> str:
-    if s is None:
+def clean_cell(v: Any) -> str:
+    if v is None:
         return ""
-    return str(s).strip()
-
-def split_list(s: str) -> List[str]:
-    s = clean_cell(s)
-    if not s:
-        return []
-    # Prefer semicolon as a "real list" delimiter; fallback to commas.
-    if ";" in s:
-        parts = [p.strip() for p in s.split(";")]
-    else:
-        parts = [p.strip() for p in s.split(",")]
-    return [p for p in parts if p]
+    return str(v).strip()
 
 def parse_int(s: str) -> Optional[int]:
     s = clean_cell(s)
@@ -74,28 +67,22 @@ def slugify(s: str) -> str:
     return s
 
 def normalize_work_id(raw: str) -> str:
-    raw = clean_cell(raw).lower()
-    raw = raw.replace(" ", "")
+    raw = clean_cell(raw).lower().replace(" ", "")
     if not raw:
         return ""
-    # Accept w0001, W1, 1, 0001, etc.
     m = re.match(r"^w(\d+)$", raw)
     if m:
-        n = m.group(1)
-        return "w" + n.zfill(4)
+        return "w" + m.group(1).zfill(4)
     if raw.isdigit():
         return "w" + raw.zfill(4)
-    return raw  # fallback
+    return raw
 
 def normalize_figure_id(raw: str) -> str:
-    raw = clean_cell(raw)
-    raw = raw.strip()
-    # strip extension if someone pasted filenames
+    raw = clean_cell(raw).strip()
     raw = re.sub(r"\.(png|webp|jpg|jpeg|tif|tiff)$", "", raw, flags=re.I)
     return raw.lower()
 
 def get_first(row: Dict[str, str], *keys: str, default: str = "") -> str:
-    """Return first non-empty value from any of the possible keys."""
     for k in keys:
         nk = norm_key(k)
         if nk in row:
@@ -104,118 +91,159 @@ def get_first(row: Dict[str, str], *keys: str, default: str = "") -> str:
                 return v
     return default
 
+def split_csvish(s: str) -> List[str]:
+    """Split on comma or semicolon for fields like features/colors/themes."""
+    s = clean_cell(s)
+    if not s:
+        return []
+    parts = [p.strip() for p in re.split(r"[;,]+", s) if p.strip()]
+    return parts
+
+def split_semicolon_only(s: str) -> List[str]:
+    """Split ONLY on semicolons (for author lists where commas are name format)."""
+    s = clean_cell(s)
+    if not s:
+        return []
+    return [p.strip() for p in s.split(";") if p.strip()]
+
+def flip_last_first(name: str) -> str:
+    """
+    Convert 'Last, First Middle' -> 'First Middle Last'.
+    If no comma, returns unchanged.
+    """
+    name = clean_cell(name)
+    if "," not in name:
+        return name
+    last, rest = name.split(",", 1)
+    last = last.strip()
+    rest = rest.strip()
+    if not rest:
+        return last
+    return f"{rest} {last}".strip()
+
 FIGURE_ID_RE = re.compile(r"^(w\d{4})-p(\d{3,4})-f(\d{2})$", re.I)
 
 def parse_figure_components(figure_id: str) -> Tuple[str, Optional[int], Optional[int]]:
-    """
-    Returns (workId, page, figureCode) parsed from figure_id if possible.
-    """
     m = FIGURE_ID_RE.match(figure_id)
     if not m:
         return ("", None, None)
     work = normalize_work_id(m.group(1))
     page = parse_int(m.group(2))
-    fig_code = parse_int(m.group(3))
-    return (work, page, fig_code)
+    fcode = parse_int(m.group(3))
+    return (work, page, fcode)
 
 def normalize_color_token(tok: str) -> str:
     t = clean_cell(tok).lower()
     t = t.replace("_", "-").replace(" ", "-")
-    # normalize "only black" variants
-    if t in {"onlyblack", "only-black", "only-black,", "onlyblack,", "only"}:
-        return "only-black"
-    if t in {"only-black"}:
-        return "only-black"
-    # map common variants
-    if t in {"grey"}:
-        return "gray"
+    if t == "grey":
+        t = "gray"
+    if t in {"onlyblack", "only-black", "only"}:
+        t = "only-black"
     return t
 
 def parse_colors(raw: str) -> Tuple[List[str], bool]:
     """
-    Returns (colors_list, onlyBlack).
-    colors_list excludes black (since black is assumed present in colored charts).
-    onlyBlack is True if the figure has no colors other than black.
+    Returns (colors_list, onlyBlack)
+    - colors_list excludes 'black'
+    - onlyBlack True if explicitly only-black OR only black present
     """
-    toks = [normalize_color_token(x) for x in re.split(r"[;,]+", clean_cell(raw)) if x.strip()]
-    toks = [t for t in toks if t]  # drop empties
-
+    toks = [normalize_color_token(x) for x in split_csvish(raw)]
     if "only-black" in toks:
         return ([], True)
 
-    # remove black if present (because it’s not useful as a filter)
-    toks_wo_black = [t for t in toks if t not in {"black", "only-black"}]
+    toks_wo_black = [t for t in toks if t and t not in {"black"}]
 
-    # if user literally provided only "black", treat as onlyBlack
     if not toks_wo_black and toks:
+        # they provided only 'black'
         return ([], True)
 
-    # keep only the allowed color set if present; otherwise pass through
-    # (you can tighten this later)
-    colors = toks_wo_black
-
-    # de-dup preserving order
+    # de-dup preserve order
     seen = set()
-    out = []
-    for c in colors:
+    out: List[str] = []
+    for c in toks_wo_black:
         if c not in seen:
             seen.add(c)
             out.append(c)
-
     return (out, False)
 
 
-# ---- Build steps ---------------------------------------------------------
+# -------------------- IO --------------------
 
 def read_csv(path: Path) -> List[Dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
-        rows = []
+        rows: List[Dict[str, str]] = []
         for r in reader:
             nr = {norm_key(k): clean_cell(v) for k, v in (r or {}).items() if k is not None}
-            # skip fully empty rows
             if any(v.strip() for v in nr.values()):
                 rows.append(nr)
         return rows
 
+def write_json(path: Path, obj: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+
+# -------------------- builders --------------------
+
 def build_works(rows: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     works: List[Dict[str, Any]] = []
     for r in rows:
-        work_id_raw = get_first(r, "work_id", "work", "workid", "work key", "work_key")
-        work_id = normalize_work_id(work_id_raw)
-
-        year = parse_int(get_first(r, "pub year", "year", "publication year", "pub_year"))
+        work_id = normalize_work_id(get_first(r, "work_id", "work", "workid", "work key", "work_key"))
         title = get_first(r, "title")
-        series = get_first(r, "series")
-        authors = split_list(get_first(r, "author(s)", "authors", "author"))
-        publisher = get_first(r, "publisher")
-        publisher_city = get_first(r, "publisher city", "publisher_city", "city")
-        height_cm = parse_int(get_first(r, "height (cm)", "height_cm", "height"))
-
-        info_designers = split_list(get_first(r, "information designers", "information_designers", "designers"))
-        language = get_first(r, "language", default="")
-
-        # Keep only meaningful works (must have an id and a title)
-        # You can loosen this later if you want.
         if not work_id or not title:
             continue
+
+        year = parse_int(get_first(r, "pub year", "year", "publication year", "pub_year"))
+        series = get_first(r, "series", default="") or None
+        language = get_first(r, "language", default="") or None
+
+        # Authors: semicolon-separated list; commas inside names are part of "Last, First"
+        authors_raw = get_first(r, "author(s)", "authors", "author", default="")
+        authors_list = [flip_last_first(a) for a in split_semicolon_only(authors_raw)]
+
+        info_designers = split_semicolon_only(get_first(r, "information designers", "information_designers", "designers", default=""))
+        publisher = get_first(r, "publisher", default="") or None
+        publisher_city = get_first(r, "publisher city", "publisher_city", "city", default="") or None
+        height_cm = parse_int(get_first(r, "height (cm)", "height_cm", "height", default=""))
+
+        # extra fields (safe to include; UI may ignore)
+        oclc = get_first(r, "oclc_number", "oclc", default="") or None
+        isbn = get_first(r, "isbn", default="") or None
+        scan_source = get_first(r, "scan_source", default="") or None
+        first_ed = get_first(r, "1st ed.", "1st_ed", "first_edition", default="") or None
 
         works.append({
             "workId": work_id,
             "year": year,
             "title": title,
-            "series": series or None,
-            "authors": authors,
+            "series": series,
+            "language": language,
+            "authors": authors_list,
             "informationDesigners": info_designers,
-            "publisher": publisher or None,
-            "publisherCity": publisher_city or None,
+            "publisher": publisher,
+            "publisherCity": publisher_city,
             "heightCm": height_cm,
-            "language": language or None,
+            "oclcNumber": oclc,
+            "isbn": isbn,
+            "scanSource": scan_source,
+            "firstEdition": first_ed,
         })
 
-    # stable order for diffs
     works.sort(key=lambda w: w.get("workId", ""))
     return works
+
+
+def parse_figure_types(raw: str) -> List[str]:
+    """
+    Parse a figure_type cell into a list of tokens.
+    """
+    tokens = [slugify(t) for t in split_csvish(raw)]
+    tokens = [t for t in tokens if t]
+    return tokens
+
 
 def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
     figures: List[Dict[str, Any]] = []
@@ -225,80 +253,88 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
         if not fig_id:
             continue
 
-        # WorkId: prefer parsing from figure_id, fallback to column
-        work_from_id, page_from_id, fig_code_from_id = parse_figure_components(fig_id)
-        work_raw = get_first(r, "work_id", "work", "workid", default="")
-        work_id = work_from_id or normalize_work_id(work_raw)
+        work_from_id, page_from_id, fcode_from_id = parse_figure_components(fig_id)
+        work_col = normalize_work_id(get_first(r, "work_id", "work", "workid", default=""))
+        work_id = work_from_id or work_col or None
 
-        # Page / fig code: prefer parsed values; fallback to columns if present
-        page = page_from_id if page_from_id is not None else parse_int(get_first(r, "page", "page_number"))
-        fig_code = fig_code_from_id if fig_code_from_id is not None else parse_int(get_first(r, "figure_code", "fig_code", "f"))
+        page = page_from_id if page_from_id is not None else parse_int(get_first(r, "page", "page_number", default=""))
+        fcode = fcode_from_id if fcode_from_id is not None else parse_int(get_first(r, "figure_code", "fig_code", "f", default=""))
 
-        # Chart types
-        primary_type_raw = get_first(r, "basic chart", "chart_type", "chart type", "type", default="")
-        facets_raw = get_first(r, "chart facets", "facets", "chart_types", "chart types", default="")
+        title = get_first(r, "figure_title", "title", default="") or None
 
-        chart_type_primary = slugify(primary_type_raw) if primary_type_raw else None
+        # NEW headers: figure_type + features
+        primary_raw = get_first(
+            r,
+            "figure_type",              # new
+            "basic chart",              # old
+            "chart_type",
+            "chart type",
+            "type",
+            default="",
+        )
 
-        chart_types: List[str] = []
-        if chart_type_primary:
-            chart_types.append(chart_type_primary)
-        for t in split_list(facets_raw):
-            st = slugify(t)
-            if st and st not in chart_types:
-                chart_types.append(st)
+        # parse figure types (all tokens, including combo)
+        figure_type_tokens = parse_figure_types(primary_raw)
+        # Features come from column 'features' (new) or 'chart facets' (old)
+        features_raw = get_first(
+            r,
+            "features",                 # new
+            "chart facets",             # old
+            "facets",
+            "chart_types",
+            "chart types",
+            default="",
+        )
+        feature_tokens = [slugify(t) for t in split_csvish(features_raw)]
+        feature_tokens = [t for t in feature_tokens if t]
 
         # Colors
         colors_raw = get_first(r, "colors", "color", "palette", default="")
         colors, only_black = parse_colors(colors_raw)
 
-        # Text + AI
-        title = get_first(r, "figure_title", "title", default="")
-        ocr_text = get_first(r, "figure text", "figure_text", "ocr_text", "ocr", default="")
-        ai_description = get_first(r, "ai description", "ai_description", "description_ai", default="")
+        # Optional long text columns (if you add later)
+        ocr_text = get_first(r, "ocr_text", "ocr", "figure_text", "figure text", default="") or None
+        ai_description = get_first(r, "ai_description", "ai description", default="") or None
         themes_raw = get_first(r, "themes", "topic themes", "topic_themes", default="")
-        themes = [clean_cell(x) for x in split_list(themes_raw)]
+        themes = [clean_cell(x) for x in split_csvish(themes_raw)]
 
-        # Auto image paths (based on your naming convention)
         thumb = f"/webp/thumbs/{fig_id}_h0500.webp"
         view = f"/webp/views/{fig_id}_h2400.webp"
 
-        # Join some work fields for convenience (optional)
-        work_meta = works_by_id.get(work_id, {})
+        work_meta = works_by_id.get(work_id, {}) if work_id else {}
         work_year = work_meta.get("year")
 
         figures.append({
             "id": fig_id,
-            "workId": work_id or None,
+            "workId": work_id,
             "page": page,
-            "figureCode": fig_code,
+            "figureCode": fcode,
             "thumb": thumb,
             "view": view,
 
-            "chartTypePrimary": chart_type_primary,
-            "chartTypes": chart_types,
+            "title": title,
+
+            # figure types (from figure_type)
+            "figureTypes": figure_type_tokens,
+            # features (from features)
+            "features": feature_tokens,
 
             "colors": colors,
             "onlyBlack": only_black,
 
             "themes": themes,
-            "aiDescription": ai_description or None,
-            "ocrText": ocr_text or None,
-            "title": title or None,
+            "aiDescription": ai_description,
+            "ocrText": ocr_text,
 
             # useful for sorting without extra join
             "workYear": work_year,
+
+            # optional: keep the full type tokens for future work (UI can ignore)
+            "typeTokens": figure_type_tokens,
         })
 
     figures.sort(key=lambda f: f.get("id", ""))
     return figures
-
-
-def write_json(path: Path, obj: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False, indent=2)
-        f.write("\n")
 
 
 def main() -> None:
@@ -326,13 +362,12 @@ def main() -> None:
 
     figures = build_figures(fig_rows, works_by_id)
 
-    # basic validation warnings
+    # warnings: figures referencing unknown works
     missing_works = sorted({f["workId"] for f in figures if f.get("workId") and f["workId"] not in works_by_id})
     if missing_works:
         print("WARNING: figures reference workIds not present in works.json:")
         for wid in missing_works:
             print("  -", wid)
-        print("You can either add those works to works.csv or accept them as 'unknown work'.")
 
     write_json(out_dir / "works.json", works)
     write_json(out_dir / "figures.json", figures)

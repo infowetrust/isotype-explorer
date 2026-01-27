@@ -18,9 +18,8 @@ export type FigureRecord = {
   height?: number;
   thumb: string;
   view: string;
-  chartType?: string | string[];
-  chartTypes?: string[];
-  chartTypePrimary?: string;
+  figureTypes?: string[];
+  features?: string[];
   colors: string[];
   onlyBlack?: boolean;
   themes?: string[];
@@ -33,6 +32,11 @@ export type ChartTypeConfig = {
   id: string;
   label: string;
   emoji?: string;
+};
+
+export type FeatureConfig = {
+  id: string;
+  label: string;
 };
 
 export type ColorConfig = {

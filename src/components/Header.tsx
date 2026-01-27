@@ -15,19 +15,18 @@ const Header = ({ query, onQueryChange, onReset, onAboutClick }: HeaderProps) =>
   return (
     <header className="header">
       <div className="header-row">
-        <button type="button" className="brand" onClick={onReset}>
-          Isotype Atlas
-        </button>
         <input
           className="search-input"
           type="search"
-          placeholder="Search chart titles, descriptions, publications..."
+          placeholder="Search Isotype designs . . ."
           value={query}
           onChange={handleChange}
           aria-label="Search charts"
         />
         <div className="header-description">
-          A photographic archive of Isotype Institute charts from the Andrews Collection of Information Graphics.
+          A design archive of Isotype Institute
+          <br />
+          charts by RJ Andrews.
         </div>
         <button type="button" className="header-link" onClick={onAboutClick}>
           About

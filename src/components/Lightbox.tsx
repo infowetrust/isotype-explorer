@@ -1,112 +1,198 @@
-import { useEffect } from "react";
-import type { ChartTypeConfig, ColorConfig, FigureWithWork, WorkRecord } from "../lib/types";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
+import type {
+  ChartTypeConfig,
+  ColorConfig,
+  FeatureConfig,
+  FigureWithWork,
+  WorkRecord
+} from "../lib/types";
 
 type LightboxProps = {
   figure: FigureWithWork | null;
   work: WorkRecord | undefined;
+  figuresInWork: FigureWithWork[];
   chartTypes: ChartTypeConfig[];
+  features: FeatureConfig[];
   colors: ColorConfig[];
   onClose: () => void;
+  onSelect: (id: string) => void;
 };
 
-const Lightbox = ({ figure, work, chartTypes, colors, onClose }: LightboxProps) => {
+const Lightbox = ({
+  figure,
+  work,
+  figuresInWork,
+  chartTypes,
+  features,
+  colors,
+  onClose,
+  onSelect
+}: LightboxProps) => {
+  const [copied, setCopied] = useState(false);
+  const activeThumbRef = useRef<HTMLButtonElement | null>(null);
+  const sortedFigures = useMemo(
+    () => sortFiguresByPage(figuresInWork),
+    [figuresInWork]
+  );
+
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        const prev = getSiblingFigure(sortedFigures, figure?.id ?? "", -1);
+        if (prev) {
+          onSelect(prev.id);
+        }
+      }
+      if (event.key === "ArrowRight") {
+        const next = getSiblingFigure(sortedFigures, figure?.id ?? "", 1);
+        if (next) {
+          onSelect(next.id);
+        }
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose]);
+  }, [figure?.id, onClose, onSelect, sortedFigures]);
+
+  useEffect(() => {
+    if (!activeThumbRef.current) {
+      return;
+    }
+    activeThumbRef.current.scrollIntoView({
+      behavior: "instant",
+      block: "nearest",
+      inline: "center"
+    });
+  }, [figure?.id, sortedFigures]);
 
   if (!figure) {
     return null;
   }
 
-  const chartTypeLabels = new Map(chartTypes.map((type) => [type.id, type.label]));
-  const colorLabels = new Map(colors.map((color) => [color.id, color.label]));
+  const chartTypeLabels = useMemo(
+    () => new Map(chartTypes.map((type) => [type.id, type.label])),
+    [chartTypes]
+  );
+  const featureLabels = useMemo(
+    () => new Map(features.map((feature) => [feature.id, feature.label])),
+    [features]
+  );
+  const colorLabels = useMemo(
+    () => new Map(colors.map((color) => [color.id, color.label])),
+    [colors]
+  );
+
+  const figureTitle = figure.title?.trim() ? figure.title : figure.id;
+  const yearLine = work?.year ? String(work.year) : null;
+  const attribution = buildAttribution(work);
+  const typeLabelList = Array.from(new Set(normalizeTypes(figure))).map(
+    (type) => chartTypeLabels.get(type) ?? type
+  );
+  const featureLabelList = Array.from(new Set(normalizeFeatures(figure))).map(
+    (type) => featureLabels.get(type) ?? chartTypeLabels.get(type) ?? type
+  );
+  const colorsLabel = figure.onlyBlack
+    ? "Only black"
+    : (figure.colors ?? []).map((color) => colorLabels.get(color) ?? color);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true">
-      <button type="button" className="lightbox-close" onClick={onClose}>
-        Close
-      </button>
-      <div className="lightbox-inner">
-        <div className="lightbox-media">
-          <img src={figure.view} alt={figure.title ?? figure.id} />
-        </div>
+    <div className="lightbox" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="lightbox-inner" onClick={(event) => event.stopPropagation()}>
+        <button type="button" className="lightbox-close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
         <div className="lightbox-meta">
-          <h2 className="lightbox-title">
-            {figure.title ?? work?.title ?? "Untitled figure"}
-          </h2>
-          <div className="meta-section">
-            <strong>Work</strong>
-            <span>
-              {work?.title ?? figure.workTitle ?? "Unknown work"}
-              {work?.year ? ` (${work.year})` : ""}
-            </span>
-            {work?.authors?.length ? <span>{work.authors.join(", ")}</span> : null}
-            {work?.publisher ? (
-              <span>
-                {work.publisher}
-                {work.publisherCity ? `, ${work.publisherCity}` : ""}
-              </span>
+          <div className="lightbox-heading">
+            <div>
+              <h2 className="lightbox-title">{figureTitle}</h2>
+              {yearLine ? <div className="lightbox-year">{yearLine}</div> : null}
+            </div>
+          </div>
+          {attribution ? <div className="lightbox-attribution">{attribution}</div> : null}
+          <div className="meta-table">
+            <div className="meta-label">Figure Type</div>
+            <div className="meta-value">
+              {typeLabelList.length ? typeLabelList.join(", ") : "Unknown"}
+            </div>
+            <div className="meta-label">Features</div>
+            <div className="meta-value">
+              {featureLabelList.length ? featureLabelList.join(", ") : "None"}
+            </div>
+            {figure.onlyBlack || (figure.colors?.length ?? 0) > 0 ? (
+              <>
+                <div className="meta-label">Colors</div>
+                <div className="meta-value">
+                  {Array.isArray(colorsLabel) ? colorsLabel.join(", ") : colorsLabel}
+                </div>
+              </>
             ) : null}
           </div>
-          <div className="meta-section">
-            <strong>Chart types</strong>
-            <div className="meta-chips">
-              {(figure.chartTypes ?? []).map((type) => (
-                <span key={type} className="meta-chip">
-                  {chartTypeLabels.get(type) ?? type}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="meta-section">
-            <strong>Colors</strong>
-            <div className="meta-chips">
-              {figure.onlyBlack ? (
-                <span className="meta-chip">Only black</span>
-              ) : (
-                (figure.colors ?? []).map((color) => (
-                  <span key={color} className="meta-chip">
-                    {colorLabels.get(color) ?? color}
-                  </span>
-                ))
-              )}
-            </div>
-          </div>
           {figure.themes?.length ? (
-            <div className="meta-section">
-              <strong>Themes</strong>
-              <span>{figure.themes.join(", ")}</span>
+            <div className="meta-block">
+              <div className="meta-label">Themes</div>
+              <div className="meta-value">{figure.themes.join(", ")}</div>
             </div>
           ) : null}
           {figure.aiDescription ? (
-            <div className="meta-section">
-              <strong>AI description</strong>
-              <span>{figure.aiDescription}</span>
+            <div className="meta-block">
+              <div className="meta-label">AI description</div>
+              <div className="meta-value">{figure.aiDescription}</div>
             </div>
           ) : null}
           {figure.ocrText ? (
-            <div className="meta-section">
-              <strong>OCR text</strong>
-              <div className="ocr-box">{figure.ocrText}</div>
+            <details className="meta-block meta-ocr" open>
+              <summary className="meta-label">OCR text</summary>
+              <div className="meta-value ocr-box">{figure.ocrText}</div>
+            </details>
+          ) : null}
+          <div className="lightbox-actions">
+            <button type="button" className="lightbox-copy" onClick={handleCopy}>
+              {copied ? "Copied" : "Copy link"}
+            </button>
+          </div>
+        </div>
+        <div className="lightbox-media">
+          <div className="lightbox-stage">
+            <img src={figure.view} alt={figureTitle} />
+          </div>
+          {sortedFigures.length > 1 ? (
+            <div className="lightbox-carousel" aria-label="Other figures in this work">
+              {work?.title ? (
+                <div className="lightbox-carousel-title">
+                  More figures from <em>{work.title}</em>
+                  {work.year ? ` (${work.year})` : ""}
+                </div>
+              ) : null}
+              <div className="lightbox-carousel-row">
+                {sortedFigures.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`lightbox-thumb${item.id === figure.id ? " is-active" : ""}`}
+                    onClick={() => onSelect(item.id)}
+                    ref={item.id === figure.id ? activeThumbRef : null}
+                  >
+                    <img src={item.thumb} alt={item.title ?? item.id} />
+                  </button>
+                ))}
+              </div>
             </div>
           ) : null}
-          <div className="meta-section">
-            <strong>Downloads</strong>
-            <div className="meta-chips">
-              <a className="meta-chip" href={figure.thumb} download>
-                Thumbnail
-              </a>
-              <a className="meta-chip" href={figure.view} download>
-                Full view
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -114,3 +200,152 @@ const Lightbox = ({ figure, work, chartTypes, colors, onClose }: LightboxProps) 
 };
 
 export default Lightbox;
+
+const normalizeTypes = (figure: FigureWithWork): string[] => {
+  if (Array.isArray(figure.figureTypes)) {
+    return figure.figureTypes.filter(Boolean);
+  }
+  return [];
+};
+
+const normalizeFeatures = (figure: FigureWithWork): string[] => {
+  if (Array.isArray(figure.features)) {
+    return figure.features.filter(Boolean);
+  }
+  return [];
+};
+
+const parsePageNumber = (id: string): number | null => {
+  const match = id.match(/-p(\d{4})-/i);
+  if (!match) {
+    return null;
+  }
+  const parsed = Number.parseInt(match[1], 10);
+  return Number.isNaN(parsed) ? null : parsed;
+};
+
+const sortFiguresByPage = (figures: FigureWithWork[]): FigureWithWork[] => {
+  const sorted = [...figures];
+  sorted.sort((a, b) => {
+    const pageA = parsePageNumber(a.id);
+    const pageB = parsePageNumber(b.id);
+    if (pageA !== null && pageB !== null) {
+      return pageA - pageB;
+    }
+    if (pageA !== null) {
+      return -1;
+    }
+    if (pageB !== null) {
+      return 1;
+    }
+    return a.id.localeCompare(b.id);
+  });
+  return sorted;
+};
+
+const getSiblingFigure = (
+  figures: FigureWithWork[],
+  currentId: string,
+  direction: -1 | 1
+): FigureWithWork | null => {
+  if (!figures.length) {
+    return null;
+  }
+  const index = figures.findIndex((item) => item.id === currentId);
+  if (index === -1) {
+    return null;
+  }
+  const nextIndex = index + direction;
+  if (nextIndex < 0 || nextIndex >= figures.length) {
+    return null;
+  }
+  return figures[nextIndex];
+};
+
+const formatAuthor = (value: string): string => {
+  const trimmed = value.trim();
+  if (!trimmed.includes(",")) {
+    return trimmed;
+  }
+  const [last, rest] = trimmed.split(",").map((part) => part.trim());
+  if (!last || !rest) {
+    return trimmed;
+  }
+  return `${rest} ${last}`.trim();
+};
+
+const buildAttribution = (work?: WorkRecord): ReactNode | null => {
+  if (!work?.title) {
+    return null;
+  }
+  const authors = normalizeAuthors(work);
+  const authorsText = authors.length ? authors.join(" and ") : null;
+  const pubText = buildPublicationDetails(work);
+  const publisherText = pubText ? ` (${pubText})` : "";
+  if (authorsText) {
+    return (
+      <>
+        Published in <em>{work.title}</em> by {authorsText}
+        {publisherText}.
+      </>
+    );
+  }
+  return (
+    <>
+      Published in <em>{work.title}</em>
+      {publisherText}.
+    </>
+  );
+};
+
+const buildPublicationDetails = (work: WorkRecord): string | null => {
+  const city = work.publisherCity?.trim();
+  const publisher = work.publisher?.trim();
+  const year = work.year ? String(work.year).trim() : "";
+  let base = "";
+  if (city && publisher) {
+    base = `${city}: ${publisher}`;
+  } else if (city) {
+    base = city;
+  } else if (publisher) {
+    base = publisher;
+  }
+  if (year) {
+    base = base ? `${base}, ${year}` : year;
+  }
+  return base || null;
+};
+
+const normalizeAuthors = (work: WorkRecord): string[] => {
+  const raw = work.authors?.map((author) => author.trim()).filter(Boolean) ?? [];
+  return raw
+    .flatMap((author) => author.split(";").map((item) => item.trim()))
+    .filter(Boolean)
+    .map(formatAuthor);
+};
+
+const FIGURE_TYPE_LABELS = new Map<string, string>([
+  ["bar", "Bar chart"],
+  ["bar-chart", "Bar chart"],
+  ["column", "Column chart"],
+  ["column-chart", "Column chart"],
+  ["map", "Map"],
+  ["area", "Area chart"],
+  ["area-chart", "Area chart"]
+]);
+
+const getFigureTypeLabel = (
+  value: string,
+  chartTypeLabels: Map<string, string>
+): string => {
+  const trimmed = value.trim();
+  const lower = trimmed.toLowerCase();
+  return (
+    FIGURE_TYPE_LABELS.get(lower) ??
+    FIGURE_TYPE_LABELS.get(trimmed) ??
+    chartTypeLabels.get(value) ??
+    chartTypeLabels.get(trimmed) ??
+    chartTypeLabels.get(lower) ??
+    value
+  );
+};

@@ -6,9 +6,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0038-f99_h0500.webp",
     "view": "/webp/views/w0001-p0038-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Development of Men's and Women's Occupations",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial"
     ],
@@ -22,8 +24,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Development of Men's and Women's Occupations",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0042-f99",
@@ -32,9 +36,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0042-f99_h0500.webp",
     "view": "/webp/views/w0001-p0042-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Age Groups and Occupations",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial",
       "diverging"
@@ -47,8 +53,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Age Groups and Occupations",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0046-f99",
@@ -57,9 +65,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0046-f99_h0500.webp",
     "view": "/webp/views/w0001-p0046-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Professions of Women in 1911 and 1931",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial"
     ],
@@ -71,8 +81,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Professions of Women in 1911 and 1931",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0067-f00",
@@ -81,9 +93,13 @@
     "figureCode": 0,
     "thumb": "/webp/thumbs/w0001-p0067-f00_h0500.webp",
     "view": "/webp/views/w0001-p0067-f00_h2400.webp",
-    "chartTypePrimary": "map",
-    "chartTypes": [
+    "title": "Women's Occupations by Regions",
+    "figureTypes": [
       "map"
+    ],
+    "features": [
+      "symbol-map",
+      "chart-map"
     ],
     "colors": [
       "red",
@@ -95,8 +111,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Women's Occupations by Regions",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "map"
+    ]
   },
   {
     "id": "w0001-p0070-f99",
@@ -105,10 +123,13 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0070-f99_h0500.webp",
     "view": "/webp/views/w0001-p0070-f99_h2400.webp",
-    "chartTypePrimary": "column-chart",
-    "chartTypes": [
-      "column-chart",
-      "unit"
+    "title": "Weekly Earnings of Men and Women",
+    "figureTypes": [
+      "column"
+    ],
+    "features": [
+      "unit",
+      "dot"
     ],
     "colors": [
       "red",
@@ -119,8 +140,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Weekly Earnings of Men and Women",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "column"
+    ]
   },
   {
     "id": "w0001-p0074-f99",
@@ -129,9 +152,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0074-f99_h0500.webp",
     "view": "/webp/views/w0001-p0074-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Trade Union Membership",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial"
     ],
@@ -144,8 +169,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Trade Union Membership",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0078-f99",
@@ -154,11 +181,16 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0078-f99_h0500.webp",
     "view": "/webp/views/w0001-p0078-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Percentage of Women Occupied and Number of Births",
+    "figureTypes": [
+      "bar",
+      "map",
+      "combo"
+    ],
+    "features": [
       "unit",
-      "pictorial"
+      "pictorial",
+      "dot-map"
     ],
     "colors": [
       "red",
@@ -170,8 +202,12 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Percentage of Women Occupied and Number of Births",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar",
+      "map",
+      "combo"
+    ]
   },
   {
     "id": "w0001-p0082-f99",
@@ -180,9 +216,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0082-f99_h0500.webp",
     "view": "/webp/views/w0001-p0082-f99_h2400.webp",
-    "chartTypePrimary": "area-chart",
-    "chartTypes": [
-      "area-chart",
+    "title": "Women at Work in Greater London and in South Wales",
+    "figureTypes": [
+      "area"
+    ],
+    "features": [
       "unit",
       "pictorial"
     ],
@@ -195,8 +233,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Women at Work in Greater London and in South Wales",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "area"
+    ]
   },
   {
     "id": "w0001-p0086-f99",
@@ -205,10 +245,12 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0086-f99_h0500.webp",
     "view": "/webp/views/w0001-p0086-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
-      "100"
+    "title": "The Changing Home before the 19th Century",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "ratio"
     ],
     "colors": [
       "red",
@@ -220,8 +262,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "The Changing Home before the 19th Century",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0090-f99",
@@ -230,10 +274,12 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0090-f99_h0500.webp",
     "view": "/webp/views/w0001-p0090-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
-      "100"
+    "title": "The Changing Home To-day",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "ratio"
     ],
     "colors": [
       "red",
@@ -245,8 +291,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "The Changing Home To-day",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0094-f99",
@@ -255,9 +303,11 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0094-f99_h0500.webp",
     "view": "/webp/views/w0001-p0094-f99_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Birth Rates and Social Class",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial"
     ],
@@ -269,8 +319,10 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Birth Rates and Social Class",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0098-f99",
@@ -279,15 +331,25 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0098-f99_h0500.webp",
     "view": "/webp/views/w0001-p0098-f99_h2400.webp",
-    "chartTypePrimary": null,
-    "chartTypes": [],
-    "colors": [],
+    "title": "Family Sizes",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "green"
+    ],
     "onlyBlack": false,
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Family Sizes",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
   },
   {
     "id": "w0001-p0103-f00",
@@ -296,12 +358,14 @@
     "figureCode": 0,
     "thumb": "/webp/thumbs/w0001-p0103-f00_h0500.webp",
     "view": "/webp/views/w0001-p0103-f00_h2400.webp",
-    "chartTypePrimary": "bar-chart",
-    "chartTypes": [
-      "bar-chart",
+    "title": "Occupations of Women about 1930",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
       "unit",
       "pictorial",
-      "100"
+      "ratio"
     ],
     "colors": [
       "red",
@@ -313,7 +377,1170 @@
     "themes": [],
     "aiDescription": null,
     "ocrText": null,
-    "title": "Occupations of Women about 1930",
-    "workYear": 1945
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0021-f00",
+    "workId": "w0002",
+    "page": 21,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0002-p0021-f00_h0500.webp",
+    "view": "/webp/views/w0002-p0021-f00_h2400.webp",
+    "title": "Death-rates in London through the centuries",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "ratio",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "orange",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0024-f99",
+    "workId": "w0002",
+    "page": 24,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0024-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0024-f99_h2400.webp",
+    "title": "The Dangerous Years",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "orange",
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0028-f99",
+    "workId": "w0002",
+    "page": 28,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0028-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0028-f99_h2400.webp",
+    "title": "The Battle against Infection",
+    "figureTypes": [
+      "diagram"
+    ],
+    "features": [
+      "process"
+    ],
+    "colors": [
+      "orange",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0002-p0068-f99",
+    "workId": "w0002",
+    "page": 68,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0068-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0068-f99_h2400.webp",
+    "title": "Social distribution of deaths from heart disease\nand tuberculosis",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "orange",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0072-f99",
+    "workId": "w0002",
+    "page": 72,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0072-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0072-f99_h2400.webp",
+    "title": "Diphtheria Treatment",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "orange",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0076-f99",
+    "workId": "w0002",
+    "page": 76,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0076-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0076-f99_h2400.webp",
+    "title": "How to fight Diphtheria",
+    "figureTypes": [
+      "bar",
+      "diagram",
+      "combo"
+    ],
+    "features": [
+      "process",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "orange",
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar",
+      "diagram",
+      "combo"
+    ]
+  },
+  {
+    "id": "w0002-p0080-f99",
+    "workId": "w0002",
+    "page": 80,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0080-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0080-f99_h2400.webp",
+    "title": "How people learned about Diphtheria Immunisation",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0088-f99",
+    "workId": "w0002",
+    "page": 88,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0088-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0088-f99_h2400.webp",
+    "title": "How Syphilis spread to the Old World",
+    "figureTypes": [
+      "map"
+    ],
+    "features": [
+      "route-map",
+      "symbol-map"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0002-p0092-f99",
+    "workId": "w0002",
+    "page": 92,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0092-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0092-f99_h2400.webp",
+    "title": "The story of Syphilis inside the body",
+    "figureTypes": [
+      "timeline",
+      "combo"
+    ],
+    "features": [
+      "symbol",
+      "snake",
+      "process"
+    ],
+    "colors": [
+      "orange",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "timeline",
+      "combo"
+    ]
+  },
+  {
+    "id": "w0002-p0096-f99",
+    "workId": "w0002",
+    "page": 96,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0096-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0096-f99_h2400.webp",
+    "title": "The public questioned about V.D.",
+    "figureTypes": [
+      "bar",
+      "combo"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "orange",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "bar",
+      "combo"
+    ]
+  },
+  {
+    "id": "w0002-p0100-f99",
+    "workId": "w0002",
+    "page": 100,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0100-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0100-f99_h2400.webp",
+    "title": "Deaths in Europe under one year in 1938",
+    "figureTypes": [
+      "combo",
+      "map",
+      "bar"
+    ],
+    "features": [
+      "choropleth",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "combo",
+      "map",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0002-p0104-f99",
+    "workId": "w0002",
+    "page": 104,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0002-p0104-f99_h0500.webp",
+    "view": "/webp/views/w0002-p0104-f99_h2400.webp",
+    "title": "Unplanned and Planned Medical Services",
+    "figureTypes": [
+      "combo",
+      "bar",
+      "diagram"
+    ],
+    "features": [
+      "process",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1944,
+    "typeTokens": [
+      "combo",
+      "bar",
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0003-p0036-f99",
+    "workId": "w0003",
+    "page": 36,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0036-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0036-f99_h2400.webp",
+    "title": "Low Wages and Unemployment as Sources of Poverty",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0040-f99",
+    "workId": "w0003",
+    "page": 40,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0040-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0040-f99_h2400.webp",
+    "title": "The Long Unemployed of Various Ages",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0044-f99",
+    "workId": "w0003",
+    "page": 44,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0044-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0044-f99_h2400.webp",
+    "title": "Unemployment—Various Countries",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0052-f99",
+    "workId": "w0003",
+    "page": 52,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0052-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0052-f99_h2400.webp",
+    "title": "Consumers' Goods and Producers' Goods",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "green",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0056-f99",
+    "workId": "w0003",
+    "page": 56,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0056-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0056-f99_h2400.webp",
+    "title": "Ups and Downs in Shipbuilding",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0060-f99",
+    "workId": "w0003",
+    "page": 60,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0060-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0060-f99_h2400.webp",
+    "title": "Ownership of Wealth in Great Britain",
+    "figureTypes": [
+      "area"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "dot"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "area"
+    ]
+  },
+  {
+    "id": "w0003-p0064-f00",
+    "workId": "w0003",
+    "page": 64,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0003-p0064-f00_h0500.webp",
+    "view": "/webp/views/w0003-p0064-f00_h2400.webp",
+    "title": "Fluctuations in Employment",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0084-f99",
+    "workId": "w0003",
+    "page": 84,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0084-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0084-f99_h2400.webp",
+    "title": "Unemployment in 1932",
+    "figureTypes": [
+      "combo",
+      "map",
+      "area"
+    ],
+    "features": [
+      "choropleth",
+      "symbol-map",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "combo",
+      "map",
+      "area"
+    ]
+  },
+  {
+    "id": "w0003-p0088-f99",
+    "workId": "w0003",
+    "page": 88,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0088-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0088-f99_h2400.webp",
+    "title": "Distribution of Income",
+    "figureTypes": [
+      "column"
+    ],
+    "features": [
+      "stack",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0092-f99",
+    "workId": "w0003",
+    "page": 92,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0092-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0092-f99_h2400.webp",
+    "title": "Burden of Total Taxation",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "dot",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0097-f00",
+    "workId": "w0003",
+    "page": 97,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0003-p0097-f00_h0500.webp",
+    "view": "/webp/views/w0003-p0097-f00_h2400.webp",
+    "title": "Unemployment in Great Britain since 1853",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0101-f00",
+    "workId": "w0003",
+    "page": 101,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0003-p0101-f00_h0500.webp",
+    "view": "/webp/views/w0003-p0101-f00_h2400.webp",
+    "title": "Unemployment by Industries",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0104-f99",
+    "workId": "w0003",
+    "page": 104,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0003-p0104-f99_h0500.webp",
+    "view": "/webp/views/w0003-p0104-f99_h2400.webp",
+    "title": "Saving and Spending in U.S.A.",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "dot"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0003-p0109-f00",
+    "workId": "w0003",
+    "page": 109,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0003-p0109-f00_h0500.webp",
+    "view": "/webp/views/w0003-p0109-f00_h2400.webp",
+    "title": "Unemployment by Regions",
+    "figureTypes": [
+      "map"
+    ],
+    "features": [
+      "chart-map",
+      "unit",
+      "pictorial",
+      "dot"
+    ],
+    "colors": [],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1945,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0004-p0036-f99",
+    "workId": "w0004",
+    "page": 36,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0036-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0036-f99_h2400.webp",
+    "title": "Length of Life a Hundred Years Ago and Now",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "pictorial",
+      "streak"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0040-f99",
+    "workId": "w0004",
+    "page": 40,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0040-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0040-f99_h2400.webp",
+    "title": "Age Groups in England and Wales",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "diverging",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0044-f99",
+    "workId": "w0004",
+    "page": 44,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0044-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0044-f99_h2400.webp",
+    "title": "The Changing Position of Women in Britain",
+    "figureTypes": [
+      "timeline"
+    ],
+    "features": [
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "timeline"
+    ]
+  },
+  {
+    "id": "w0004-p0068-f99",
+    "workId": "w0004",
+    "page": 68,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0068-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0068-f99_h2400.webp",
+    "title": "The Battle of the Franchise",
+    "figureTypes": [
+      "combo",
+      "timeline",
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "combo",
+      "timeline",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0072-f99",
+    "workId": "w0004",
+    "page": 72,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0072-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0072-f99_h2400.webp",
+    "title": "Political Rights of Women",
+    "figureTypes": [
+      "map"
+    ],
+    "features": [
+      "choropleth"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0004-p0076-f99",
+    "workId": "w0004",
+    "page": 76,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0076-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0076-f99_h2400.webp",
+    "title": "Students and Pupils in Different Types of Education",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0080-f99",
+    "workId": "w0004",
+    "page": 80,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0080-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0080-f99_h2400.webp",
+    "title": "Higher Education",
+    "figureTypes": [
+      "combo",
+      "bar",
+      "map"
+    ],
+    "features": [
+      "symbol-map",
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "combo",
+      "bar",
+      "map"
+    ]
+  },
+  {
+    "id": "w0004-p0085-f00",
+    "workId": "w0004",
+    "page": 85,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0004-p0085-f00_h0500.webp",
+    "view": "/webp/views/w0004-p0085-f00_h2400.webp",
+    "title": "Growth of Literacy in England and Wales",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0088-f99",
+    "workId": "w0004",
+    "page": 88,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0088-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0088-f99_h2400.webp",
+    "title": "Social Life at Home—A Century Ago and Now",
+    "figureTypes": [
+      "diagram"
+    ],
+    "features": [
+      "now-and-then"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0004-p0091-f00",
+    "workId": "w0004",
+    "page": 91,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0004-p0091-f00_h0500.webp",
+    "view": "/webp/views/w0004-p0091-f00_h2400.webp",
+    "title": "Changes in Fashion",
+    "figureTypes": [
+      "diagram"
+    ],
+    "features": [
+      "timeline"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0004-p0092-f99",
+    "workId": "w0004",
+    "page": 92,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0092-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0092-f99_h2400.webp",
+    "title": "Women's Underwear-Past and Present",
+    "figureTypes": [
+      "diagram"
+    ],
+    "features": [
+      "process",
+      "now-and-then"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0004-p0100-f99",
+    "workId": "w0004",
+    "page": 100,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0100-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0100-f99_h2400.webp",
+    "title": "Use of Electrical Appliances—United States and Great Britain",
+    "figureTypes": [
+      "bar"
+    ],
+    "features": [
+      "unit",
+      "pictorial",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0004-p0105-f99",
+    "workId": "w0004",
+    "page": 105,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0004-p0105-f99_h0500.webp",
+    "view": "/webp/views/w0004-p0105-f99_h2400.webp",
+    "title": "The Working Woman's Day",
+    "figureTypes": [
+      "diagram"
+    ],
+    "features": [
+      "process"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
   }
 ]

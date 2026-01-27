@@ -16,13 +16,8 @@ const hasAll = (source: string[], target: string[]): boolean =>
 
 export const extractFeatures = (figure: FigureWithWork): string[] => {
   const raw: string[] = [];
-  if (Array.isArray(figure.chartType)) {
-    raw.push(...figure.chartType);
-  } else if (typeof figure.chartType === "string") {
-    raw.push(figure.chartType);
-  }
-  if (Array.isArray(figure.chartTypes)) {
-    raw.push(...figure.chartTypes);
+  if (Array.isArray(figure.features)) {
+    raw.push(...figure.features);
   }
   return raw.map((item) => item.trim()).filter(Boolean);
 };
@@ -36,15 +31,14 @@ export const matchesFilters = (
   }
 
   if (filters.selectedTypes.length > 0) {
-    const primary = figure.chartTypePrimary ?? "";
-    if (!filters.selectedTypes.includes(primary)) {
+    const types = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
+    if (!hasAny(types, filters.selectedTypes)) {
       return false;
     }
   }
 
   if (filters.selectedFeatures.length > 0) {
-    const primary = figure.chartTypePrimary ?? "";
-    const features = extractFeatures(figure).filter((item) => item !== primary);
+    const features = extractFeatures(figure);
     if (!hasAny(features, filters.selectedFeatures)) {
       return false;
     }

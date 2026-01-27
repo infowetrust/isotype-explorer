@@ -1,18 +1,30 @@
 [
   {
-    "id": "bar-chart",
+    "id": "area",
+    "label": "Area"
+  },
+  {
+    "id": "bar",
     "label": "Bar"
   },
   {
-    "id": "column-chart",
+    "id": "column",
     "label": "Column"
+  },
+  {
+    "id": "combo",
+    "label": "Combo"
+  },
+  {
+    "id": "diagram",
+    "label": "Diagram"
   },
   {
     "id": "map",
     "label": "Map"
   },
   {
-    "id": "area-chart",
-    "label": "Area"
+    "id": "timeline",
+    "label": "Timeline"
   }
 ]

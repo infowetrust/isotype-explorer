@@ -1,6 +1,6 @@
 import type { FigureWithWork } from "./types";
 
-export type SortKey = "relevance" | "work" | "year" | "type";
+export type SortKey = "relevance" | "oldest" | "newest";
 
 const compareStrings = (a?: string, b?: string): number =>
   (a ?? "").localeCompare(b ?? "");
@@ -11,8 +11,7 @@ const compareNumbers = (a?: number, b?: number): number =>
 export const sortFigures = (
   figures: FigureWithWork[],
   sortKey: SortKey,
-  scoreById: Map<string, number>,
-  chartTypeLabels: Record<string, string>
+  scoreById: Map<string, number>
 ): FigureWithWork[] => {
   const sorted = [...figures];
 
@@ -25,23 +24,14 @@ export const sortFigures = (
       }
     }
 
-    if (sortKey === "year") {
+    if (sortKey === "oldest" || sortKey === "newest") {
       const yearCompare = compareNumbers(a.workYear, b.workYear);
       if (yearCompare !== 0) {
-        return yearCompare;
+        return sortKey === "newest" ? -yearCompare : yearCompare;
       }
     }
 
-    if (sortKey === "type") {
-      const labelA = chartTypeLabels[a.chartTypePrimary ?? ""] ?? a.chartTypePrimary;
-      const labelB = chartTypeLabels[b.chartTypePrimary ?? ""] ?? b.chartTypePrimary;
-      const typeCompare = compareStrings(labelA, labelB);
-      if (typeCompare !== 0) {
-        return typeCompare;
-      }
-    }
-
-    if (sortKey === "work" || sortKey === "relevance") {
+    if (sortKey === "relevance" || sortKey === "oldest" || sortKey === "newest") {
       const workCompare = compareStrings(a.workTitle ?? a.workId, b.workTitle ?? b.workId);
       if (workCompare !== 0) {
         return workCompare;

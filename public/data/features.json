@@ -1,0 +1,70 @@
+[
+  {
+    "id": "chart-map",
+    "label": "Chart map"
+  },
+  {
+    "id": "choropleth",
+    "label": "Choropleth"
+  },
+  {
+    "id": "diverging",
+    "label": "Diverging"
+  },
+  {
+    "id": "dot",
+    "label": "Dot"
+  },
+  {
+    "id": "dot-map",
+    "label": "Dot map"
+  },
+  {
+    "id": "now-and-then",
+    "label": "Now and then"
+  },
+  {
+    "id": "pictorial",
+    "label": "Pictorial"
+  },
+  {
+    "id": "process",
+    "label": "Process"
+  },
+  {
+    "id": "ratio",
+    "label": "Ratio"
+  },
+  {
+    "id": "route-map",
+    "label": "Route map"
+  },
+  {
+    "id": "snake",
+    "label": "Snake"
+  },
+  {
+    "id": "stack",
+    "label": "Stack"
+  },
+  {
+    "id": "streak",
+    "label": "Streak"
+  },
+  {
+    "id": "symbol",
+    "label": "Symbol"
+  },
+  {
+    "id": "symbol-map",
+    "label": "Symbol map"
+  },
+  {
+    "id": "timeline",
+    "label": "Timeline"
+  },
+  {
+    "id": "unit",
+    "label": "Unit"
+  }
+]
