@@ -1560,17 +1560,11 @@
     "isCombo": false,
     "featuresByType": {
       "map": [
-        "chart-map",
-        "unit",
-        "pictorial",
-        "dot"
+        "chart-map"
       ]
     },
     "featuresFlat": [
-      "chart-map",
-      "unit",
-      "pictorial",
-      "dot"
+      "chart-map"
     ],
     "colors": [],
     "onlyBlack": false,
