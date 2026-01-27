@@ -186,9 +186,6 @@ const App = () => {
     updateParams({ features: next.size ? Array.from(next).join(",") : null });
   };
 
-  const handleClearFeatures = () => {
-    updateParams({ features: null });
-  };
 
   const handleSortChange = (sort: SortKey) => {
     updateParams({ sort });
