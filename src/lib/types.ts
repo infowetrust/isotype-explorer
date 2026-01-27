@@ -18,8 +18,11 @@ export type FigureRecord = {
   height?: number;
   thumb: string;
   view: string;
-  figureTypes?: string[];
-  features?: string[];
+  types: string[];
+  typesFlat?: string[];
+  isCombo?: boolean;
+  featuresByType?: Record<string, string[]>;
+  featuresFlat?: string[];
   colors: string[];
   onlyBlack?: boolean;
   themes?: string[];

@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer className="footer">
-    <div>Isotype Atlas v1 by RJ Andrews.</div>
+    <div>Isotype Atlas v0.9 by RJ Andrews.</div>
     <div>
       Images are presented for research and educational purposes under fair use/fair dealing. Photography and metadata © Andrews Collection of Information Graphics.
     </div>

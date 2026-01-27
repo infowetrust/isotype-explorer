@@ -686,6 +686,12 @@ button:focus-visible {
   margin-top: 8px;
 }
 
+.lightbox-attribution-footer {
+  margin-top: auto;
+  font-size: var(--size-caption);
+  color: #000000;
+}
+
 .about-modal {
   position: fixed;
   inset: 0;

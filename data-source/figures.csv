@@ -1,11 +1,11 @@
-work,figure_id,figure_title,figure_type,features,colors
+work,figure_id,figure_title,types,features,colors
 0001,w0001-p0038-f99,Development of Men's and Women's Occupations,bar,"unit, pictorial","red, blue, gray, green"
 0001,w0001-p0042-f99,Age Groups and Occupations,bar,"unit, pictorial, diverging","red, blue"
 0001,w0001-p0046-f99,Professions of Women in 1911 and 1931,bar,"unit, pictorial","red, blue"
 0001,w0001-p0067-f00,Women's Occupations by Regions,map,"symbol-map, chart-map","red, blue, gray, green"
 0001,w0001-p0070-f99,Weekly Earnings of Men and Women,column,"unit, dot","red, blue, gray"
 0001,w0001-p0074-f99,Trade Union Membership,bar,"unit, pictorial","red, blue, gray"
-0001,w0001-p0078-f99,Percentage of Women Occupied and Number of Births,"bar, map, combo","unit, pictorial, dot-map","red, blue, gray, green"
+0001,w0001-p0078-f99,Percentage of Women Occupied and Number of Births,"bar, map","bar: unit, pictorial; map: dot-map","red, blue, gray, green"
 0001,w0001-p0082-f99,Women at Work in Greater London and in South Wales,area,"unit, pictorial","red, blue, gray"
 0001,w0001-p0086-f99,The Changing Home before the 19th Century,bar,ratio,"red, blue, gray, green"
 0001,w0001-p0090-f99,The Changing Home To-day,bar,ratio,"red, blue, gray, green"
@@ -18,13 +18,13 @@ work,figure_id,figure_title,figure_type,features,colors
 0002,w0002-p0068-f99,"Social distribution of deaths from heart disease
 and tuberculosis",bar,"unit, pictorial, ratio","orange, gray"
 0002,w0002-p0072-f99,Diphtheria Treatment,bar,"unit, pictorial, ratio","orange, red, gray"
-0002,w0002-p0076-f99,How to fight Diphtheria,"bar, diagram, combo","process, unit, pictorial, ratio","orange, red, blue, gray"
+0002,w0002-p0076-f99,How to fight Diphtheria,"bar, diagram","diagram: process; bar: unit, pictorial, ratio","orange, red, blue, gray"
 0002,w0002-p0080-f99,How people learned about Diphtheria Immunisation,bar,"unit, pictorial, ratio","blue, red, gray"
 0002,w0002-p0088-f99,How Syphilis spread to the Old World,map,"route-map, symbol-map","blue, red, gray"
-0002,w0002-p0092-f99,The story of Syphilis inside the body,"timeline, combo","symbol, snake, process","orange, red"
-0002,w0002-p0096-f99,The public questioned about V.D.,"bar, combo","unit, pictorial, ratio","orange, blue, red"
-0002,w0002-p0100-f99,Deaths in Europe under one year in 1938,"combo, map, bar","choropleth, unit, pictorial, ratio","blue, red"
-0002,w0002-p0104-f99,Unplanned and Planned Medical Services,"combo, bar, diagram","process, unit, pictorial, ratio","blue, red"
+0002,w0002-p0092-f99,The story of Syphilis inside the body,timeline,"timeline: snake, process","orange, red"
+0002,w0002-p0096-f99,The public questioned about V.D.,bar,"unit, pictorial, ratio","orange, blue, red"
+0002,w0002-p0100-f99,Deaths in Europe under one year in 1938,"map, bar","map: choropleth; bar: unit, pictorial, ratio","blue, red"
+0002,w0002-p0104-f99,Unplanned and Planned Medical Services,"bar, diagram","diagram: process; bar: unit, pictorial, ratio","blue, red"
 0003,w0003-p0036-f99,Low Wages and Unemployment as Sources of Poverty,bar,"unit, pictorial, ratio","red, green"
 0003,w0003-p0040-f99,The Long Unemployed of Various Ages,bar,"unit, pictorial, ratio",red
 0003,w0003-p0044-f99,Unemployment—Various Countries,bar,"unit, pictorial, ratio","blue, red, green, gray"
@@ -32,7 +32,7 @@ and tuberculosis",bar,"unit, pictorial, ratio","orange, gray"
 0003,w0003-p0056-f99,Ups and Downs in Shipbuilding,bar,"unit, pictorial","blue, red"
 0003,w0003-p0060-f99,Ownership of Wealth in Great Britain,area,"unit, pictorial, dot",red
 0003,w0003-p0064-f00,Fluctuations in Employment,bar,"unit, pictorial, ratio","red, green"
-0003,w0003-p0084-f99,Unemployment in 1932,"combo, map, area","choropleth, symbol-map, unit, pictorial, ratio","blue, red, green"
+0003,w0003-p0084-f99,Unemployment in 1932,"map, area","map: choropleth, symbol-map; area: unit, pictorial, ratio","blue, red, green"
 0003,w0003-p0088-f99,Distribution of Income,column,"stack, unit, pictorial, ratio","blue, red, green"
 0003,w0003-p0092-f99,Burden of Total Taxation,bar,"unit, dot, ratio","blue, red, green, gray"
 0003,w0003-p0097-f00,Unemployment in Great Britain since 1853,bar,"unit, pictorial, ratio",red
@@ -42,10 +42,10 @@ and tuberculosis",bar,"unit, pictorial, ratio","orange, gray"
 0004,w0004-p0036-f99,Length of Life a Hundred Years Ago and Now,bar,"pictorial, streak","blue, red"
 0004,w0004-p0040-f99,Age Groups in England and Wales,bar,"diverging, unit, pictorial, ","blue, red"
 0004,w0004-p0044-f99,The Changing Position of Women in Britain,timeline,symbol,"blue, red"
-0004,w0004-p0068-f99,The Battle of the Franchise,"combo, timeline, bar","unit, pictorial, ratio",red
+0004,w0004-p0068-f99,The Battle of the Franchise,"timeline, bar","bar: unit, pictorial, ratio; timeline: ",red
 0004,w0004-p0072-f99,Political Rights of Women,map,choropleth,"blue, red, gray"
 0004,w0004-p0076-f99,Students and Pupils in Different Types of Education,bar,"unit, pictorial","blue, red, green"
-0004,w0004-p0080-f99,Higher Education,"combo, bar, map","symbol-map, unit, pictorial, ratio","blue, red, green"
+0004,w0004-p0080-f99,Higher Education,"bar, map","map: symbol-map; bar: unit, pictorial, ratio","blue, red, green"
 0004,w0004-p0085-f00,Growth of Literacy in England and Wales,bar,"unit, pictorial, ratio",blue
 0004,w0004-p0088-f99,Social Life at Home—A Century Ago and Now,diagram,now-and-then,"blue, red, green"
 0004,w0004-p0091-f00,Changes in Fashion,diagram,timeline,black

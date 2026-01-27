@@ -6,7 +6,7 @@ import Gallery from "./components/Gallery";
 import Lightbox from "./components/Lightbox";
 import Footer from "./components/Footer";
 import { buildSearchIndex, runSearch } from "./lib/search";
-import { extractFeatures, matchesFilters } from "./lib/filters";
+import { matchesFilters } from "./lib/filters";
 import { sortFigures, type SortKey } from "./lib/sort";
 import type {
   ChartTypeConfig,
@@ -22,9 +22,9 @@ type ViewMode = "figures" | "publications";
 const splitParam = (value: string | null): string[] =>
   value
     ? value
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean)
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean)
     : [];
 
 const App = () => {
@@ -105,7 +105,12 @@ const App = () => {
   const sortKey = (searchParams.get("sort") as SortKey) || "relevance";
   const viewMode = (searchParams.get("view") as ViewMode) || "figures";
   const lightboxId = searchParams.get("id");
-  const selectedFeatureType = selectedTypes.length === 1 ? selectedTypes[0] : null;
+  const selectedBaseTypes = useMemo(
+    () => selectedTypes.filter((type) => type !== "combo"),
+    [selectedTypes]
+  );
+  const selectedFeatureType =
+    selectedBaseTypes.length === 1 ? selectedBaseTypes[0] : null;
   const prevPrimaryTypeRef = useRef<string | null>(null);
 
   const updateParams = useCallback(
@@ -245,24 +250,6 @@ const App = () => {
     return labels;
   }, [features]);
 
-  const availableFeatures = useMemo(() => {
-    if (!selectedFeatureType) {
-      return [];
-    }
-    const set = new Set<string>();
-    figuresWithWork.forEach((figure) => {
-      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
-      if (!figureTypes.includes(selectedFeatureType)) {
-        return;
-      }
-      extractFeatures(figure).forEach((item) => set.add(item));
-    });
-    return Array.from(set)
-      .sort((a, b) => a.localeCompare(b))
-      .map((id) => ({ id, label: featureLabels[id] ?? id }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-  }, [featureLabels, figuresWithWork, selectedFeatureType]);
-
   const { ids: searchIds, scoreById } = useMemo(
     () => runSearch(searchIndex, query),
     [searchIndex, query]
@@ -300,6 +287,22 @@ const App = () => {
     [searchBase, selectedTypes, selectedFeatures, selectedColors, onlyBlack, selectedWorkId]
   );
 
+  const availableFeatures = useMemo(() => {
+    if (!selectedFeatureType) {
+      return [];
+    }
+    const set = new Set<string>();
+    const base = filterBase({ useTypes: true, useColors: true, useFeatures: false });
+    base.forEach((figure) => {
+      const byType = figure.featuresByType ?? {};
+      (byType[selectedFeatureType] ?? []).forEach((item) => set.add(item));
+    });
+    return Array.from(set)
+      .sort((a, b) => a.localeCompare(b))
+      .map((id) => ({ id, label: featureLabels[id] ?? id }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [featureLabels, filterBase, selectedFeatureType]);
+
   const filteredFigures = useMemo(() => {
     return searchBase.filter((figure) =>
       matchesFilters(figure, {
@@ -316,14 +319,17 @@ const App = () => {
     const counts: Record<string, number> = {};
     const base = filterBase({ useTypes: false, useColors: true, useFeatures: false });
     base.forEach((figure) => {
-      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
-      if (!figureTypes.length) {
+      const types = Array.isArray(figure.types) ? figure.types : [];
+      if (!types.length) {
         return;
       }
-      const unique = new Set(figureTypes);
+      const unique = new Set(types);
       unique.forEach((type) => {
         counts[type] = (counts[type] ?? 0) + 1;
       });
+      if (figure.isCombo) {
+        counts.combo = (counts.combo ?? 0) + 1;
+      }
     });
     return counts;
   }, [filterBase]);
@@ -331,17 +337,28 @@ const App = () => {
   const typeSortCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     figuresWithWork.forEach((figure) => {
-      const figureTypes = Array.isArray(figure.figureTypes) ? figure.figureTypes : [];
-      if (!figureTypes.length) {
+      const types = Array.isArray(figure.types) ? figure.types : [];
+      if (!types.length) {
         return;
       }
-      const unique = new Set(figureTypes);
+      const unique = new Set(types);
       unique.forEach((type) => {
         counts[type] = (counts[type] ?? 0) + 1;
       });
+      if (figure.isCombo) {
+        counts.combo = (counts.combo ?? 0) + 1;
+      }
     });
     return counts;
   }, [figuresWithWork]);
+
+  const displayTypes = useMemo(() => {
+    const ids = Object.keys(typeSortCounts);
+    return ids.map((id) => ({
+      id,
+      label: chartTypeLabels[id] ?? id
+    }));
+  }, [chartTypeLabels, typeSortCounts]);
 
   const colorCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -390,11 +407,11 @@ const App = () => {
 
   const hasActiveFilters = Boolean(
     query.trim() ||
-      selectedTypes.length ||
-      selectedFeatures.length ||
-      selectedColors.length ||
-      onlyBlack ||
-      selectedWorkId
+    selectedTypes.length ||
+    selectedFeatures.length ||
+    selectedColors.length ||
+    onlyBlack ||
+    selectedWorkId
   );
 
   const activeFigure = lightboxId ? figureMap.get(lightboxId) ?? null : null;
@@ -414,32 +431,32 @@ const App = () => {
         onReset={handleReset}
         onAboutClick={handleAboutOpen}
       />
-        <FiltersBar
-          chartTypes={chartTypes}
-          availableFeatures={availableFeatures}
-          typeCounts={typeCounts}
-          typeSortCounts={typeSortCounts}
-          colors={colors}
-          colorCounts={colorCounts}
-          colorSortCounts={colorSortCounts}
-          works={works}
-          selectedTypes={selectedTypes}
-          selectedFeatures={selectedFeatures}
-          selectedColors={selectedColors}
-          onlyBlack={onlyBlack}
-          selectedWorkId={selectedWorkId}
-          sortKey={sortKey}
-          viewMode={viewMode}
-          viewCounts={viewCounts}
-          onToggleType={handleToggleType}
-          onToggleFeature={handleToggleFeature}
-          onClearFeatures={handleClearFeatures}
-          onToggleColor={handleToggleColor}
-          onWorkChange={handleWorkChange}
-          onSortChange={handleSortChange}
-          onViewChange={handleViewChange}
-          onClearAll={handleReset}
-        />
+      <FiltersBar
+        chartTypes={displayTypes}
+        availableFeatures={availableFeatures}
+        typeCounts={typeCounts}
+        typeSortCounts={typeSortCounts}
+        colors={colors}
+        colorCounts={colorCounts}
+        colorSortCounts={colorSortCounts}
+        works={works}
+        selectedTypes={selectedTypes}
+        selectedFeatures={selectedFeatures}
+        selectedColors={selectedColors}
+        onlyBlack={onlyBlack}
+        selectedWorkId={selectedWorkId}
+        sortKey={sortKey}
+        viewMode={viewMode}
+        viewCounts={viewCounts}
+        onToggleType={handleToggleType}
+        onToggleFeature={handleToggleFeature}
+        onClearFeatures={handleClearFeatures}
+        onToggleColor={handleToggleColor}
+        onWorkChange={handleWorkChange}
+        onSortChange={handleSortChange}
+        onViewChange={handleViewChange}
+        onClearAll={handleReset}
+      />
       <main className="gallery-wrap">
         <Gallery
           figures={sortedFigures}
@@ -450,16 +467,16 @@ const App = () => {
         />
       </main>
       {activeFigure ? (
-      <Lightbox
-        figure={activeFigure}
-        work={activeWork}
-        figuresInWork={figuresInWork}
-        chartTypes={chartTypes}
-        features={features}
-        colors={colors}
-        onClose={handleCloseLightbox}
-        onSelect={handleSelectFigure}
-      />
+        <Lightbox
+          figure={activeFigure}
+          work={activeWork}
+          figuresInWork={figuresInWork}
+          chartTypes={chartTypes}
+          features={features}
+          colors={colors}
+          onClose={handleCloseLightbox}
+          onSelect={handleSelectFigure}
+        />
       ) : null}
       {aboutOpen ? (
         <div
@@ -474,16 +491,10 @@ const App = () => {
             </button>
             <h2>About</h2>
             <p>
-              The Isotype Institute advances the original mission of ISOTYPE: turning complex
-              information into clear, human-scaled visuals. Its work highlights the social and
-              educational impact of pictorial statistics and the legacy of Otto and Marie Neurath.
-              Today the institute supports research, preservation, and new applications of the
-              visual language.
+              Isotype is a method of showing pictorial information. It consists of standardized methods and abstracted symbols to represent social-scientific data. It was first known as the Vienna Method of Pictorial Statistics due to its 1920s origins at the Gesellschafts-und Wirtschaftsmuseum in Wien (Social and Economic Museum of Vienna). The term Isotype was applied to the method in the 1930s, after its key practitioners were forced to leave Vienna by the rise of Austrian fascism.
             </p>
             <p>
-              RJ Andrews is a writer, researcher, and designer focused on the history of information
-              graphics. He curates and produces the Isotype Chart Explorer to make rare chart
-              collections accessible for study and public appreciation.
+              For generations, Isotype charts and diagrams have inspired information designers. Explore a growing collection of Isotype figures using this interactive explorer created by RJ Andrews.
             </p>
           </div>
         </div>

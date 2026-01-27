@@ -60,12 +60,13 @@ const FiltersBar = ({
   onViewChange,
   onClearAll
 }: FiltersBarProps) => {
-  const showFeatures = selectedTypes.length === 1;
+  const selectedBaseTypes = selectedTypes.filter((type) => type !== "combo");
+  const showFeatures = selectedBaseTypes.length === 1;
   const showWork = false;
   const helperText =
-    selectedTypes.length === 0
+    selectedBaseTypes.length === 0
       ? "Select a type to see feature refinements."
-      : selectedTypes.length > 1
+      : selectedBaseTypes.length > 1
         ? "Select a single type to see feature refinements."
         : "";
   const hasFeatures = showFeatures && availableFeatures.length > 0;

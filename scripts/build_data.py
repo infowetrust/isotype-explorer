@@ -12,9 +12,9 @@ Outputs:
 
 Notes:
 - Supports newer figure CSV headers:
-    figure_type, features, figure_title
+    types, features, figure_title
   and older ones:
-    basic chart, chart facets, etc.
+    figure_type, basic chart, chart facets, etc.
 - Normalizes work ids: 1 -> w0001, w1 -> w0001, w0001 -> w0001
 - Parses page + fcode from figure_id: w0001-p0038-f99
 - Auto-generates image paths:
@@ -132,6 +132,42 @@ def parse_figure_components(figure_id: str) -> Tuple[str, Optional[int], Optiona
     fcode = parse_int(m.group(3))
     return (work, page, fcode)
 
+def parse_types(raw: str) -> List[str]:
+    tokens = [slugify(t) for t in split_csvish(raw)]
+    tokens = [t for t in tokens if t and t != "combo"]
+    return tokens
+
+def parse_features_list(raw: str) -> List[str]:
+    tokens = [slugify(t) for t in split_csvish(raw)]
+    return [t for t in tokens if t]
+
+def parse_features_by_type(raw: str, types: List[str], fig_id: str) -> Dict[str, List[str]]:
+    features_by_type: Dict[str, List[str]] = {}
+    if not raw.strip():
+        return features_by_type
+
+    groups = [g.strip() for g in raw.split(";") if g.strip()]
+    if not any(":" in g for g in groups):
+        print(f"WARNING: multi-type figure without scoped features: {fig_id}")
+        return features_by_type
+
+    for group in groups:
+        if ":" not in group:
+            print(f"WARNING: invalid scoped features (missing ':') for {fig_id}: {group}")
+            continue
+        type_key_raw, feature_list_raw = group.split(":", 1)
+        type_key = slugify(type_key_raw)
+        if not type_key:
+            continue
+        if type_key not in types:
+            print(
+                f"WARNING: scoped features type not in types for {fig_id}: {type_key}"
+            )
+            continue
+        features = parse_features_list(feature_list_raw)
+        features_by_type[type_key] = features
+    return features_by_type
+
 def normalize_color_token(tok: str) -> str:
     t = clean_cell(tok).lower()
     t = t.replace("_", "-").replace(" ", "-")
@@ -236,15 +272,6 @@ def build_works(rows: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     return works
 
 
-def parse_figure_types(raw: str) -> List[str]:
-    """
-    Parse a figure_type cell into a list of tokens.
-    """
-    tokens = [slugify(t) for t in split_csvish(raw)]
-    tokens = [t for t in tokens if t]
-    return tokens
-
-
 def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
     figures: List[Dict[str, Any]] = []
 
@@ -255,6 +282,11 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
 
         work_from_id, page_from_id, fcode_from_id = parse_figure_components(fig_id)
         work_col = normalize_work_id(get_first(r, "work_id", "work", "workid", default=""))
+        if work_from_id and work_col and work_from_id != work_col:
+            print(
+                f"WARNING: work mismatch for {fig_id}: figure_id={work_from_id} "
+                f"csv={work_col}"
+            )
         work_id = work_from_id or work_col or None
 
         page = page_from_id if page_from_id is not None else parse_int(get_first(r, "page", "page_number", default=""))
@@ -262,31 +294,49 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
 
         title = get_first(r, "figure_title", "title", default="") or None
 
-        # NEW headers: figure_type + features
-        primary_raw = get_first(
+        # Types (new: types; fallback to older columns)
+        types_raw = get_first(
             r,
-            "figure_type",              # new
-            "basic chart",              # old
+            "types",
+            "figure_type",
+            "basic chart",
             "chart_type",
             "chart type",
             "type",
             default="",
         )
+        types = parse_types(types_raw)
+        is_combo = len(types) > 1
 
-        # parse figure types (all tokens, including combo)
-        figure_type_tokens = parse_figure_types(primary_raw)
-        # Features come from column 'features' (new) or 'chart facets' (old)
+        # Features (new: features; fallback to older columns)
         features_raw = get_first(
             r,
-            "features",                 # new
-            "chart facets",             # old
+            "features",
+            "chart facets",
             "facets",
             "chart_types",
             "chart types",
             default="",
         )
-        feature_tokens = [slugify(t) for t in split_csvish(features_raw)]
-        feature_tokens = [t for t in feature_tokens if t]
+        features_by_type: Dict[str, List[str]] = {}
+        if len(types) == 1:
+            if types:
+                features_by_type[types[0]] = parse_features_list(features_raw)
+        elif len(types) > 1:
+            features_by_type = parse_features_by_type(features_raw, types, fig_id)
+            for t in types:
+                if t not in features_by_type:
+                    print(
+                        f"WARNING: missing scoped features for type '{t}' in {fig_id}"
+                    )
+
+        features_flat: List[str] = []
+        seen_features: set[str] = set()
+        for t in types:
+            for feat in features_by_type.get(t, []):
+                if feat not in seen_features:
+                    seen_features.add(feat)
+                    features_flat.append(feat)
 
         # Colors
         colors_raw = get_first(r, "colors", "color", "palette", default="")
@@ -314,10 +364,12 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
 
             "title": title,
 
-            # figure types (from figure_type)
-            "figureTypes": figure_type_tokens,
-            # features (from features)
-            "features": feature_tokens,
+            # types + features
+            "types": types,
+            "typesFlat": types,
+            "isCombo": is_combo,
+            "featuresByType": features_by_type,
+            "featuresFlat": features_flat,
 
             "colors": colors,
             "onlyBlack": only_black,
@@ -330,7 +382,7 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
             "workYear": work_year,
 
             # optional: keep the full type tokens for future work (UI can ignore)
-            "typeTokens": figure_type_tokens,
+            "typeTokens": types,
         })
 
     figures.sort(key=lambda f: f.get("id", ""))

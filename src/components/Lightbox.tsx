@@ -93,9 +93,7 @@ const Lightbox = ({
   const typeLabelList = Array.from(new Set(normalizeTypes(figure))).map(
     (type) => chartTypeLabels.get(type) ?? type
   );
-  const featureLabelList = Array.from(new Set(normalizeFeatures(figure))).map(
-    (type) => featureLabels.get(type) ?? chartTypeLabels.get(type) ?? type
-  );
+  const featureLabelList = buildFeatureLabelLines(figure, featureLabels, chartTypeLabels);
   const colorsLabel = figure.onlyBlack
     ? "Only black"
     : (figure.colors ?? []).map((color) => colorLabels.get(color) ?? color);
@@ -131,7 +129,11 @@ const Lightbox = ({
             </div>
             <div className="meta-label">Features</div>
             <div className="meta-value">
-              {featureLabelList.length ? featureLabelList.join(", ") : "None"}
+              {featureLabelList.length ? (
+                featureLabelList.map((line) => <div key={line}>{line}</div>)
+              ) : (
+                "None"
+              )}
             </div>
             {figure.onlyBlack || (figure.colors?.length ?? 0) > 0 ? (
               <>
@@ -154,16 +156,19 @@ const Lightbox = ({
               <div className="meta-value">{figure.aiDescription}</div>
             </div>
           ) : null}
+          <div className="lightbox-actions">
+            <button type="button" className="lightbox-copy" onClick={handleCopy}>
+              {copied ? "Copied" : "Copy link"}
+            </button>
+          </div>
           {figure.ocrText ? (
             <details className="meta-block meta-ocr" open>
               <summary className="meta-label">OCR text</summary>
               <div className="meta-value ocr-box">{figure.ocrText}</div>
             </details>
           ) : null}
-          <div className="lightbox-actions">
-            <button type="button" className="lightbox-copy" onClick={handleCopy}>
-              {copied ? "Copied" : "Copy link"}
-            </button>
+          <div className="lightbox-attribution-footer">
+            Andrews Collection of Information Graphics
           </div>
         </div>
         <div className="lightbox-media">
@@ -202,17 +207,44 @@ const Lightbox = ({
 export default Lightbox;
 
 const normalizeTypes = (figure: FigureWithWork): string[] => {
-  if (Array.isArray(figure.figureTypes)) {
-    return figure.figureTypes.filter(Boolean);
+  if (Array.isArray(figure.types)) {
+    return figure.types.filter(Boolean);
   }
   return [];
 };
 
 const normalizeFeatures = (figure: FigureWithWork): string[] => {
-  if (Array.isArray(figure.features)) {
-    return figure.features.filter(Boolean);
+  if (Array.isArray(figure.featuresFlat)) {
+    return figure.featuresFlat.filter(Boolean);
   }
   return [];
+};
+
+const buildFeatureLabelLines = (
+  figure: FigureWithWork,
+  featureLabels: Map<string, string>,
+  chartTypeLabels: Map<string, string>
+): string[] => {
+  const types = normalizeTypes(figure);
+  const byType = figure.featuresByType ?? {};
+  if (types.length <= 1) {
+    const features = normalizeFeatures(figure);
+    return features.map((type) => featureLabels.get(type) ?? chartTypeLabels.get(type) ?? type);
+  }
+
+  const lines: string[] = [];
+  types.forEach((type) => {
+    const features = byType[type] ?? [];
+    if (!features.length) {
+      return;
+    }
+    const typeLabel = chartTypeLabels.get(type) ?? type;
+    const featureText = features
+      .map((feat) => featureLabels.get(feat) ?? chartTypeLabels.get(feat) ?? feat)
+      .join(", ");
+    lines.push(`${typeLabel} — ${featureText}`);
+  });
+  return lines;
 };
 
 const parsePageNumber = (id: string): number | null => {
