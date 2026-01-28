@@ -225,6 +225,11 @@ button:focus-visible {
   transition: background-color 0.15s ease;
 }
 
+.chip:disabled {
+  opacity: 0.50;
+  cursor: not-allowed;
+}
+
 .chip:not(.chip-sup) {
   padding-right: 12px;
 }
@@ -300,6 +305,11 @@ button:focus-visible {
   cursor: pointer;
   border: none;
   transition: none;
+}
+
+.color-chip:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
 }
 
 .color-chip:hover {

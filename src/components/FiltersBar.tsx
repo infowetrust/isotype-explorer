@@ -22,6 +22,7 @@ type FiltersBarProps = {
   onlyBlack: boolean;
   selectedWorkId: string | null;
   sortKey: SortKey;
+  hasQuery: boolean;
   viewMode: "figures" | "publications";
   viewCounts: { figures: number; publications: number };
   onToggleType: (id: string) => void;
@@ -48,6 +49,7 @@ const FiltersBar = ({
   onlyBlack,
   selectedWorkId,
   sortKey,
+  hasQuery,
   viewMode,
   viewCounts,
   onToggleType,
@@ -60,7 +62,6 @@ const FiltersBar = ({
 }: FiltersBarProps) => {
   const selectedBaseTypes = selectedTypes.filter((type) => type !== "combo");
   const showFeatures = selectedBaseTypes.length === 1;
-  const showWork = false;
   const helperText =
     selectedBaseTypes.length === 0
       ? "Select a type to see feature refinements."
@@ -91,11 +92,18 @@ const FiltersBar = ({
                 selectedTypes.includes(type.id) && "selected"
               )}
               onClick={() => onToggleType(type.id)}
+              disabled={(typeCounts[type.id] ?? 0) === 0}
+              aria-disabled={(typeCounts[type.id] ?? 0) === 0}
             >
               <span className="chip-label">{type.label}</span>
-              <sup className="chip-count">
-                <span className="count-num">{typeCounts[type.id] ?? 0}</span>
-              </sup>
+              {selectedTypes.includes(type.id) ? null : (
+                <sup className="chip-count">
+                  <span className="count-num">
+                    {selectedTypes.length > 0 ? "+" : ""}
+                    {typeCounts[type.id] ?? 0}
+                  </span>
+                </sup>
+              )}
             </button>
           ))}
         </div>
@@ -105,6 +113,7 @@ const FiltersBar = ({
             const isOnlyBlack = color.id === "only-black";
             const selected = isOnlyBlack ? onlyBlack : selectedColors.includes(color.id);
             const count = colorCounts[color.id] ?? 0;
+            const isDisabled = count === 0;
             return (
               <button
                 key={color.id}
@@ -112,35 +121,20 @@ const FiltersBar = ({
                 className={clsx("color-chip", selected && "selected")}
                 onClick={() => onToggleColor(color.id)}
                 aria-label={color.label}
+                disabled={isDisabled}
+                aria-disabled={isDisabled}
               >
                 <span
                   aria-hidden="true"
                   className="color-chip-dot"
                   style={{ ["--chip-color" as string]: color.hex }}
                 >
-                  <span className="count-num">{count}</span>
+                  {selected ? null : <span className="count-num">{count}</span>}
                 </span>
               </button>
             );
           })}
         </div>
-        {showWork ? (
-          <div className="filter-group">
-            <span className="filter-label">Work</span>
-            <select
-              className="select"
-              value={selectedWorkId ?? ""}
-              onChange={(event) => onWorkChange(event.target.value || null)}
-            >
-              <option value="">All works</option>
-              {works.map((work) => (
-                <option key={work.workId} value={work.workId}>
-                  {work.title}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : null}
       </div>
       <div className="filters-row filters-row-features">
         {hasFeatures ? (
@@ -213,7 +207,9 @@ const FiltersBar = ({
         </div>
         <div className="filter-group">
           <span className="filter-label">Sort</span>
-          {(["relevance", "oldest", "newest"] as const).map((value) => (
+          {((hasQuery
+            ? ["relevance", "oldest", "newest"]
+            : ["oldest", "newest"]) as const).map((value) => (
             <button
               key={value}
               type="button"

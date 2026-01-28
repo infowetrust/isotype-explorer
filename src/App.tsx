@@ -6,7 +6,7 @@ import Gallery from "./components/Gallery";
 import Lightbox from "./components/Lightbox";
 import Footer from "./components/Footer";
 import { buildSearchIndex, runSearch } from "./lib/search";
-import { matchesFilters } from "./lib/filters";
+import { matchesFilters, type FiltersState } from "./lib/filters";
 import { sortFigures, type SortKey } from "./lib/sort";
 import type {
   ChartTypeConfig,
@@ -96,6 +96,7 @@ const App = () => {
   const searchIndex = useMemo(() => buildSearchIndex(figuresWithWork), [figuresWithWork]);
 
   const query = searchParams.get("q") ?? "";
+  const hasQuery = query.trim().length > 0;
   const selectedTypes = splitParam(searchParams.get("types"));
   const selectedFeatures = splitParam(searchParams.get("features"));
   const colorParam = splitParam(searchParams.get("colors"));
@@ -131,6 +132,12 @@ const App = () => {
   const handleQueryChange = (value: string) => {
     updateParams({ q: value.trim() ? value : null });
   };
+
+  useEffect(() => {
+    if (!hasQuery && sortKey === "relevance") {
+      updateParams({ sort: "oldest" });
+    }
+  }, [hasQuery, sortKey, updateParams]);
 
   const handleReset = () => {
     setSearchParams(new URLSearchParams());
@@ -262,75 +269,6 @@ const App = () => {
       .filter((figure): figure is FigureWithWork => Boolean(figure));
   }, [figuresWithWork, figureMap, query, searchIds]);
 
-  const filterBase = useCallback(
-    ({
-      useTypes,
-      useColors,
-      useFeatures
-    }: {
-      useTypes: boolean;
-      useColors: boolean;
-      useFeatures: boolean;
-    }) =>
-      searchBase.filter((figure) =>
-        matchesFilters(figure, {
-          selectedTypes: useTypes ? selectedTypes : [],
-          selectedFeatures: useFeatures ? selectedFeatures : [],
-          selectedColors: useColors ? selectedColors : [],
-          onlyBlack: useColors ? onlyBlack : false,
-          workId: selectedWorkId
-        })
-      ),
-    [searchBase, selectedTypes, selectedFeatures, selectedColors, onlyBlack, selectedWorkId]
-  );
-
-  const availableFeatures = useMemo(() => {
-    if (!selectedFeatureType) {
-      return [];
-    }
-    const set = new Set<string>();
-    const base = filterBase({ useTypes: true, useColors: true, useFeatures: false });
-    base.forEach((figure) => {
-      const byType = figure.featuresByType ?? {};
-      (byType[selectedFeatureType] ?? []).forEach((item) => set.add(item));
-    });
-    return Array.from(set)
-      .sort((a, b) => a.localeCompare(b))
-      .map((id) => ({ id, label: featureLabels[id] ?? id }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-  }, [featureLabels, filterBase, selectedFeatureType]);
-
-  const filteredFigures = useMemo(() => {
-    return searchBase.filter((figure) =>
-      matchesFilters(figure, {
-        selectedTypes,
-        selectedFeatures,
-        selectedColors,
-        onlyBlack,
-        workId: selectedWorkId
-      })
-    );
-  }, [searchBase, selectedTypes, selectedFeatures, selectedColors, onlyBlack, selectedWorkId]);
-
-  const typeCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    const base = filterBase({ useTypes: false, useColors: true, useFeatures: false });
-    base.forEach((figure) => {
-      const types = Array.isArray(figure.types) ? figure.types : [];
-      if (!types.length) {
-        return;
-      }
-      const unique = new Set(types);
-      unique.forEach((type) => {
-        counts[type] = (counts[type] ?? 0) + 1;
-      });
-      if (figure.isCombo) {
-        counts.combo = (counts.combo ?? 0) + 1;
-      }
-    });
-    return counts;
-  }, [filterBase]);
-
   const typeSortCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     figuresWithWork.forEach((figure) => {
@@ -349,6 +287,130 @@ const App = () => {
     return counts;
   }, [figuresWithWork]);
 
+  const { filteredFigures, typeCounts, colorCounts, availableFeatures } = useMemo(() => {
+    const baseFilters: FiltersState = {
+      selectedTypes,
+      selectedFeatures,
+      selectedColors,
+      onlyBlack,
+      workId: selectedWorkId
+    };
+    const typeCounts: Record<string, number> = {};
+    const colorCounts: Record<string, number> = {};
+    const filteredFigures: FigureWithWork[] = [];
+    const featureSet = new Set<string>();
+
+    const typeIds = Object.keys(typeSortCounts);
+    typeIds.forEach((id) => {
+      typeCounts[id] = 0;
+    });
+    const colorIds = colors.map((color) => color.id);
+    colorIds.forEach((id) => {
+      colorCounts[id] = 0;
+    });
+
+    const unselectedTypeIds = typeIds.filter((id) => !selectedTypes.includes(id));
+    const typeFilterById = new Map<string, FiltersState>();
+    unselectedTypeIds.forEach((typeId) => {
+      typeFilterById.set(typeId, {
+        ...baseFilters,
+        selectedTypes: [...selectedTypes, typeId]
+      });
+    });
+
+    const colorFilterById = new Map<string, FiltersState>();
+    colorIds.forEach((colorId) => {
+      const isOnlyBlack = colorId === "only-black";
+      if (isOnlyBlack) {
+        if (!onlyBlack) {
+          colorFilterById.set(colorId, {
+            ...baseFilters,
+            onlyBlack: true,
+            selectedColors: []
+          });
+        }
+        return;
+      }
+      const isSelected = !onlyBlack && selectedColors.includes(colorId);
+      if (isSelected) {
+        return;
+      }
+      const nextSelectedColors = selectedColors.includes(colorId)
+        ? selectedColors
+        : [...selectedColors, colorId];
+      colorFilterById.set(colorId, {
+        ...baseFilters,
+        onlyBlack: false,
+        selectedColors: nextSelectedColors
+      });
+    });
+
+    const featuresFilter = selectedFeatureType
+      ? { ...baseFilters, selectedFeatures: [] }
+      : null;
+
+    searchBase.forEach((figure) => {
+      if (matchesFilters(figure, baseFilters)) {
+        filteredFigures.push(figure);
+      }
+
+      if (featuresFilter && matchesFilters(figure, featuresFilter)) {
+        const byType = figure.featuresByType ?? {};
+        (byType[selectedFeatureType ?? ""] ?? []).forEach((item) => featureSet.add(item));
+      }
+
+      typeFilterById.forEach((filters, typeId) => {
+        if (matchesFilters(figure, filters)) {
+          typeCounts[typeId] = (typeCounts[typeId] ?? 0) + 1;
+        }
+      });
+
+      colorFilterById.forEach((filters, colorId) => {
+        if (matchesFilters(figure, filters)) {
+          colorCounts[colorId] = (colorCounts[colorId] ?? 0) + 1;
+        }
+      });
+    });
+
+    const currentCount = filteredFigures.length;
+    selectedTypes.forEach((typeId) => {
+      typeCounts[typeId] = currentCount;
+    });
+    if (selectedTypes.length > 0) {
+      unselectedTypeIds.forEach((typeId) => {
+        const addCount = typeCounts[typeId] ?? 0;
+        typeCounts[typeId] = Math.max(0, addCount - currentCount);
+      });
+    }
+    if (onlyBlack) {
+      colorCounts["only-black"] = currentCount;
+    } else {
+      selectedColors.forEach((colorId) => {
+        colorCounts[colorId] = currentCount;
+      });
+    }
+
+    const availableFeatures = selectedFeatureType
+      ? Array.from(featureSet)
+        .sort((a, b) => a.localeCompare(b))
+        .map((id) => ({ id, label: featureLabels[id] ?? id }))
+        .sort((a, b) => a.label.localeCompare(b.label))
+      : [];
+
+    return { filteredFigures, typeCounts, colorCounts, availableFeatures };
+  }, [
+    colors,
+    featureLabels,
+    onlyBlack,
+    searchBase,
+    selectedColors,
+    selectedFeatures,
+    selectedFeatureType,
+    selectedTypes,
+    selectedWorkId,
+    typeSortCounts
+  ]);
+
   const displayTypes = useMemo(() => {
     const ids = Object.keys(typeSortCounts);
     return ids.map((id) => ({
@@ -356,20 +418,6 @@ const App = () => {
       label: chartTypeLabels[id] ?? id
     }));
   }, [chartTypeLabels, typeSortCounts]);
-
-  const colorCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    const base = filterBase({ useTypes: true, useColors: false, useFeatures: true });
-    base.forEach((figure) => {
-      if (figure.onlyBlack) {
-        counts["only-black"] = (counts["only-black"] ?? 0) + 1;
-      }
-      (figure.colors ?? []).forEach((color) => {
-        counts[color] = (counts[color] ?? 0) + 1;
-      });
-    });
-    return counts;
-  }, [filterBase]);
 
   const colorSortCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -433,8 +481,9 @@ const App = () => {
         onlyBlack={onlyBlack}
         selectedWorkId={selectedWorkId}
         sortKey={sortKey}
+        hasQuery={hasQuery}
         viewMode={viewMode}
-          viewCounts={viewCounts}
+        viewCounts={viewCounts}
           onToggleType={handleToggleType}
           onToggleFeature={handleToggleFeature}
           onToggleColor={handleToggleColor}
