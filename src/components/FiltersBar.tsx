@@ -1,10 +1,5 @@
 import clsx from "clsx";
-import type {
-  ChartTypeConfig,
-  ColorConfig,
-  FeatureConfig,
-  WorkRecord
-} from "../lib/types";
+import type { ChartTypeConfig, ColorConfig, FeatureConfig } from "../lib/types";
 import type { SortKey } from "../lib/sort";
 
 type FiltersBarProps = {
@@ -15,12 +10,10 @@ type FiltersBarProps = {
   colors: ColorConfig[];
   colorCounts: Record<string, number>;
   colorSortCounts: Record<string, number>;
-  works: WorkRecord[];
   selectedTypes: string[];
   selectedFeatures: string[];
   selectedColors: string[];
   onlyBlack: boolean;
-  selectedWorkId: string | null;
   sortKey: SortKey;
   hasQuery: boolean;
   viewMode: "figures" | "publications";
@@ -28,7 +21,6 @@ type FiltersBarProps = {
   onToggleType: (id: string) => void;
   onToggleFeature: (id: string) => void;
   onToggleColor: (id: string) => void;
-  onWorkChange: (id: string | null) => void;
   onSortChange: (sort: SortKey) => void;
   onViewChange: (view: "figures" | "publications") => void;
   onClearAll: () => void;
@@ -42,12 +34,10 @@ const FiltersBar = ({
   colors,
   colorCounts,
   colorSortCounts,
-  works,
   selectedTypes,
   selectedFeatures,
   selectedColors,
   onlyBlack,
-  selectedWorkId,
   sortKey,
   hasQuery,
   viewMode,
@@ -55,7 +45,6 @@ const FiltersBar = ({
   onToggleType,
   onToggleFeature,
   onToggleColor,
-  onWorkChange,
   onSortChange,
   onViewChange,
   onClearAll
@@ -207,9 +196,7 @@ const FiltersBar = ({
         </div>
         <div className="filter-group">
           <span className="filter-label">Sort</span>
-          {((hasQuery
-            ? ["relevance", "oldest", "newest"]
-            : ["oldest", "newest"]) as const).map((value) => (
+          {(hasQuery ? (["relevance", "oldest", "newest"] as SortKey[]) : (["oldest", "newest"] as SortKey[])).map((value) => (
             <button
               key={value}
               type="button"
