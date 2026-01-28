@@ -176,10 +176,6 @@ const App = () => {
     updateParams({ colors: joined || null });
   };
 
-  const handleWorkChange = (id: string | null) => {
-    updateParams({ work: id });
-  };
-
   const handleToggleFeature = (id: string) => {
     if (!selectedFeatureType) {
       return;
