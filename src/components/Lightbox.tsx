@@ -30,11 +30,28 @@ const Lightbox = ({
   onSelect
 }: LightboxProps) => {
   const [copied, setCopied] = useState(false);
+  const [isFullLoaded, setIsFullLoaded] = useState(false);
   const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const sortedFigures = useMemo(
     () => sortFiguresByPage(figuresInWork),
     [figuresInWork]
   );
+
+  useEffect(() => {
+    setIsFullLoaded(false);
+  }, [figure?.view]);
+
+  useEffect(() => {
+    if (!isFullLoaded || !figure) {
+      return;
+    }
+    const next = getSiblingFigure(sortedFigures, figure.id, 1);
+    const prev = getSiblingFigure(sortedFigures, figure.id, -1);
+    [next?.view, prev?.view].filter(Boolean).forEach((src) => {
+      const img = new Image();
+      img.src = src as string;
+    });
+  }, [figure, isFullLoaded, sortedFigures]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -172,8 +189,19 @@ const Lightbox = ({
           </div>
         </div>
         <div className="lightbox-media">
-          <div className="lightbox-stage">
-            <img src={figure.view} alt={figureTitle} />
+          <div className={`lightbox-stage${isFullLoaded ? " is-loaded" : ""}`}>
+            <img
+              className="lightbox-stage-thumb"
+              src={figure.thumb}
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              className="lightbox-stage-full"
+              src={figure.view}
+              alt={figureTitle}
+              onLoad={() => setIsFullLoaded(true)}
+            />
           </div>
           {sortedFigures.length > 1 ? (
             <div className="lightbox-carousel" aria-label="Other figures in this work">
