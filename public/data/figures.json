@@ -638,7 +638,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0002-p0068-f99_h0500.webp",
     "view": "/webp/views/w0002-p0068-f99_h2400.webp",
-    "title": "Social distribution of deaths from heart disease\nand tuberculosis",
+    "title": "Social distribution of deaths from heart disease\r\nand tuberculosis",
     "types": [
       "bar"
     ],
@@ -1560,11 +1560,17 @@
     "isCombo": false,
     "featuresByType": {
       "map": [
-        "chart-map"
+        "chart-map",
+        "unit",
+        "pictorial",
+        "dot"
       ]
     },
     "featuresFlat": [
-      "chart-map"
+      "chart-map",
+      "unit",
+      "pictorial",
+      "dot"
     ],
     "colors": [],
     "onlyBlack": false,
@@ -1712,8 +1718,7 @@
         "unit",
         "pictorial",
         "ratio"
-      ],
-      "timeline": []
+      ]
     },
     "featuresFlat": [
       "unit",
@@ -2083,6 +2088,605 @@
     "ocrText": null,
     "workYear": 1946,
     "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0007-p0052-f99",
+    "workId": "w0007",
+    "page": 52,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0052-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0052-f99_h2400.webp",
+    "title": "Social History and Education",
+    "types": [
+      "timeline"
+    ],
+    "typesFlat": [
+      "timeline"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "timeline": [
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "symbol"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "timeline"
+    ]
+  },
+  {
+    "id": "w0007-p0056-f99",
+    "workId": "w0007",
+    "page": 56,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0056-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0056-f99_h2400.webp",
+    "title": "Plan of a School",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "building"
+      ]
+    },
+    "featuresFlat": [
+      "building"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0007-p0060-f99",
+    "workId": "w0007",
+    "page": 60,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0060-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0060-f99_h2400.webp",
+    "title": "Children in State-aided Schools, United States and England & Wales",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "unit",
+        "pictorial"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0065-f00",
+    "workId": "w0007",
+    "page": 65,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0065-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0065-f00_h2400.webp",
+    "title": "Sizes of Classes in 1938, England and Wales",
+    "types": [
+      "bar",
+      "column"
+    ],
+    "typesFlat": [
+      "bar",
+      "column"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "column": [
+        "diverging",
+        "symbol"
+      ],
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar",
+      "column"
+    ]
+  },
+  {
+    "id": "w0007-p0068-f00",
+    "workId": "w0007",
+    "page": 68,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0068-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0068-f00_h2400.webp",
+    "title": "Teachers in Public Elementary and State-aided Secondary Schools, 1938",
+    "types": [
+      "column"
+    ],
+    "typesFlat": [
+      "column"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "column": [
+        "diverging",
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "diverging",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "column"
+    ]
+  },
+  {
+    "id": "w0007-p0069-f00",
+    "workId": "w0007",
+    "page": 69,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0069-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0069-f00_h2400.webp",
+    "title": "Teachers Entering and Leaving",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0072-f99",
+    "workId": "w0007",
+    "page": 72,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0072-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0072-f99_h2400.webp",
+    "title": "The New Educational Administration",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0007-p0076-f99",
+    "workId": "w0007",
+    "page": 76,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0076-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0076-f99_h2400.webp",
+    "title": "How Educational Reaction Affected the Growing Child",
+    "types": [
+      "timeline"
+    ],
+    "typesFlat": [
+      "timeline"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "timeline": [
+        "symbol",
+        "streak"
+      ]
+    },
+    "featuresFlat": [
+      "symbol",
+      "streak"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "timeline"
+    ]
+  },
+  {
+    "id": "w0007-p0080-f00",
+    "workId": "w0007",
+    "page": 80,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0080-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0080-f00_h2400.webp",
+    "title": "Teachers Needed to Operate New Education Act",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0100-f99",
+    "workId": "w0007",
+    "page": 100,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0100-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0100-f99_h2400.webp",
+    "title": "The Universities of Great Britain and their Students in 1937-38",
+    "types": [
+      "map",
+      "bar"
+    ],
+    "typesFlat": [
+      "map",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ],
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "gray",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0104-f99",
+    "workId": "w0007",
+    "page": 104,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0104-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0104-f99_h2400.webp",
+    "title": "University Students and Population, 1934/35",
+    "types": [
+      "map",
+      "bar"
+    ],
+    "typesFlat": [
+      "map",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "choropleth"
+      ],
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth",
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0109-f00",
+    "workId": "w0007",
+    "page": 109,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0109-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0109-f00_h2400.webp",
+    "title": "Students Entering Oxford and Cambridge Universities, 1940-41",
+    "types": [
+      "column",
+      "area"
+    ],
+    "typesFlat": [
+      "column",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "column": [
+        "symbol",
+        "ratio"
+      ],
+      "area": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "symbol",
+      "ratio",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "column",
+      "area"
+    ]
+  },
+  {
+    "id": "w0007-p0113-f00",
+    "workId": "w0007",
+    "page": 113,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0007-p0113-f00_h0500.webp",
+    "view": "/webp/views/w0007-p0113-f00_h2400.webp",
+    "title": "University Finance, 1937/38",
+    "types": [
+      "diagram",
+      "bar"
+    ],
+    "typesFlat": [
+      "diagram",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "symbol",
+        "flow"
+      ],
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "symbol",
+      "flow",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0007-p0116-f99",
+    "workId": "w0007",
+    "page": 116,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0007-p0116-f99_h0500.webp",
+    "view": "/webp/views/w0007-p0116-f99_h2400.webp",
+    "title": "Education of the Members of Parliament, 1918-36",
+    "types": [
+      "bar",
+      "diagram"
+    ],
+    "typesFlat": [
+      "bar",
+      "diagram"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "symbol",
+        "flow"
+      ],
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "symbol",
+      "flow"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar",
       "diagram"
     ]
   }

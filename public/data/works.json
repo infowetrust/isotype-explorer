@@ -79,5 +79,25 @@
     "isbn": null,
     "scanSource": null,
     "firstEdition": null
+  },
+  {
+    "workId": "w0007",
+    "year": 1947,
+    "title": "Education, the new horizon",
+    "series": "The new democracy",
+    "language": "English",
+    "authors": [
+      "Harold C. Shearman"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Nicholson & Watson",
+    "publisherCity": "London",
+    "heightCm": 22,
+    "oclcNumber": null,
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
   }
 ]

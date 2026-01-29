@@ -491,6 +491,7 @@ button:focus-visible {
   height: min(900px, 90vh);
   display: grid;
   grid-template-columns: 0.35fr 0.65fr;
+  padding-top: 60px;
   overflow: hidden;
 }
 
@@ -749,6 +750,16 @@ button:focus-visible {
   margin-top: 0;
 }
 
+.about-photo {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 28px auto 0;
+  border: 1px solid none;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
 .about-close {
   position: absolute;
   top: 16px;
@@ -792,6 +803,7 @@ button:focus-visible {
   .lightbox-inner {
     grid-template-columns: 1fr;
     height: 92vh;
+    padding-top: 72px;
   }
 
   .lightbox-stage {

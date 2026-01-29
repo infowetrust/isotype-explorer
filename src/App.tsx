@@ -522,8 +522,13 @@ const App = () => {
               Isotype is a method of showing pictorial information. It consists of standardized methods and abstracted symbols to represent social-scientific data. It was first known as the Vienna Method of Pictorial Statistics due to its 1920s origins at the Gesellschafts-und Wirtschaftsmuseum in Wien (Social and Economic Museum of Vienna). The term Isotype was applied to the method in the 1930s, after its key practitioners were forced to leave Vienna by the rise of Austrian fascism.
             </p>
             <p>
-              For generations, Isotype charts and diagrams have inspired information designers. Explore a growing collection of Isotype figures using this interactive explorer created by RJ Andrews.
+              For generations, Isotype charts and diagrams have inspired information designers. Explore a growing collection of Isotype figures using this interactive explorer created by RJ Andrews with original photography and metadata.
             </p>
+            <img
+              className="about-photo"
+              src="/rj-photo-rig.webp"
+              alt="RJ Andrews with camera rig."
+            />
           </div>
         </div>
       ) : null}

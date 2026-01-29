@@ -26,6 +26,15 @@ type FiltersBarProps = {
   onClearAll: () => void;
 };
 
+const toSentenceCase = (value: string) => {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+  const lower = trimmed.toLowerCase();
+  return lower[0].toUpperCase() + lower.slice(1);
+};
+
 const FiltersBar = ({
   chartTypes,
   availableFeatures,
@@ -141,7 +150,7 @@ const FiltersBar = ({
                   )}
                   onClick={() => onToggleFeature(feature.id)}
                 >
-                  <span>{feature.label}</span>
+                  <span>{toSentenceCase(feature.label)}</span>
                 </button>
               ))}
             </div>
