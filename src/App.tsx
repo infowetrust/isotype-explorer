@@ -36,7 +36,7 @@ const App = () => {
   const [colors, setColors] = useState<ColorConfig[]>([]);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [aboutScrollTarget, setAboutScrollTarget] = useState<null | "terms">(null);
-  const termsRef = useRef<HTMLDivElement | null>(null);
+  const termsRef = useRef<HTMLDetailsElement | null>(null);
 
   useEffect(() => {
     const load = async () => {
