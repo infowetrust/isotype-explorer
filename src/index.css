@@ -740,14 +740,40 @@ button:focus-visible {
 
 .about-card {
   max-width: 720px;
+  max-height: 90vh;
   background: #ffffff;
   border-radius: 0;
   padding: 28px;
   position: relative;
+  overflow: auto;
 }
 
 .about-card h2 {
   margin-top: 0;
+}
+
+.about-details {
+  margin-top: 20px;
+}
+
+.about-details summary {
+  cursor: pointer;
+  font-size: var(--size-body);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.about-details ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.about-details p {
+  margin: 10px 0 0;
+}
+
+.about-text {
+  margin-top: 10px;
 }
 
 .about-photo {
@@ -786,6 +812,16 @@ button:focus-visible {
   color: #000000;
   font-size: var(--size-body);
   background: #ffffff;
+}
+
+.footer-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #000000;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
 }
 
 .empty-state {

@@ -35,6 +35,8 @@ const App = () => {
   const [features, setFeatures] = useState<FeatureConfig[]>([]);
   const [colors, setColors] = useState<ColorConfig[]>([]);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [aboutScrollTarget, setAboutScrollTarget] = useState<null | "terms">(null);
+  const termsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -148,6 +150,10 @@ const App = () => {
   const handleAboutClose = () => {
     setAboutOpen(false);
   };
+  const handleTermsOpen = () => {
+    setAboutOpen(true);
+    setAboutScrollTarget("terms");
+  };
 
   const handleToggleType = (id: string) => {
     const next = new Set(selectedTypes);
@@ -233,6 +239,19 @@ const App = () => {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [aboutOpen]);
+
+  useEffect(() => {
+    if (!aboutOpen || !aboutScrollTarget) {
+      return;
+    }
+    const node = aboutScrollTarget === "terms"
+      ? termsRef.current
+      : document.getElementById(aboutScrollTarget);
+    if (node) {
+      node.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setAboutScrollTarget(null);
+  }, [aboutOpen, aboutScrollTarget]);
 
   const chartTypeLabels = useMemo(() => {
     const labels: Record<string, string> = {};
@@ -522,17 +541,71 @@ const App = () => {
               Isotype is a method of showing pictorial information. It consists of standardized methods and abstracted symbols to represent social-scientific data. It was first known as the Vienna Method of Pictorial Statistics due to its 1920s origins at the Gesellschafts-und Wirtschaftsmuseum in Wien (Social and Economic Museum of Vienna). The term Isotype was applied to the method in the 1930s, after its key practitioners were forced to leave Vienna by the rise of Austrian fascism.
             </p>
             <p>
-              For generations, Isotype charts and diagrams have inspired information designers. Explore a growing collection of Isotype figures using this interactive explorer created by RJ Andrews with original photography and metadata.
+              For generations, Isotype charts and diagrams have inspired information designers. Explore a growing collection of Isotype figures using this interactive explorer created by RJ Andrews with original photography and metadata. For inquiries, visit{" "}
+              <a href="https://infowetrust.com/contact">infowetrust.com/contact</a>.
             </p>
             <img
               className="about-photo"
               src="/rj-photo-rig.webp"
               alt="RJ Andrews with camera rig."
             />
+            <details className="about-details" id="terms" ref={termsRef}>
+              <summary>Terms of Use</summary>
+              <div className="about-text">
+                <p>
+                  This site presents historical information graphics for research and
+                  educational purposes under fair use/fair dealing.
+                </p>
+                <p>
+                  Photography and curated metadata are © Andrews Collection of
+                  Information Graphics (RJ Andrews). All rights reserved unless
+                  otherwise noted.
+                </p>
+                <p>
+                  You may browse, search, and share links to this site. Limited
+                  quotation of metadata or low-resolution imagery for commentary,
+                  scholarship, and teaching is permitted with attribution.
+                </p>
+                <p>Prohibited without written permission:</p>
+                <ul>
+                  <li>
+                  automated scraping, crawling, bulk downloading, or mirroring of
+                  images or metadata
+                  </li>
+                  <li>
+                  building or redistributing a dataset derived from this site (images
+                  or metadata)
+                  </li>
+                  <li>
+                  using any images or metadata from this site to train, fine-tune,
+                  evaluate, or operate machine learning / AI systems (including
+                  embedding generation or dataset construction)
+                  </li>
+                  <li>
+                  commercial reuse or resale of the photography and metadata
+                  </li>
+                </ul>
+                <p>We may block automated access and update these terms over time.</p>
+              </div>
+            </details>
+            <details className="about-details" id="data-license">
+              <summary>Data &amp; Content License</summary>
+              <div className="about-text">
+                <p>
+                  The software/code for this website is licensed under the repository
+                  LICENSE (MIT).
+                </p>
+                <p>
+                  The photography and metadata published on the site are governed by
+                  the project's Data &amp; Content License (see DATA_LICENSE.md) and
+                  the Terms above.
+                </p>
+              </div>
+            </details>
           </div>
         </div>
       ) : null}
-      <Footer />
+      <Footer onTermsClick={handleTermsOpen} />
     </div>
   );
 };

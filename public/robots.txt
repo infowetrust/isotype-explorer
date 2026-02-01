@@ -1,0 +1,28 @@
+# Isotype Atlas robots.txt
+# Search indexing of pages is OK.
+# Automated scraping of images and metadata is not permitted.
+# AI training/grounding crawlers are not permitted.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Default: allow pages, disallow bulk assets (images + JSON data)
+User-agent: *
+Disallow: /data/
+Disallow: /webp/
+Allow: /
