@@ -1,6 +1,6 @@
 import type { FigureWithWork } from "./types";
 
-export type SortKey = "relevance" | "oldest" | "newest";
+export type SortKey = "relevance" | "oldest" | "newest" | "random";
 
 const compareStrings = (a?: string, b?: string): number =>
   (a ?? "").localeCompare(b ?? "");
@@ -14,6 +14,14 @@ export const sortFigures = (
   scoreById: Map<string, number>
 ): FigureWithWork[] => {
   const sorted = [...figures];
+
+  if (sortKey === "random") {
+    for (let i = sorted.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
+    }
+    return sorted;
+  }
 
   sorted.sort((a, b) => {
     if (sortKey === "relevance") {

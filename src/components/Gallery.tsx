@@ -55,8 +55,15 @@ const Gallery = ({
           count: visibleCount
         };
       })
-      .filter((row) => row.count > 0)
-      .sort((a, b) => {
+      .filter((row) => row.count > 0);
+
+    if (sortKey === "random") {
+      for (let i = rows.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rows[i], rows[j]] = [rows[j], rows[i]];
+      }
+    } else {
+      rows.sort((a, b) => {
         if (sortKey === "oldest" || sortKey === "newest") {
           const yearA = a.workYear ?? Number.POSITIVE_INFINITY;
           const yearB = b.workYear ?? Number.POSITIVE_INFINITY;
@@ -70,6 +77,7 @@ const Gallery = ({
         }
         return a.workTitle.localeCompare(b.workTitle);
       });
+    }
 
     return (
       <div className="gallery-work-rows">

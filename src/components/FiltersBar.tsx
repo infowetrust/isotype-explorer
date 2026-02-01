@@ -205,7 +205,9 @@ const FiltersBar = ({
         </div>
         <div className="filter-group">
           <span className="filter-label">Sort</span>
-          {(hasQuery ? (["relevance", "oldest", "newest"] as SortKey[]) : (["oldest", "newest"] as SortKey[])).map((value) => (
+          {(hasQuery
+            ? (["relevance", "oldest", "newest", "random"] as SortKey[])
+            : (["oldest", "newest", "random"] as SortKey[])).map((value) => (
             <button
               key={value}
               type="button"
@@ -217,7 +219,9 @@ const FiltersBar = ({
                   ? "Relevance"
                   : value === "oldest"
                     ? "Oldest"
-                    : "Newest"}
+                    : value === "newest"
+                      ? "Newest"
+                      : "Random"}
               </span>
             </button>
           ))}
