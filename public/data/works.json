@@ -81,6 +81,46 @@
     "firstEdition": null
   },
   {
+    "workId": "w0005",
+    "year": 1946,
+    "title": "Human problems in industry",
+    "series": "The new democracy",
+    "language": "English",
+    "authors": [
+      "Norah M. Davis"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Nicholson & Watson",
+    "publisherCity": "London",
+    "heightCm": 22,
+    "oclcNumber": null,
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
+    "workId": "w0006",
+    "year": 1947,
+    "title": "The citizen and government",
+    "series": "The new democracy",
+    "language": "English",
+    "authors": [
+      "John A. Hawgood"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Nicholson & Watson",
+    "publisherCity": "London",
+    "heightCm": 22,
+    "oclcNumber": null,
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
     "workId": "w0007",
     "year": 1947,
     "title": "Education, the new horizon",
@@ -88,6 +128,26 @@
     "language": "English",
     "authors": [
       "Harold C. Shearman"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Nicholson & Watson",
+    "publisherCity": "London",
+    "heightCm": 22,
+    "oclcNumber": null,
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
+    "workId": "w0008",
+    "year": 1948,
+    "title": "Full enjoyment",
+    "series": "The new democracy",
+    "language": "English",
+    "authors": [
+      "Norman Crosby"
     ],
     "informationDesigners": [
       "Isotype Institute"

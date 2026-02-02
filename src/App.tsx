@@ -22,10 +22,13 @@ type ViewMode = "figures" | "publications";
 const splitParam = (value: string | null): string[] =>
   value
     ? value
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean)
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean)
     : [];
+
+const toTitleCase = (value: string): string =>
+  value ? `${value[0].toUpperCase()}${value.slice(1)}` : value;
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -430,7 +433,7 @@ const App = () => {
     const ids = Object.keys(typeSortCounts);
     return ids.map((id) => ({
       id,
-      label: chartTypeLabels[id] ?? id
+      label: toTitleCase(chartTypeLabels[id] ?? id)
     }));
   }, [chartTypeLabels, typeSortCounts]);
 

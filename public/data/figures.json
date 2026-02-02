@@ -255,7 +255,8 @@
     "featuresByType": {
       "bar": [
         "unit",
-        "pictorial"
+        "pictorial",
+        "ratio"
       ],
       "map": [
         "dot-map"
@@ -264,6 +265,7 @@
     "featuresFlat": [
       "unit",
       "pictorial",
+      "ratio",
       "dot-map"
     ],
     "colors": [
@@ -328,7 +330,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0086-f99_h0500.webp",
     "view": "/webp/views/w0001-p0086-f99_h2400.webp",
-    "title": "The Changing Home before the 19th Century",
+    "title": "w0001-p0086-f99",
     "types": [
       "bar"
     ],
@@ -638,7 +640,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0002-p0068-f99_h0500.webp",
     "view": "/webp/views/w0002-p0068-f99_h2400.webp",
-    "title": "Social distribution of deaths from heart disease\r\nand tuberculosis",
+    "title": "Social distribution of deaths from heart disease\nand tuberculosis",
     "types": [
       "bar"
     ],
@@ -810,23 +812,11 @@
     "thumb": "/webp/thumbs/w0002-p0088-f99_h0500.webp",
     "view": "/webp/views/w0002-p0088-f99_h2400.webp",
     "title": "How Syphilis spread to the Old World",
-    "types": [
-      "map"
-    ],
-    "typesFlat": [
-      "map"
-    ],
+    "types": [],
+    "typesFlat": [],
     "isCombo": false,
-    "featuresByType": {
-      "map": [
-        "route-map",
-        "symbol-map"
-      ]
-    },
-    "featuresFlat": [
-      "route-map",
-      "symbol-map"
-    ],
+    "featuresByType": {},
+    "featuresFlat": [],
     "colors": [
       "blue",
       "red",
@@ -837,9 +827,7 @@
     "aiDescription": null,
     "ocrText": null,
     "workYear": 1944,
-    "typeTokens": [
-      "map"
-    ]
+    "typeTokens": []
   },
   {
     "id": "w0002-p0092-f99",
@@ -1310,7 +1298,7 @@
     "featuresByType": {
       "map": [
         "choropleth",
-        "symbol-map"
+        "chart-map"
       ],
       "area": [
         "unit",
@@ -1320,7 +1308,7 @@
     },
     "featuresFlat": [
       "choropleth",
-      "symbol-map",
+      "chart-map",
       "unit",
       "pictorial",
       "ratio"
@@ -1560,19 +1548,15 @@
     "isCombo": false,
     "featuresByType": {
       "map": [
-        "chart-map",
-        "unit",
-        "pictorial",
-        "dot"
+        "chart-map"
       ]
     },
     "featuresFlat": [
-      "chart-map",
-      "unit",
-      "pictorial",
-      "dot"
+      "chart-map"
     ],
-    "colors": [],
+    "colors": [
+      "red"
+    ],
     "onlyBlack": false,
     "themes": [],
     "aiDescription": null,
@@ -2087,6 +2071,1133 @@
     "aiDescription": null,
     "ocrText": null,
     "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0005-p0024-f99",
+    "workId": "w0005",
+    "page": 24,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0024-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0024-f99_h2400.webp",
+    "title": "Distribution of Intelligence Scores",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0028-f99",
+    "workId": "w0005",
+    "page": 28,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0028-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0028-f99_h2400.webp",
+    "title": "Vocational Selection at a Cocoa Works",
+    "types": [
+      "diagram",
+      "area"
+    ],
+    "typesFlat": [
+      "diagram",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "streak"
+      ],
+      "area": [
+        "unit",
+        "pictorial"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "streak",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram",
+      "area"
+    ]
+  },
+  {
+    "id": "w0005-p0040-f99",
+    "workId": "w0005",
+    "page": 40,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0040-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0040-f99_h2400.webp",
+    "title": "Testing the Tests",
+    "types": [
+      "diagram",
+      "bar"
+    ],
+    "typesFlat": [
+      "diagram",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "process"
+      ],
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0044-f99",
+    "workId": "w0005",
+    "page": 44,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0044-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0044-f99_h2400.webp",
+    "title": "Motion Studies: Assembling Meshing Gears and Sweet Dipping",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process"
+      ]
+    },
+    "featuresFlat": [
+      "process"
+    ],
+    "colors": [
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0005-p0049-f00",
+    "workId": "w0005",
+    "page": 49,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0005-p0049-f00_h0500.webp",
+    "view": "/webp/views/w0005-p0049-f00_h2400.webp",
+    "title": "Effects of Training Based on Motion Study",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "dot",
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "dot",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0060-f00",
+    "workId": "w0005",
+    "page": 60,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0005-p0060-f00_h0500.webp",
+    "view": "/webp/views/w0005-p0060-f00_h2400.webp",
+    "title": "Necessity for Ventilation",
+    "types": [
+      "column"
+    ],
+    "typesFlat": [
+      "column"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "column": [
+        "temperature",
+        "rectangle",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "temperature",
+      "rectangle",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "column"
+    ]
+  },
+  {
+    "id": "w0005-p0061-f00",
+    "workId": "w0005",
+    "page": 61,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0005-p0061-f00_h0500.webp",
+    "view": "/webp/views/w0005-p0061-f00_h2400.webp",
+    "title": "Effects of Illumination on Efficiency of Typesetting",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "rectangle"
+      ]
+    },
+    "featuresFlat": [
+      "rectangle"
+    ],
+    "colors": [
+      "red",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0081-f00",
+    "workId": "w0005",
+    "page": 81,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0005-p0081-f00_h0500.webp",
+    "view": "/webp/views/w0005-p0081-f00_h2400.webp",
+    "title": "Effect of Supervision",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "rectangle"
+      ]
+    },
+    "featuresFlat": [
+      "rectangle"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0084-f99",
+    "workId": "w0005",
+    "page": 84,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0084-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0084-f99_h2400.webp",
+    "title": "Reducing Fatigue in Housework",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "building"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "building"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0005-p0088-f99",
+    "workId": "w0005",
+    "page": 88,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0005-p0088-f99_h0500.webp",
+    "view": "/webp/views/w0005-p0088-f99_h2400.webp",
+    "title": "Accidents Among Miners",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0005-p0093-f00",
+    "workId": "w0005",
+    "page": 93,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0005-p0093-f00_h0500.webp",
+    "view": "/webp/views/w0005-p0093-f00_h2400.webp",
+    "title": "Distribution of Accidents Among Taxicab Drivers",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0006-p0021-f00",
+    "workId": "w0006",
+    "page": 21,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0021-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0021-f00_h2400.webp",
+    "title": "The Extension of the Parliamentary Franchise in Great Britain",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0006-p0024-f99",
+    "workId": "w0006",
+    "page": 24,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0024-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0024-f99_h2400.webp",
+    "title": "Redistribution of Seats under the First Reform Act, 1832",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map",
+        "choropleth"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "choropleth"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0006-p0028-f99",
+    "workId": "w0006",
+    "page": 28,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0028-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0028-f99_h2400.webp",
+    "title": "Population in 1931 and Distribution of Seats in 1935",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map",
+        "choropleth"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "choropleth"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0006-p0032-f00",
+    "workId": "w0006",
+    "page": 32,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0032-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0032-f00_h2400.webp",
+    "title": "Voting Record of the Larger Towns in England and Wales",
+    "types": [
+      "map",
+      "area"
+    ],
+    "typesFlat": [
+      "map",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "abstract"
+      ],
+      "area": [
+        "dot",
+        "triangle",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "abstract",
+      "dot",
+      "triangle",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map",
+      "area"
+    ]
+  },
+  {
+    "id": "w0006-p0033-f00",
+    "workId": "w0006",
+    "page": 33,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0033-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0033-f00_h2400.webp",
+    "title": "Electoral Apathy and Enthusiasm",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "rectangle",
+        "unit",
+        "pictorial",
+        "diverging",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "rectangle",
+      "unit",
+      "pictorial",
+      "diverging",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0006-p0037-f00",
+    "workId": "w0006",
+    "page": 37,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0037-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0037-f00_h2400.webp",
+    "title": "Votes Cast and M.P.s Elected",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "unit",
+        "pictorial",
+        "diverging",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "pictorial",
+      "diverging",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0006-p0040-f99",
+    "workId": "w0006",
+    "page": 40,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0040-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0040-f99_h2400.webp",
+    "title": "Spheres of Activity of the Ordinary Citizen and of his M.P.",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "flow"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0044-f99",
+    "workId": "w0006",
+    "page": 44,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0044-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0044-f99_h2400.webp",
+    "title": "The Legislative Process in the U.S.A. and in Britain",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "flow",
+        "org"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "flow",
+      "org"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0065-f00",
+    "workId": "w0006",
+    "page": 65,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0065-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0065-f00_h2400.webp",
+    "title": "Local Government Areas: Worcestershire (a Typical County)",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "choropleth"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0006-p0069-f00",
+    "workId": "w0006",
+    "page": 69,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0069-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0069-f00_h2400.webp",
+    "title": "Chief Spheres of Activity of Local Councils in Britain",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "dot"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "dot"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0072-f99",
+    "workId": "w0006",
+    "page": 72,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0072-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0072-f99_h2400.webp",
+    "title": "The Working of a County Borough Council",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org"
+      ]
+    },
+    "featuresFlat": [
+      "org"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0076-f99",
+    "workId": "w0006",
+    "page": 76,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0076-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0076-f99_h2400.webp",
+    "title": "The Local Government Hierarchy in Britain (after 1929) and in Germany (1918-1933)",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "flow"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0097-f00",
+    "workId": "w0006",
+    "page": 97,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0097-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0097-f00_h2400.webp",
+    "title": "The Active Citizen in Urban and Rural Areas",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "semi-circle",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "semi-circle",
+      "symbol"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0100-f99",
+    "workId": "w0006",
+    "page": 100,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0100-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0100-f99_h2400.webp",
+    "title": "Trade Union Democracy: Controlled and Autonomous Executives",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "flow"
+    ],
+    "colors": [
+      "red",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0104-f99",
+    "workId": "w0006",
+    "page": 104,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0104-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0104-f99_h2400.webp",
+    "title": "Political \"Pressure Groups\" Old and New",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "flow"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0006-p0108-f99",
+    "workId": "w0006",
+    "page": 108,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0006-p0108-f99_h0500.webp",
+    "view": "/webp/views/w0006-p0108-f99_h2400.webp",
+    "title": "How a Public Opinion Poll Works",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "unit",
+        "pictorial",
+        "rectangle",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "pictorial",
+      "rectangle",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "gray",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0006-p0112-f00",
+    "workId": "w0006",
+    "page": 112,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0006-p0112-f00_h0500.webp",
+    "view": "/webp/views/w0006-p0112-f00_h2400.webp",
+    "title": "Education for Citizenship: Possible Channels",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "semi-circle",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "semi-circle",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1947,
     "typeTokens": [
       "diagram"
     ]
@@ -2688,6 +3799,451 @@
     "typeTokens": [
       "bar",
       "diagram"
+    ]
+  },
+  {
+    "id": "w0008-p0017-f00",
+    "workId": "w0008",
+    "page": 17,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0008-p0017-f00_h0500.webp",
+    "view": "/webp/views/w0008-p0017-f00_h2400.webp",
+    "title": "Theatres and Cinemas in London",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0020-f99",
+    "workId": "w0008",
+    "page": 20,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0020-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0020-f99_h2400.webp",
+    "title": "Cinema-going in Britain. Summer 1943",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio",
+      "diverging"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0024-f99",
+    "workId": "w0008",
+    "page": 24,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0024-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0024-f99_h2400.webp",
+    "title": "Cinema Seats and Attendance in Proportion to Population",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0028-f99",
+    "workId": "w0008",
+    "page": 28,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0028-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0028-f99_h2400.webp",
+    "title": "Playing Games and Watching Races",
+    "types": [
+      "timeline",
+      "bar"
+    ],
+    "typesFlat": [
+      "timeline",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "bar": [
+        "unit",
+        "pictorial"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "timeline",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0032-f00",
+    "workId": "w0008",
+    "page": 32,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0008-p0032-f00_h0500.webp",
+    "view": "/webp/views/w0008-p0032-f00_h2400.webp",
+    "title": "Increasing Leisure",
+    "types": [
+      "pie"
+    ],
+    "typesFlat": [
+      "pie"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "pie": [
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "symbol"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "pie"
+    ]
+  },
+  {
+    "id": "w0008-p0053-f00",
+    "workId": "w0008",
+    "page": 53,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0008-p0053-f00_h0500.webp",
+    "view": "/webp/views/w0008-p0053-f00_h2400.webp",
+    "title": "Leisure's Share in the Nation's Expenditure",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "dot",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "dot",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "green",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0060-f99",
+    "workId": "w0008",
+    "page": 60,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0060-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0060-f99_h2400.webp",
+    "title": "Youth Clubs in the City of Nottingham",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "dot",
+        "rectangle",
+        "diverging",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "dot",
+      "rectangle",
+      "diverging",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "green",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0100-f99",
+    "workId": "w0008",
+    "page": 100,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0100-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0100-f99_h2400.webp",
+    "title": "Public Libraries in Great Britain",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio",
+      "diverging"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0104-f99",
+    "workId": "w0008",
+    "page": 104,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0104-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0104-f99_h2400.webp",
+    "title": "BBC Programmes. Size of Audiences, 1947",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio",
+      "diverging"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0008-p0116-f99",
+    "workId": "w0008",
+    "page": 116,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0116-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0116-f99_h2400.webp",
+    "title": "Football Ground as a Recreation Centre",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "building"
+      ]
+    },
+    "featuresFlat": [
+      "building"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0008-p0124-f99",
+    "workId": "w0008",
+    "page": 124,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0008-p0124-f99_h0500.webp",
+    "view": "/webp/views/w0008-p0124-f99_h2400.webp",
+    "title": "Middlesbrough: Present and Proposed Leisure Facilities and Services",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "choropleth",
+        "chart-map"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth",
+      "chart-map"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1948,
+    "typeTokens": [
+      "map"
     ]
   }
 ]
