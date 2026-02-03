@@ -29,7 +29,7 @@ import tempfile
 import subprocess
 import urllib.error
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 
 def load_json(path: Path) -> Any:
@@ -77,15 +77,16 @@ def encode_image(path: Path, max_size: int) -> str:
 
 
 def request_ollama(host: str, model: str, prompt: str, image_b64: str) -> str:
+    message: Dict[str, Any] = {
+        "role": "user",
+        "content": prompt,
+    }
+    if image_b64:
+        message["images"] = [image_b64]
+
     payload = {
         "model": model,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt,
-                "images": [image_b64],
-            }
-        ],
+        "messages": [message],
         "stream": False,
         "options": {
             "temperature": 0.2,
@@ -146,23 +147,36 @@ def build_label_map(items: List[Dict[str, Any]]) -> Dict[str, str]:
     return out
 
 
-def pick_image_path(figure: Dict[str, Any], input_dir: Path) -> Optional[Path]:
+def pick_image_path(
+    figure: Dict[str, Any],
+    input_dir: Path,
+    png_root: Optional[Path],
+) -> Tuple[Optional[Path], Optional[Path]]:
+    png_path: Optional[Path] = None
+    if png_root:
+        work_id = str(figure.get("workId", "")).strip()
+        figure_id = str(figure.get("id", "")).strip()
+        if work_id and figure_id:
+            candidate = png_root / work_id / "03-charts-png" / f"{figure_id}.png"
+            if candidate.exists():
+                png_path = candidate
+
     view = str(figure.get("view", "")).strip()
     if view.startswith("/"):
         candidate = input_dir.parent.parent / view.lstrip("/")
         if candidate.exists():
-            return candidate
+            return png_path, candidate
     figure_id = str(figure.get("id", "")).strip()
     if not figure_id:
-        return None
+        return png_path, None
     candidates = [
         input_dir / f"{figure_id}_h2400.webp",
         input_dir / f"{figure_id}.webp",
     ]
     for candidate in candidates:
         if candidate.exists():
-            return candidate
-    return None
+            return png_path, candidate
+    return png_path, None
 
 
 def build_prompt(
@@ -171,6 +185,7 @@ def build_prompt(
     ocr_text: str,
     max_ocr_chars: int,
     include_ocr: bool,
+    vision_summary: str,
     chart_type_labels: Dict[str, str],
     feature_labels: Dict[str, str],
     color_labels: Dict[str, str],
@@ -206,12 +221,14 @@ def build_prompt(
     work_series = work.get("series") if work else None
 
     lines = [
-        "Write a concise, accessibility-focused description in 2–3 sentences.",
+        "Write a concise, accessibility-focused description in exactly 2 sentences.",
         "Sentence 1: topic + what is being compared or shown.",
         "Sentence 2: how the data is encoded (bars, pictograms, maps, etc.) and any distinctive symbols or layout.",
+        "Respond with only the two sentences and no preamble or labels.",
         "Use plain language; avoid decorative phrasing and boilerplate.",
         "Do not mention that it is an Isotype chart or repeat generic facts shared by all items.",
-        "Avoid framing like 'page/spread/book' unless it is essential to understanding the graphic.",
+        "Do not use framing like 'page', 'spread', 'book', or 'publication' unless the page itself is the subject.",
+        "Do not mention series/publisher unless explicitly visible in the graphic.",
         "Prefer what you see in the image. OCR text may be noisy and should not override the image.",
         "Do not quote long OCR passages; summarize any text you use.",
     ]
@@ -233,6 +250,9 @@ def build_prompt(
     if meta_parts:
         lines.append("Metadata: " + " | ".join(meta_parts))
 
+    if vision_summary:
+        lines.append("Vision summary: " + vision_summary)
+
     if include_ocr and ocr_text:
         ocr_clean = normalize_ws(ocr_text)
         ocr_trimmed = truncate_text(ocr_clean, max_ocr_chars)
@@ -241,9 +261,17 @@ def build_prompt(
     return "\n".join(lines).strip()
 
 
+def build_vision_prompt() -> str:
+    return (
+        "Describe the chart content in 1 sentence. "
+        "Focus on what is shown and how it is visually encoded."
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate descriptions via Ollama.")
-    parser.add_argument("--model", default="llava", help="Ollama vision model name.")
+    parser.add_argument("--vision-model", default="llava:7b", help="Ollama vision model.")
+    parser.add_argument("--text-model", default="llama3.1:8b", help="Ollama text model.")
     parser.add_argument("--host", default="http://localhost:11434", help="Ollama host.")
     parser.add_argument("--figures", default="public/data/figures.json")
     parser.add_argument("--works", default="public/data/works.json")
@@ -252,6 +280,16 @@ def main() -> int:
     parser.add_argument("--features", default="public/data/features.json")
     parser.add_argument("--colors", default="public/data/colors.json")
     parser.add_argument("--input-dir", default="public/webp/views")
+    parser.add_argument(
+        "--png-root",
+        default="",
+        help="Root folder containing <workId>/03-charts-png/<figureId>.png.",
+    )
+    parser.add_argument(
+        "--require-png",
+        action="store_true",
+        help="Skip figures without a PNG in the png-root path.",
+    )
     parser.add_argument("--output", default="public/data/descriptions.json")
     parser.add_argument("--force", action="store_true", help="Rebuild existing entries.")
     parser.add_argument("--limit", type=int, default=0, help="Limit processed images.")
@@ -298,6 +336,7 @@ def main() -> int:
     work_by_id = {work["workId"]: work for work in works if work.get("workId")}
 
     input_dir = Path(args.input_dir)
+    png_root = Path(args.png_root).expanduser().resolve() if args.png_root else None
     processed = 0
     updated: Dict[str, str] = {}
 
@@ -308,28 +347,38 @@ def main() -> int:
         if not args.force and figure_id in existing:
             continue
 
-        image_path = pick_image_path(figure, input_dir)
+        png_path, webp_path = pick_image_path(figure, input_dir, png_root)
+        image_path = png_path or webp_path
         if not image_path:
             print(f"Skipping {figure_id}: image not found", file=sys.stderr)
             continue
+        if png_root and not png_path:
+            print(f"PNG missing for {figure_id} at {png_root}", file=sys.stderr)
+            if args.require_png:
+                continue
 
         ocr_text = str(ocr_data.get(figure_id, "")).strip()
         work = work_by_id.get(figure.get("workId"))
 
-        prompt = build_prompt(
-            figure,
-            work,
-            ocr_text,
-            args.max_ocr_chars,
-            not args.no_ocr,
-            chart_type_labels,
-            feature_labels,
-            color_labels,
-        )
+        vision_prompt = build_vision_prompt()
         image_b64 = encode_image(image_path, args.max_image_size)
 
         try:
-            description = request_ollama(args.host, args.model, prompt, image_b64)
+            vision_summary = request_ollama(
+                args.host, args.vision_model, vision_prompt, image_b64
+            )
+            prompt = build_prompt(
+                figure,
+                work,
+                ocr_text,
+                args.max_ocr_chars,
+                not args.no_ocr,
+                vision_summary,
+                chart_type_labels,
+                feature_labels,
+                color_labels,
+            )
+            description = request_ollama(args.host, args.text_model, prompt, "")
         except Exception as exc:
             print(f"Failed {figure_id}: {exc}", file=sys.stderr)
             break
