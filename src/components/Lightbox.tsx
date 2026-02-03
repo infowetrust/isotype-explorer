@@ -31,6 +31,9 @@ const Lightbox = ({
 }: LightboxProps) => {
   const [copied, setCopied] = useState(false);
   const [isFullLoaded, setIsFullLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 600px)").matches
+  );
   const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const sortedFigures = useMemo(
     () => sortFiguresByPage(figuresInWork),
@@ -52,6 +55,28 @@ const Lightbox = ({
       img.src = src as string;
     });
   }, [figure, isFullLoaded, sortedFigures]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 600px)");
+    const handleResize = () => {
+      setIsMobile(media.matches);
+    };
+    handleResize();
+    media.addEventListener("change", handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      media.removeEventListener("change", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMetaOpen(window.innerWidth >= 600);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -107,13 +132,19 @@ const Lightbox = ({
   const figureTitle = figure.title?.trim() ? figure.title : figure.id;
   const yearLine = work?.year ? String(work.year) : null;
   const attribution = buildAttribution(work);
-  const typeLabelList = Array.from(new Set(normalizeTypes(figure))).map(
-    (type) => chartTypeLabels.get(type) ?? type
+  const typeLabelList = Array.from(new Set(normalizeTypes(figure))).map((type) =>
+    toTitleCase(chartTypeLabels.get(type) ?? type)
   );
-  const featureLabelList = buildFeatureLabelLines(figure, featureLabels, chartTypeLabels);
+  const featureLabelList = buildFeatureLabelLines(
+    figure,
+    featureLabels,
+    chartTypeLabels
+  ).map((line) => toTitleCase(line));
   const colorsLabel = figure.onlyBlack
     ? "Only black"
     : (figure.colors ?? []).map((color) => colorLabels.get(color) ?? color);
+  const prevFigure = getSiblingFigure(sortedFigures, figure.id, -1);
+  const nextFigure = getSiblingFigure(sortedFigures, figure.id, 1);
 
   const handleCopy = async () => {
     try {
@@ -138,49 +169,102 @@ const Lightbox = ({
               {yearLine ? <div className="lightbox-year">{yearLine}</div> : null}
             </div>
           </div>
-          {attribution ? <div className="lightbox-attribution">{attribution}</div> : null}
-          <div className="meta-table">
-            <div className="meta-label">Figure Type</div>
-            <div className="meta-value">
-              {typeLabelList.length ? typeLabelList.join(", ") : "Unknown"}
-            </div>
-            <div className="meta-label">Features</div>
-            <div className="meta-value">
-              {featureLabelList.length ? (
-                featureLabelList.map((line) => <div key={line}>{line}</div>)
-              ) : (
-                "None"
-              )}
-            </div>
-            {figure.onlyBlack || (figure.colors?.length ?? 0) > 0 ? (
-              <>
-                <div className="meta-label">Colors</div>
+          {isMobile ? (
+            <details className="lightbox-meta-details" open>
+              <summary>Details</summary>
+              {attribution ? <div className="lightbox-attribution">{attribution}</div> : null}
+              <div className="meta-table">
+                <div className="meta-label">Figure Type</div>
                 <div className="meta-value">
-                  {Array.isArray(colorsLabel) ? colorsLabel.join(", ") : colorsLabel}
+                  {typeLabelList.length ? typeLabelList.join(", ") : "Unknown"}
                 </div>
-              </>
-            ) : null}
-          </div>
-          {figure.themes?.length ? (
-            <div className="meta-block">
-              <div className="meta-label">Themes</div>
-              <div className="meta-value">{figure.themes.join(", ")}</div>
-            </div>
-          ) : null}
-          {figure.aiDescription ? (
-            <div className="meta-block">
-              <div className="meta-label">AI description</div>
-              <div className="meta-value">{figure.aiDescription}</div>
-            </div>
-          ) : null}
-          <div className="lightbox-actions">
-            <button type="button" className="lightbox-copy" onClick={handleCopy}>
-              {copied ? "Copied" : "Copy link"}
-            </button>
-          </div>
-          <div className="lightbox-attribution-footer">
-            Andrews Collection of Information Graphics
-          </div>
+                <div className="meta-label">Features</div>
+                <div className="meta-value">
+                  {featureLabelList.length ? (
+                    featureLabelList.map((line) => <div key={line}>{line}</div>)
+                  ) : (
+                    "None"
+                  )}
+                </div>
+                {figure.onlyBlack || (figure.colors?.length ?? 0) > 0 ? (
+                  <>
+                    <div className="meta-label">Colors</div>
+                    <div className="meta-value">
+                      {Array.isArray(colorsLabel) ? colorsLabel.join(", ") : colorsLabel}
+                    </div>
+                  </>
+                ) : null}
+              </div>
+              {figure.themes?.length ? (
+                <div className="meta-block">
+                  <div className="meta-label">Themes</div>
+                  <div className="meta-value">{figure.themes.join(", ")}</div>
+                </div>
+              ) : null}
+              {figure.aiDescription ? (
+                <div className="meta-block">
+                  <div className="meta-label">AI description</div>
+                  <div className="meta-value">{figure.aiDescription}</div>
+                </div>
+              ) : null}
+              <div className="lightbox-actions">
+              <button type="button" className="lightbox-copy" onClick={handleCopy}>
+                {copied ? "Copied" : "↗ Copy link"}
+              </button>
+              </div>
+              <div className="lightbox-attribution-footer">
+                Andrews Collection of Information Graphics
+              </div>
+            </details>
+          ) : (
+            <>
+              {attribution ? (
+                <div className="lightbox-attribution">{attribution}</div>
+              ) : null}
+              <div className="meta-table">
+                <div className="meta-label">Figure Type</div>
+                <div className="meta-value">
+                  {typeLabelList.length ? typeLabelList.join(", ") : "Unknown"}
+                </div>
+                <div className="meta-label">Features</div>
+                <div className="meta-value">
+                  {featureLabelList.length ? (
+                    featureLabelList.map((line) => <div key={line}>{line}</div>)
+                  ) : (
+                    "None"
+                  )}
+                </div>
+                {figure.onlyBlack || (figure.colors?.length ?? 0) > 0 ? (
+                  <>
+                    <div className="meta-label">Colors</div>
+                    <div className="meta-value">
+                      {Array.isArray(colorsLabel) ? colorsLabel.join(", ") : colorsLabel}
+                    </div>
+                  </>
+                ) : null}
+              </div>
+              {figure.themes?.length ? (
+                <div className="meta-block">
+                  <div className="meta-label">Themes</div>
+                  <div className="meta-value">{figure.themes.join(", ")}</div>
+                </div>
+              ) : null}
+              {figure.aiDescription ? (
+                <div className="meta-block">
+                  <div className="meta-label">AI description</div>
+                  <div className="meta-value">{figure.aiDescription}</div>
+                </div>
+              ) : null}
+              <div className="lightbox-actions">
+                <button type="button" className="lightbox-copy" onClick={handleCopy}>
+                  {copied ? "Copied" : "↗ Copy link"}
+                </button>
+              </div>
+              <div className="lightbox-attribution-footer">
+                Andrews Collection of Information Graphics
+              </div>
+            </>
+          )}
         </div>
         <div className="lightbox-media">
           <div className={`lightbox-stage${isFullLoaded ? " is-loaded" : ""}`}>
@@ -221,6 +305,26 @@ const Lightbox = ({
             </div>
           ) : null}
         </div>
+        {isMobile && sortedFigures.length > 1 ? (
+          <div className="lightbox-nav">
+            <button
+              type="button"
+              className="lightbox-nav-btn"
+              onClick={() => prevFigure && onSelect(prevFigure.id)}
+              disabled={!prevFigure}
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              className="lightbox-nav-btn"
+              onClick={() => nextFigure && onSelect(nextFigure.id)}
+              disabled={!nextFigure}
+            >
+              Next
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );
@@ -251,7 +355,9 @@ const buildFeatureLabelLines = (
   const byType = figure.featuresByType ?? {};
   if (types.length <= 1) {
     const features = normalizeFeatures(figure);
-    return features.map((type) => featureLabels.get(type) ?? chartTypeLabels.get(type) ?? type);
+    return features.map((type) =>
+      featureLabels.get(type) ?? chartTypeLabels.get(type) ?? type
+    );
   }
 
   const lines: string[] = [];
@@ -268,6 +374,12 @@ const buildFeatureLabelLines = (
   });
   return lines;
 };
+
+const toTitleCase = (value: string): string =>
+  value
+    .split(" ")
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1).toLowerCase() : ""))
+    .join(" ");
 
 const parsePageNumber = (id: string): number | null => {
   const match = id.match(/-p(\d{4})-/i);
@@ -336,11 +448,13 @@ const buildAttribution = (work?: WorkRecord): ReactNode | null => {
   const authorsText = authors.length ? authors.join(" and ") : null;
   const pubText = buildPublicationDetails(work);
   const publisherText = pubText ? ` (${pubText})` : "";
+  const seriesText = formatSeries(work.series);
   if (authorsText) {
     return (
       <>
         Published in <em>{work.title}</em> by {authorsText}
         {publisherText}.
+        {seriesText ? ` Part of the ${seriesText} book series.` : ""}
       </>
     );
   }
@@ -348,8 +462,17 @@ const buildAttribution = (work?: WorkRecord): ReactNode | null => {
     <>
       Published in <em>{work.title}</em>
       {publisherText}.
+      {seriesText ? ` Part of the ${seriesText} book series.` : ""}
     </>
   );
+};
+
+const formatSeries = (value?: string | null): string | null => {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return null;
+  }
+  return toTitleCase(trimmed.replace(/^the\s+/i, ""));
 };
 
 const buildPublicationDetails = (work: WorkRecord): string | null => {

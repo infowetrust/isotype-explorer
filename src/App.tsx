@@ -42,6 +42,10 @@ const App = () => {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [aboutScrollTarget, setAboutScrollTarget] = useState<null | "terms">(null);
   const termsRef = useRef<HTMLDetailsElement | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 600px)").matches
+  );
 
   useEffect(() => {
     const load = async () => {
@@ -176,6 +180,12 @@ const App = () => {
     setAboutOpen(true);
     setAboutScrollTarget("terms");
   };
+  const handleFiltersToggle = () => {
+    setFiltersOpen((prev) => !prev);
+  };
+  const handleFiltersClose = () => {
+    setFiltersOpen(false);
+  };
 
   const handleToggleType = (id: string) => {
     const next = new Set(selectedTypes);
@@ -261,6 +271,29 @@ const App = () => {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [aboutOpen]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 600px)");
+    const handleResize = () => setIsMobile(media.matches);
+    handleResize();
+    media.addEventListener("change", handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      media.removeEventListener("change", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!filtersOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [filtersOpen]);
 
   useEffect(() => {
     if (!aboutOpen || !aboutScrollTarget) {
@@ -483,6 +516,12 @@ const App = () => {
     [filteredFigures, sortKey, scoreById]
   );
 
+  const activeFilterCount =
+    selectedTypes.length +
+    selectedFeatures.length +
+    selectedColors.length +
+    (onlyBlack ? 1 : 0);
+
   const viewCounts = useMemo(() => {
     const publications = new Set<string>();
     filteredFigures.forEach((figure) => {
@@ -511,29 +550,69 @@ const App = () => {
         query={query}
         onQueryChange={handleQueryChange}
         onAboutClick={handleAboutOpen}
+        onFiltersClick={handleFiltersToggle}
+        filtersOpen={filtersOpen}
+        activeFilterCount={activeFilterCount}
+        gridCount={
+          viewMode === "figures"
+            ? `${viewCounts.figures} Figures`
+            : `${viewCounts.publications} Publications`
+        }
       />
-      <FiltersBar
-        chartTypes={displayTypes}
-        availableFeatures={availableFeatures}
-        typeCounts={typeCounts}
-        typeSortCounts={typeSortCounts}
-        colors={colors}
-        colorCounts={colorCounts}
-        colorSortCounts={colorSortCounts}
-        selectedTypes={selectedTypes}
-        selectedFeatures={selectedFeatures}
-        selectedColors={selectedColors}
-        onlyBlack={onlyBlack}
-        sortKey={sortKey}
-        hasQuery={hasQuery}
-        viewMode={viewMode}
-        viewCounts={viewCounts}
-        onToggleType={handleToggleType}
-        onToggleFeature={handleToggleFeature}
-        onToggleColor={handleToggleColor}
-        onSortChange={handleSortChange}
-        onViewChange={handleViewChange}
-        onClearAll={handleReset}
+      <div className={`filters-panel${filtersOpen ? " is-open" : ""}`}>
+        <div className="filters-panel-header">
+          <div className="filters-panel-title">
+            Filters
+            {activeFilterCount > 0 ? (
+              <span className="filters-panel-count">{activeFilterCount}</span>
+            ) : null}
+          </div>
+          <button
+            type="button"
+            className="filters-panel-close"
+            onClick={handleFiltersClose}
+          >
+            Close
+          </button>
+        </div>
+        <FiltersBar
+          chartTypes={displayTypes}
+          availableFeatures={availableFeatures}
+          typeCounts={typeCounts}
+          typeSortCounts={typeSortCounts}
+          colors={colors}
+          colorCounts={colorCounts}
+          colorSortCounts={colorSortCounts}
+          selectedTypes={selectedTypes}
+          selectedFeatures={selectedFeatures}
+          selectedColors={selectedColors}
+          onlyBlack={onlyBlack}
+          sortKey={sortKey}
+          hasQuery={hasQuery}
+          viewMode={viewMode}
+          viewCounts={viewCounts}
+          hideView={isMobile}
+          onToggleType={handleToggleType}
+          onToggleFeature={handleToggleFeature}
+          onToggleColor={handleToggleColor}
+          onSortChange={handleSortChange}
+          onViewChange={handleViewChange}
+          onClearAll={handleReset}
+        />
+        <div className="filters-panel-footer">
+          <button type="button" className="filters-panel-clear" onClick={handleReset}>
+            Clear filters
+          </button>
+          <button type="button" className="filters-panel-apply" onClick={handleFiltersClose}>
+            Done
+          </button>
+        </div>
+      </div>
+      <button
+        type="button"
+        className={`filters-backdrop${filtersOpen ? " is-open" : ""}`}
+        onClick={handleFiltersClose}
+        aria-label="Close filters panel"
       />
       <main className="gallery-wrap">
         <Gallery

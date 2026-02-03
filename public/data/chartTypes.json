@@ -1,15 +1,15 @@
 [
   {
     "id": "area",
-    "label": "Area"
+    "label": "Area Chart"
   },
   {
     "id": "bar",
-    "label": "Bar"
+    "label": "Bar Chart"
   },
   {
     "id": "column",
-    "label": "Column"
+    "label": "Column Chart"
   },
   {
     "id": "combo",
@@ -26,5 +26,9 @@
   {
     "id": "timeline",
     "label": "Timeline"
+  },
+  {
+    "id": "pie",
+    "label": "Pie Chart"
   }
 ]

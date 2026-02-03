@@ -18,6 +18,7 @@ type FiltersBarProps = {
   hasQuery: boolean;
   viewMode: "figures" | "publications";
   viewCounts: { figures: number; publications: number };
+  hideView?: boolean;
   onToggleType: (id: string) => void;
   onToggleFeature: (id: string) => void;
   onToggleColor: (id: string) => void;
@@ -51,6 +52,7 @@ const FiltersBar = ({
   hasQuery,
   viewMode,
   viewCounts,
+  hideView,
   onToggleType,
   onToggleFeature,
   onToggleColor,
@@ -68,9 +70,17 @@ const FiltersBar = ({
         : "";
   const hasFeatures = showFeatures && availableFeatures.length > 0;
   const sortedChartTypes = [...chartTypes].sort((a, b) => {
+    if (a.id === "combo") {
+      return 1;
+    }
+    if (b.id === "combo") {
+      return -1;
+    }
     const diff = (typeSortCounts[b.id] ?? 0) - (typeSortCounts[a.id] ?? 0);
     return diff !== 0 ? diff : a.label.localeCompare(b.label);
   });
+  const shortTypeLabel = (value: string) =>
+    value.replace(/\s*chart$/i, "");
   const sortedColors = [...colors].sort((a, b) => {
     const diff = (colorSortCounts[b.id] ?? 0) - (colorSortCounts[a.id] ?? 0);
     return diff !== 0 ? diff : a.label.localeCompare(b.label);
@@ -93,7 +103,7 @@ const FiltersBar = ({
               disabled={(typeCounts[type.id] ?? 0) === 0}
               aria-disabled={(typeCounts[type.id] ?? 0) === 0}
             >
-              <span className="chip-label">{type.label}</span>
+              <span className="chip-label">{shortTypeLabel(type.label)}</span>
               {selectedTypes.includes(type.id) ? null : (
                 <sup className="chip-count">
                   <span className="count-num">
@@ -171,38 +181,40 @@ const FiltersBar = ({
       </div>
       <div className="filters-row filters-row-spacer" aria-hidden="true" />
       <div className="filters-row filters-row-tertiary">
-        <div className="filter-group">
-          <span className="filter-label">View</span>
-          {(["figures", "publications"] as const).map((value) => (
+        {hideView ? null : (
+          <div className="filter-group">
+            <span className="filter-label">View</span>
+            {(["figures", "publications"] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                className={clsx(
+                  "chip",
+                  viewMode === value && "selected",
+                  "chip-compact",
+                  "chip-sup"
+                )}
+                onClick={() => onViewChange(value)}
+              >
+                <span>{value === "figures" ? "Figures" : "Publications"}</span>
+                <sup className="chip-count">
+                  <span className="count-num">
+                    {value === "figures"
+                      ? viewCounts.figures
+                      : viewCounts.publications}
+                  </span>
+                </sup>
+              </button>
+            ))}
             <button
-              key={value}
               type="button"
-              className={clsx(
-                "chip",
-                viewMode === value && "selected",
-                "chip-compact",
-                "chip-sup"
-              )}
-              onClick={() => onViewChange(value)}
+              className={clsx("chip", "chip-compact", "chip-clear")}
+              onClick={onClearAll}
             >
-              <span>{value === "figures" ? "Figures" : "Publications"}</span>
-              <sup className="chip-count">
-                <span className="count-num">
-                  {value === "figures"
-                    ? viewCounts.figures
-                    : viewCounts.publications}
-                </span>
-              </sup>
+              <span>Clear filters</span>
             </button>
-          ))}
-          <button
-            type="button"
-            className={clsx("chip", "chip-compact")}
-            onClick={onClearAll}
-          >
-            <span>Clear filters</span>
-          </button>
-        </div>
+          </div>
+        )}
         <div className="filter-group">
           <span className="filter-label">Sort</span>
           {(hasQuery

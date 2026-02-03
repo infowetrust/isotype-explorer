@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { FigureWithWork } from "../lib/types";
 import type { SortKey } from "../lib/sort";
 
+const MOBILE_ROW_HEIGHT = 120;
+
 type GalleryProps = {
   figures: FigureWithWork[];
   allFigures: FigureWithWork[];
@@ -17,16 +19,33 @@ const Gallery = ({
   viewMode,
   onSelect
 }: GalleryProps) => {
-  const [rowHeight, setRowHeight] = useState(
-    window.innerWidth < 700 ? 210 : 260
+  const [rowHeight, setRowHeight] = useState(() => {
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      return MOBILE_ROW_HEIGHT;
+    }
+    return window.innerWidth < 700 ? 210 : 260;
+  });
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 600px)").matches
   );
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 600px)");
     const handleResize = () => {
-      setRowHeight(window.innerWidth < 700 ? 210 : 260);
+      if (media.matches) {
+        setRowHeight(MOBILE_ROW_HEIGHT);
+      } else {
+        setRowHeight(window.innerWidth < 700 ? 210 : 260);
+      }
+      setIsMobile(media.matches);
     };
+    handleResize();
+    media.addEventListener("change", handleResize);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      media.removeEventListener("change", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   if (figures.length === 0) {
@@ -92,9 +111,8 @@ const Gallery = ({
                 <button
                   key={figure.id}
                   type="button"
-                  className={`lightbox-thumb${
-                    visibleIds.has(figure.id) ? "" : " is-muted"
-                  }`}
+                  className={`lightbox-thumb${visibleIds.has(figure.id) ? "" : " is-muted"
+                    }`}
                   onClick={() => onSelect(figure.id)}
                 >
                   <img
@@ -124,7 +142,11 @@ const Gallery = ({
             src={figure.thumb}
             alt={figure.title ?? figure.workTitle ?? figure.id}
             loading="lazy"
-            style={{ height: rowHeight }}
+            style={
+              isMobile
+                ? { height: rowHeight, width: "100%", maxWidth: "100%", objectFit: "contain" }
+                : { height: rowHeight }
+            }
           />
           <div className="gallery-overlay">
             <div className="gallery-overlay-title">
