@@ -178,12 +178,6 @@ const Lightbox = ({
               {copied ? "Copied" : "Copy link"}
             </button>
           </div>
-          {figure.ocrText ? (
-            <details className="meta-block meta-ocr" open>
-              <summary className="meta-label">OCR text</summary>
-              <div className="meta-value ocr-box">{figure.ocrText}</div>
-            </details>
-          ) : null}
           <div className="lightbox-attribution-footer">
             Andrews Collection of Information Graphics
           </div>

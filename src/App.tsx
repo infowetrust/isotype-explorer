@@ -5,6 +5,7 @@ import FiltersBar from "./components/FiltersBar";
 import Gallery from "./components/Gallery";
 import Lightbox from "./components/Lightbox";
 import Footer from "./components/Footer";
+import { matchesAdvancedFilters, parseAdvancedQuery } from "./lib/advancedQuery";
 import { buildSearchIndex, runSearch } from "./lib/search";
 import { matchesFilters, type FiltersState } from "./lib/filters";
 import { sortFigures, type SortKey } from "./lib/sort";
@@ -34,6 +35,7 @@ const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [works, setWorks] = useState<WorkRecord[]>([]);
   const [figures, setFigures] = useState<FigureRecord[]>([]);
+  const [ocrById, setOcrById] = useState<Record<string, string>>({});
   const [chartTypes, setChartTypes] = useState<ChartTypeConfig[]>([]);
   const [features, setFeatures] = useState<FeatureConfig[]>([]);
   const [colors, setColors] = useState<ColorConfig[]>([]);
@@ -43,10 +45,11 @@ const App = () => {
 
   useEffect(() => {
     const load = async () => {
-      const [worksRes, figuresRes, chartTypesRes, featuresRes, colorsRes] =
+      const [worksRes, figuresRes, ocrRes, chartTypesRes, featuresRes, colorsRes] =
         await Promise.all([
           fetch("/data/works.json"),
           fetch("/data/figures.json"),
+          fetch("/data/ocr.json"),
           fetch("/data/chartTypes.json"),
           fetch("/data/features.json"),
           fetch("/data/colors.json")
@@ -57,6 +60,9 @@ const App = () => {
       }
       if (figuresRes.ok) {
         setFigures(await figuresRes.json());
+      }
+      if (ocrRes.ok) {
+        setOcrById(await ocrRes.json());
       }
       if (chartTypesRes.ok) {
         setChartTypes(await chartTypesRes.json());
@@ -87,10 +93,12 @@ const App = () => {
         workYear: work?.year,
         workAuthors: work?.authors,
         workPublisher: work?.publisher,
-        workPublisherCity: work?.publisherCity
+        workPublisherCity: work?.publisherCity,
+        workSeries: work?.series,
+        ocrText: ocrById[figure.id] ?? figure.ocrText
       };
     });
-  }, [figures, workMap]);
+  }, [figures, ocrById, workMap]);
 
   const figureMap = useMemo(() => {
     const map = new Map<string, FigureWithWork>();
@@ -101,7 +109,18 @@ const App = () => {
   const searchIndex = useMemo(() => buildSearchIndex(figuresWithWork), [figuresWithWork]);
 
   const query = searchParams.get("q") ?? "";
-  const hasQuery = query.trim().length > 0;
+  const advancedQuery = useMemo(
+    () =>
+      parseAdvancedQuery(query, {
+        colors,
+        chartTypes,
+        features,
+        works
+      }),
+    [chartTypes, colors, features, query, works]
+  );
+  const searchText = advancedQuery.text;
+  const hasQuery = searchText.trim().length > 0;
   const selectedTypes = splitParam(searchParams.get("types"));
   const selectedFeatures = splitParam(searchParams.get("features"));
   const colorParam = splitParam(searchParams.get("colors"));
@@ -273,19 +292,28 @@ const App = () => {
   }, [features]);
 
   const { ids: searchIds, scoreById } = useMemo(
-    () => runSearch(searchIndex, query),
-    [searchIndex, query]
+    () => runSearch(searchIndex, searchText),
+    [searchIndex, searchText]
   );
 
   const searchBase = useMemo(() => {
-    if (!query.trim()) {
+    if (!searchText.trim()) {
       return figuresWithWork;
     }
 
     return searchIds
       .map((id) => figureMap.get(id))
       .filter((figure): figure is FigureWithWork => Boolean(figure));
-  }, [figuresWithWork, figureMap, query, searchIds]);
+  }, [figuresWithWork, figureMap, searchIds, searchText]);
+
+  const searchBaseAdvanced = useMemo(() => {
+    if (!advancedQuery.hasFilters) {
+      return searchBase;
+    }
+    return searchBase.filter((figure) =>
+      matchesAdvancedFilters(figure, advancedQuery.filters)
+    );
+  }, [advancedQuery, searchBase]);
 
   const typeSortCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -367,7 +395,7 @@ const App = () => {
       ? { ...baseFilters, selectedFeatures: [] }
       : null;
 
-    searchBase.forEach((figure) => {
+    searchBaseAdvanced.forEach((figure) => {
       if (matchesFilters(figure, baseFilters)) {
         filteredFigures.push(figure);
       }
@@ -420,7 +448,7 @@ const App = () => {
     colors,
     featureLabels,
     onlyBlack,
-    searchBase,
+    searchBaseAdvanced,
     selectedColors,
     selectedFeatures,
     selectedFeatureType,
@@ -552,6 +580,28 @@ const App = () => {
               src="/rj-photo-rig.webp"
               alt="RJ Andrews with camera rig."
             />
+            <details className="about-details" id="advanced-search">
+              <summary>Advanced Search</summary>
+              <div className="about-text">
+                <p>
+                  Use key:value tokens in the search bar to filter results while
+                  still searching the remaining text.
+                </p>
+                <p>
+                  Supported keys: <strong>color</strong>, <strong>type</strong>,
+                  <strong>work</strong>, <strong>year</strong>, <strong>feature</strong>,
+                  <strong>series</strong>.
+                </p>
+                <p>
+                  Values accept either slugs or labels and can be comma-separated
+                  for multiple values.
+                </p>
+                <ul>
+                  <li>color:red type:bar accidents</li>
+                  <li>color:red,blue work:&quot;Human problems in industry&quot; year:1946</li>
+                </ul>
+              </div>
+            </details>
             <details className="about-details" id="terms" ref={termsRef}>
               <summary>Terms of Use</summary>
               <div className="about-text">

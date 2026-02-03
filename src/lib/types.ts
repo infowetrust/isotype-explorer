@@ -54,4 +54,5 @@ export type FigureWithWork = FigureRecord & {
   workAuthors?: string[];
   workPublisher?: string;
   workPublisherCity?: string;
+  workSeries?: string;
 };
