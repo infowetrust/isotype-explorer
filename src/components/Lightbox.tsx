@@ -71,14 +71,6 @@ const Lightbox = ({
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      setMetaOpen(window.innerWidth >= 600);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
