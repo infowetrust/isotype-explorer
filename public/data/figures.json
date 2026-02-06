@@ -812,11 +812,23 @@
     "thumb": "/webp/thumbs/w0002-p0088-f99_h0500.webp",
     "view": "/webp/views/w0002-p0088-f99_h2400.webp",
     "title": "How Syphilis spread to the Old World",
-    "types": [],
-    "typesFlat": [],
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
     "isCombo": false,
-    "featuresByType": {},
-    "featuresFlat": [],
+    "featuresByType": {
+      "map": [
+        "route-map",
+        "symbol-map"
+      ]
+    },
+    "featuresFlat": [
+      "route-map",
+      "symbol-map"
+    ],
     "colors": [
       "blue",
       "red",
@@ -827,7 +839,9 @@
     "aiDescription": null,
     "ocrText": null,
     "workYear": 1944,
-    "typeTokens": []
+    "typeTokens": [
+      "map"
+    ]
   },
   {
     "id": "w0002-p0092-f99",
