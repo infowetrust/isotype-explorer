@@ -788,6 +788,12 @@ button:focus-visible {
   line-height: 1.5;
 }
 
+.lightbox-series-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .lightbox-copy {
   background: none;
   border: none;
@@ -1021,6 +1027,26 @@ button:focus-visible {
   background: #ffffff;
 }
 
+.footer-inner {
+  max-width: 800px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(0, 3fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.footer-mark img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  display: block;
+}
+
+.footer-text {
+  line-height: 1.55;
+}
+
 .footer-link {
   background: transparent;
   border: none;
@@ -1051,6 +1077,19 @@ button:focus-visible {
 
   .lightbox-stage {
     max-height: 50vh;
+  }
+
+  .footer {
+    padding: 24px 24px 36px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .footer-mark img {
+    max-width: 180px;
   }
 }
 

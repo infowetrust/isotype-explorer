@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
 import type {
   ChartTypeConfig,
@@ -440,21 +441,29 @@ const buildAttribution = (work?: WorkRecord): ReactNode | null => {
   const authorsText = authors.length ? authors.join(" and ") : null;
   const pubText = buildPublicationDetails(work);
   const publisherText = pubText ? ` (${pubText})` : "";
-  const seriesText = formatSeries(work.series);
+  const seriesLink = buildSeriesLink(work.series);
+  const seriesSuffix = seriesLink ? (
+    <>
+      {" "}
+      Part of the{" "}
+      <Link className="lightbox-series-link" to={seriesLink.href}>
+        {seriesLink.label}
+      </Link>{" "}
+      book series.
+    </>
+  ) : null;
   if (authorsText) {
     return (
       <>
         Published in <em>{work.title}</em> by {authorsText}
-        {publisherText}.
-        {seriesText ? ` Part of the ${seriesText} book series.` : ""}
+        {publisherText}.{seriesSuffix}
       </>
     );
   }
   return (
     <>
       Published in <em>{work.title}</em>
-      {publisherText}.
-      {seriesText ? ` Part of the ${seriesText} book series.` : ""}
+      {publisherText}.{seriesSuffix}
     </>
   );
 };
@@ -465,6 +474,19 @@ const formatSeries = (value?: string | null): string | null => {
     return null;
   }
   return toTitleCase(trimmed.replace(/^the\s+/i, ""));
+};
+
+const buildSeriesLink = (value?: string | null): { label: string; href: string } | null => {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return null;
+  }
+  const label = formatSeries(trimmed) ?? trimmed;
+  const params = new URLSearchParams();
+  params.set("sort", "oldest");
+  params.set("view", "publications");
+  params.set("q", `series:"${trimmed}"`);
+  return { label, href: `/?${params.toString()}` };
 };
 
 const buildPublicationDetails = (work: WorkRecord): string | null => {

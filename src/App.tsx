@@ -46,6 +46,8 @@ const App = () => {
   const [isMobile, setIsMobile] = useState(
     window.matchMedia("(max-width: 600px)").matches
   );
+  const [randomSeed, setRandomSeed] = useState(() => Math.floor(Math.random() * 1e9));
+  const prevSortKeyRef = useRef<SortKey | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -166,6 +168,13 @@ const App = () => {
       updateParams({ sort: "oldest" });
     }
   }, [hasQuery, sortKey, updateParams]);
+
+  useEffect(() => {
+    if (sortKey === "random" && prevSortKeyRef.current !== "random") {
+      setRandomSeed((value) => value + 1);
+    }
+    prevSortKeyRef.current = sortKey;
+  }, [sortKey]);
 
   const handleReset = () => {
     setSearchParams(new URLSearchParams());
@@ -512,8 +521,8 @@ const App = () => {
   }, [figuresWithWork]);
 
   const sortedFigures = useMemo(
-    () => sortFigures(filteredFigures, sortKey, scoreById),
-    [filteredFigures, sortKey, scoreById]
+    () => sortFigures(filteredFigures, sortKey, scoreById, randomSeed),
+    [filteredFigures, sortKey, scoreById, randomSeed]
   );
 
   const activeFilterCount =
@@ -620,6 +629,7 @@ const App = () => {
           allFigures={figuresWithWork}
           sortKey={sortKey}
           viewMode={viewMode}
+          randomSeed={randomSeed}
           onSelect={handleSelectFigure}
         />
       </main>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FigureWithWork } from "../lib/types";
-import type { SortKey } from "../lib/sort";
+import { seededShuffle, type SortKey } from "../lib/sort";
 
 const MOBILE_ROW_HEIGHT = 120;
 
@@ -9,6 +9,7 @@ type GalleryProps = {
   allFigures: FigureWithWork[];
   sortKey: SortKey;
   viewMode: "figures" | "publications";
+  randomSeed: number;
   onSelect: (id: string) => void;
 };
 
@@ -17,6 +18,7 @@ const Gallery = ({
   allFigures,
   sortKey,
   viewMode,
+  randomSeed,
   onSelect
 }: GalleryProps) => {
   const [rowHeight, setRowHeight] = useState(() => {
@@ -76,31 +78,27 @@ const Gallery = ({
       })
       .filter((row) => row.count > 0);
 
-    if (sortKey === "random") {
-      for (let i = rows.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [rows[i], rows[j]] = [rows[j], rows[i]];
-      }
-    } else {
-      rows.sort((a, b) => {
-        if (sortKey === "oldest" || sortKey === "newest") {
-          const yearA = a.workYear ?? Number.POSITIVE_INFINITY;
-          const yearB = b.workYear ?? Number.POSITIVE_INFINITY;
-          if (yearA !== yearB) {
-            return sortKey === "newest" ? yearB - yearA : yearA - yearB;
-          }
-        }
-        const diff = b.count - a.count;
-        if (diff !== 0) {
-          return diff;
-        }
-        return a.workTitle.localeCompare(b.workTitle);
-      });
-    }
+    const orderedRows =
+      sortKey === "random"
+        ? seededShuffle(rows, randomSeed)
+        : rows.sort((a, b) => {
+            if (sortKey === "oldest" || sortKey === "newest") {
+              const yearA = a.workYear ?? Number.POSITIVE_INFINITY;
+              const yearB = b.workYear ?? Number.POSITIVE_INFINITY;
+              if (yearA !== yearB) {
+                return sortKey === "newest" ? yearB - yearA : yearA - yearB;
+              }
+            }
+            const diff = b.count - a.count;
+            if (diff !== 0) {
+              return diff;
+            }
+            return a.workTitle.localeCompare(b.workTitle);
+          });
 
     return (
       <div className="gallery-work-rows">
-        {rows.map((row) => (
+        {orderedRows.map((row) => (
           <div key={row.workId} className="gallery-work-row">
             <div className="lightbox-carousel-title">
               <em>{row.workTitle}</em>

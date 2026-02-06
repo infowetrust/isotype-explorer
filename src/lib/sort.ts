@@ -2,6 +2,27 @@ import type { FigureWithWork } from "./types";
 
 export type SortKey = "relevance" | "oldest" | "newest" | "random";
 
+const createSeededRandom = (seed: number) => {
+  let value = seed % 2147483647;
+  if (value <= 0) {
+    value += 2147483646;
+  }
+  return () => {
+    value = (value * 16807) % 2147483647;
+    return value / 2147483647;
+  };
+};
+
+export const seededShuffle = <T>(items: T[], seed: number): T[] => {
+  const shuffled = [...items];
+  const random = createSeededRandom(seed);
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const compareStrings = (a?: string, b?: string): number =>
   (a ?? "").localeCompare(b ?? "");
 
@@ -11,16 +32,13 @@ const compareNumbers = (a?: number, b?: number): number =>
 export const sortFigures = (
   figures: FigureWithWork[],
   sortKey: SortKey,
-  scoreById: Map<string, number>
+  scoreById: Map<string, number>,
+  randomSeed?: number
 ): FigureWithWork[] => {
   const sorted = [...figures];
 
   if (sortKey === "random") {
-    for (let i = sorted.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
-    }
-    return sorted;
+    return seededShuffle(sorted, typeof randomSeed === "number" ? randomSeed : Date.now());
   }
 
   sorted.sort((a, b) => {
