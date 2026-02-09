@@ -26,6 +26,7 @@ export type FigureRecord = {
   colors: string[];
   onlyBlack?: boolean;
   themes?: string[];
+  originalCaption?: string;
   aiDescription?: string;
   ocrText?: string;
   title?: string;

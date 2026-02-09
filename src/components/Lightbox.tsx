@@ -136,6 +136,13 @@ const Lightbox = ({
   const colorsLabel = figure.onlyBlack
     ? "Only black"
     : (figure.colors ?? []).map((color) => colorLabels.get(color) ?? color);
+  const originalCaption = figure.originalCaption?.trim() ?? "";
+  const captionBlock = originalCaption ? (
+    <div className="meta-block">
+      <div className="meta-label">Original caption</div>
+      <div className="meta-caption-box">{originalCaption}</div>
+    </div>
+  ) : null;
   const prevFigure = getSiblingFigure(sortedFigures, figure.id, -1);
   const nextFigure = getSiblingFigure(sortedFigures, figure.id, 1);
 
@@ -188,6 +195,7 @@ const Lightbox = ({
                   </>
                 ) : null}
               </div>
+              {captionBlock}
               {figure.themes?.length ? (
                 <div className="meta-block">
                   <div className="meta-label">Themes</div>
@@ -236,6 +244,7 @@ const Lightbox = ({
                   </>
                 ) : null}
               </div>
+              {captionBlock}
               {figure.themes?.length ? (
                 <div className="meta-block">
                   <div className="meta-label">Themes</div>

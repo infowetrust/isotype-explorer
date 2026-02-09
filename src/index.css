@@ -876,6 +876,18 @@ button:focus-visible {
   font-size: var(--size-body);
 }
 
+.meta-caption-box {
+  max-height: 180px;
+  overflow: auto;
+  padding: 8px 10px;
+  border: 1px solid #d0d0d0;
+  background: #fafafa;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-size: var(--size-body);
+  color: var(--ink);
+}
+
 .meta-table {
   display: grid;
   grid-template-columns: 120px 1fr;

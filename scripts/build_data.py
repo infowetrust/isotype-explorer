@@ -5,6 +5,7 @@ Build site JSON from Google Sheets CSV exports.
 Inputs (default):
   data-source/works.csv
   data-source/figures.csv
+  data-source/captions.csv
 
 Outputs:
   public/data/works.json
@@ -272,7 +273,22 @@ def build_works(rows: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     return works
 
 
-def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
+def build_captions(rows: List[Dict[str, str]]) -> Dict[str, str]:
+    captions_by_id: Dict[str, str] = {}
+    for r in rows:
+        fig_id = normalize_figure_id(get_first(r, "figure_id", "id", default=""))
+        caption = get_first(r, "caption", "original_caption", default="")
+        if not fig_id or not caption:
+            continue
+        captions_by_id[fig_id] = caption
+    return dict(sorted(captions_by_id.items()))
+
+
+def build_figures(
+    rows: List[Dict[str, str]],
+    works_by_id: Dict[str, Dict[str, Any]],
+    captions_by_id: Dict[str, str]
+) -> List[Dict[str, Any]]:
     figures: List[Dict[str, Any]] = []
 
     for r in rows:
@@ -354,7 +370,7 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
         work_meta = works_by_id.get(work_id, {}) if work_id else {}
         work_year = work_meta.get("year")
 
-        figures.append({
+        record: Dict[str, Any] = {
             "id": fig_id,
             "workId": work_id,
             "page": page,
@@ -383,7 +399,11 @@ def build_figures(rows: List[Dict[str, str]], works_by_id: Dict[str, Dict[str, A
 
             # optional: keep the full type tokens for future work (UI can ignore)
             "typeTokens": types,
-        })
+        }
+        if fig_id in captions_by_id:
+            record["originalCaption"] = captions_by_id[fig_id]
+
+        figures.append(record)
 
     figures.sort(key=lambda f: f.get("id", ""))
     return figures
@@ -393,12 +413,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build public/data JSON from CSV exports")
     parser.add_argument("--works", default="data-source/works.csv", help="Path to works.csv")
     parser.add_argument("--figures", default="data-source/figures.csv", help="Path to figures.csv")
+    parser.add_argument("--captions", default="data-source/captions.csv", help="Path to captions.csv")
     parser.add_argument("--out", default="public/data", help="Output folder for JSON files")
     args = parser.parse_args()
 
     repo_root = Path.cwd()
     works_path = (repo_root / args.works).resolve()
     figures_path = (repo_root / args.figures).resolve()
+    captions_path = (repo_root / args.captions).resolve()
     out_dir = (repo_root / args.out).resolve()
 
     if not works_path.exists():
@@ -408,11 +430,13 @@ def main() -> None:
 
     works_rows = read_csv(works_path)
     fig_rows = read_csv(figures_path)
+    caption_rows = read_csv(captions_path) if captions_path.exists() else []
 
     works = build_works(works_rows)
     works_by_id = {w["workId"]: w for w in works}
+    captions_by_id = build_captions(caption_rows)
 
-    figures = build_figures(fig_rows, works_by_id)
+    figures = build_figures(fig_rows, works_by_id, captions_by_id)
 
     # warnings: figures referencing unknown works
     missing_works = sorted({f["workId"] for f in figures if f.get("workId") and f["workId"] not in works_by_id})
@@ -420,6 +444,13 @@ def main() -> None:
         print("WARNING: figures reference workIds not present in works.json:")
         for wid in missing_works:
             print("  -", wid)
+    unknown_caption_ids = sorted(
+        caption_id for caption_id in captions_by_id if caption_id not in {f["id"] for f in figures}
+    )
+    if unknown_caption_ids:
+        print("WARNING: captions reference figure_ids not present in figures.json:")
+        for caption_id in unknown_caption_ids:
+            print("  -", caption_id)
 
     write_json(out_dir / "works.json", works)
     write_json(out_dir / "figures.json", figures)
