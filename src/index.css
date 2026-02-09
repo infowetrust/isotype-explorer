@@ -526,9 +526,51 @@ button:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
+.color-chip-dot-process {
+  position: relative;
+  border: none;
+  color: #000000;
+  background:
+    conic-gradient(
+      from -90deg,
+      #00a7d6 0deg 120deg,
+      #d84aa7 120deg 240deg,
+      #f0cd31 240deg 360deg
+    );
+}
+
+.color-chip-dot-process::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.color-chip-dot-process .count-num {
+  position: relative;
+  z-index: 1;
+  color: #000000;
+}
+
 .color-chip.selected .color-chip-dot {
   background: var(--chip-color);
   color: #ffffff;
+}
+
+.color-chip.selected .color-chip-dot-process {
+  background:
+    conic-gradient(
+      from -90deg,
+      #00a7d6 0deg 120deg,
+      #d84aa7 120deg 240deg,
+      #f0cd31 240deg 360deg
+    );
+  color: #000000;
+}
+
+.color-chip.selected .color-chip-dot-process::before {
+  display: none;
 }
 
 .select {

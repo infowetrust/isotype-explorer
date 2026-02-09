@@ -36,6 +36,9 @@ const toSentenceCase = (value: string) => {
   return lower[0].toUpperCase() + lower.slice(1);
 };
 
+const PROCESS_COLOR_ID = "process";
+const ONLY_BLACK_ID = "only-black";
+
 const FiltersBar = ({
   chartTypes,
   availableFeatures,
@@ -82,6 +85,18 @@ const FiltersBar = ({
   const shortTypeLabel = (value: string) =>
     value.replace(/\s*chart$/i, "");
   const sortedColors = [...colors].sort((a, b) => {
+    if (a.id === PROCESS_COLOR_ID) {
+      return 1;
+    }
+    if (b.id === PROCESS_COLOR_ID) {
+      return -1;
+    }
+    if (a.id === ONLY_BLACK_ID) {
+      return 1;
+    }
+    if (b.id === ONLY_BLACK_ID) {
+      return -1;
+    }
     const diff = (colorSortCounts[b.id] ?? 0) - (colorSortCounts[a.id] ?? 0);
     return diff !== 0 ? diff : a.label.localeCompare(b.label);
   });
@@ -118,7 +133,8 @@ const FiltersBar = ({
         <div className="filter-group colors-group">
           <span className="filter-label">Colors</span>
           {sortedColors.map((color) => {
-            const isOnlyBlack = color.id === "only-black";
+            const isOnlyBlack = color.id === ONLY_BLACK_ID;
+            const isProcessMode = color.id === PROCESS_COLOR_ID;
             const selected = isOnlyBlack ? onlyBlack : selectedColors.includes(color.id);
             const count = colorCounts[color.id] ?? 0;
             const isDisabled = count === 0;
@@ -134,8 +150,15 @@ const FiltersBar = ({
               >
                 <span
                   aria-hidden="true"
-                  className="color-chip-dot"
-                  style={{ ["--chip-color" as string]: color.hex }}
+                  className={clsx(
+                    "color-chip-dot",
+                    isProcessMode && "color-chip-dot-process"
+                  )}
+                  style={
+                    isProcessMode
+                      ? undefined
+                      : { ["--chip-color" as string]: color.hex }
+                  }
                 >
                   {selected ? null : <span className="count-num">{count}</span>}
                 </span>

@@ -19,6 +19,12 @@ import type {
 } from "./lib/types";
 
 type ViewMode = "figures" | "publications";
+const PROCESS_COLOR_ID = "process";
+const PROCESS_COLOR_MODE: ColorConfig = {
+  id: PROCESS_COLOR_ID,
+  label: "Process",
+  hex: "#000000"
+};
 
 const splitParam = (value: string | null): string[] =>
   value
@@ -115,15 +121,21 @@ const App = () => {
   const searchIndex = useMemo(() => buildSearchIndex(figuresWithWork), [figuresWithWork]);
 
   const query = searchParams.get("q") ?? "";
+  const displayColors = useMemo(() => {
+    if (colors.some((color) => color.id === PROCESS_COLOR_ID)) {
+      return colors;
+    }
+    return [...colors, PROCESS_COLOR_MODE];
+  }, [colors]);
   const advancedQuery = useMemo(
     () =>
       parseAdvancedQuery(query, {
-        colors,
+        colors: displayColors,
         chartTypes,
         features,
         works
       }),
-    [chartTypes, colors, features, query, works]
+    [chartTypes, displayColors, features, query, works]
   );
   const searchText = advancedQuery.text;
   const hasQuery = searchText.trim().length > 0;
@@ -392,7 +404,7 @@ const App = () => {
     typeIds.forEach((id) => {
       typeCounts[id] = 0;
     });
-    const colorIds = colors.map((color) => color.id);
+    const colorIds = displayColors.map((color) => color.id);
     colorIds.forEach((id) => {
       colorCounts[id] = 0;
     });
@@ -487,7 +499,7 @@ const App = () => {
 
     return { filteredFigures, typeCounts, colorCounts, availableFeatures };
   }, [
-    colors,
+    displayColors,
     featureLabels,
     onlyBlack,
     searchBaseAdvanced,
@@ -589,7 +601,7 @@ const App = () => {
           availableFeatures={availableFeatures}
           typeCounts={typeCounts}
           typeSortCounts={typeSortCounts}
-          colors={colors}
+          colors={displayColors}
           colorCounts={colorCounts}
           colorSortCounts={colorSortCounts}
           selectedTypes={selectedTypes}
@@ -640,7 +652,7 @@ const App = () => {
           figuresInWork={figuresInWork}
           chartTypes={chartTypes}
           features={features}
-          colors={colors}
+          colors={displayColors}
           onClose={handleCloseLightbox}
           onSelect={handleSelectFigure}
         />

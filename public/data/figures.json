@@ -4259,5 +4259,545 @@
     "typeTokens": [
       "map"
     ]
+  },
+  {
+    "id": "w0011-p0000-f01",
+    "workId": "w0011",
+    "page": 0,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0000-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0000-f01_h2400.webp",
+    "title": "Growth of Coventry",
+    "types": [
+      "map",
+      "bar"
+    ],
+    "typesFlat": [
+      "map",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "choropleth"
+      ],
+      "bar": [
+        "unit",
+        "pictorial",
+        "rectangle"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth",
+      "unit",
+      "pictorial",
+      "rectangle"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0009-f01",
+    "workId": "w0011",
+    "page": 9,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0009-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0009-f01_h2400.webp",
+    "title": "United Kingdom Food Requirements for 1945",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0010-f01",
+    "workId": "w0011",
+    "page": 10,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0010-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0010-f01_h2400.webp",
+    "title": "Daily Milk Sales in England and Wales",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "gray",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0010-f02",
+    "workId": "w0011",
+    "page": 10,
+    "figureCode": 2,
+    "thumb": "/webp/thumbs/w0011-p0010-f02_h0500.webp",
+    "view": "/webp/views/w0011-p0010-f02_h2400.webp",
+    "title": "Milk Retailer's margin",
+    "types": [
+      "column"
+    ],
+    "typesFlat": [
+      "column"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "column": [
+        "dot",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "dot",
+      "diverging"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "orange"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "column"
+    ]
+  },
+  {
+    "id": "w0011-p0012-f00",
+    "workId": "w0011",
+    "page": 12,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0011-p0012-f00_h0500.webp",
+    "view": "/webp/views/w0011-p0012-f00_h2400.webp",
+    "title": "Two Ways of Farming a Hundred Acres",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "symbol"
+    ],
+    "colors": [
+      "process"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0011-p0013-f00",
+    "workId": "w0011",
+    "page": 13,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0011-p0013-f00_h0500.webp",
+    "view": "/webp/views/w0011-p0013-f00_h2400.webp",
+    "title": "The Pattern of British Farming",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "isarithmic",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "isarithmic",
+      "symbol"
+    ],
+    "colors": [
+      "process"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0011-p0019-f01",
+    "workId": "w0011",
+    "page": 19,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0019-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0019-f01_h2400.webp",
+    "title": "More Births and Fewer Deaths",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0020-f01",
+    "workId": "w0011",
+    "page": 20,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0020-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0020-f01_h2400.webp",
+    "title": "Coventry at Work",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0037-f00",
+    "workId": "w0011",
+    "page": 37,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0011-p0037-f00_h0500.webp",
+    "view": "/webp/views/w0011-p0037-f00_h2400.webp",
+    "title": "Integration—and Disintegration",
+    "types": [
+      "diagram",
+      "bar"
+    ],
+    "typesFlat": [
+      "diagram",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "process"
+      ],
+      "bar": [
+        "unit",
+        "pictorial"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "unit",
+      "pictorial"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "orange",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0038-f01",
+    "workId": "w0011",
+    "page": 38,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0038-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0038-f01_h2400.webp",
+    "title": "Tootal's Production Pipelines",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "flow"
+    ],
+    "colors": [
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0011-p0046-f01",
+    "workId": "w0011",
+    "page": 46,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0046-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0046-f01_h2400.webp",
+    "title": "Half a Century of World Sugar",
+    "types": [
+      "column",
+      "bar"
+    ],
+    "typesFlat": [
+      "column",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "column": [
+        "pictorial",
+        "unit"
+      ],
+      "bar": [
+        "pictorial",
+        "unit",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "column",
+      "bar"
+    ]
+  },
+  {
+    "id": "w0011-p0048-f01",
+    "workId": "w0011",
+    "page": 48,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0048-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0048-f01_h2400.webp",
+    "title": "World Sugar Market 1938-39",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map",
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "flow"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0011-p0048-f02",
+    "workId": "w0011",
+    "page": 48,
+    "figureCode": 2,
+    "thumb": "/webp/thumbs/w0011-p0048-f02_h0500.webp",
+    "view": "/webp/views/w0011-p0048-f02_h2400.webp",
+    "title": "Caribbean Sugar in the World Market",
+    "types": [
+      "area",
+      "diagram"
+    ],
+    "typesFlat": [
+      "area",
+      "diagram"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "flow"
+      ],
+      "area": [
+        "unit",
+        "pictorial"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "pictorial",
+      "flow"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "area",
+      "diagram"
+    ]
   }
 ]

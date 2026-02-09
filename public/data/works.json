@@ -159,5 +159,85 @@
     "isbn": null,
     "scanSource": null,
     "firstEdition": null
+  },
+  {
+    "workId": "w0009",
+    "year": 1946,
+    "title": "Volume I. Overture",
+    "series": "Future Books",
+    "language": "English",
+    "authors": [
+      "Marjorie Bruce Milne"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Leathley",
+    "publisherCity": "London",
+    "heightCm": 29,
+    "oclcNumber": "1017234304",
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
+    "workId": "w0010",
+    "year": 1946,
+    "title": "Volume II. The stage is set",
+    "series": "Future Books",
+    "language": "English",
+    "authors": [
+      "Marjorie Bruce Milne"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Leathley",
+    "publisherCity": "London",
+    "heightCm": 29,
+    "oclcNumber": "1017234304",
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
+    "workId": "w0011",
+    "year": 1946,
+    "title": "Volume III. The crowded scene",
+    "series": "Future Books",
+    "language": "English",
+    "authors": [
+      "Marjorie Bruce Milne"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Leathley",
+    "publisherCity": "London",
+    "heightCm": 29,
+    "oclcNumber": "1017234304",
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
+  },
+  {
+    "workId": "w0012",
+    "year": 1946,
+    "title": "Volume IV. Transformation",
+    "series": "Future Books",
+    "language": "English",
+    "authors": [
+      "Marjorie Bruce Milne"
+    ],
+    "informationDesigners": [
+      "Isotype Institute"
+    ],
+    "publisher": "Leathley",
+    "publisherCity": "London",
+    "heightCm": 29,
+    "oclcNumber": "1017234304",
+    "isbn": null,
+    "scanSource": null,
+    "firstEdition": null
   }
 ]
