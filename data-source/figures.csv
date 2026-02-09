@@ -45,7 +45,7 @@ w0004,w0004-p0044-f99,The Changing Position of Women in Britain,timeline,symbol,
 w0004,w0004-p0068-f99,The Battle of the Franchise,"timeline, bar","bar: unit, pictorial, ratio",red
 w0004,w0004-p0072-f99,Political Rights of Women,map,choropleth,"blue, red, gray"
 w0004,w0004-p0076-f99,Students and Pupils in Different Types of Education,bar,"unit, pictorial","blue, red, green"
-w0004,w0004-p0080-f99,Higher Education,"bar, map","map: symbol-map; bar: unit, pictorial, ratio","blue, red, green"
+w0004,w0004-p0080-f99,Higher Education,"bar, map","map: dot-map; bar: unit, pictorial, ratio","blue, red, green"
 w0004,w0004-p0085-f00,Growth of Literacy in England and Wales,bar,"unit, pictorial, ratio",blue
 w0004,w0004-p0088-f99,Social Life at Home—A Century Ago and Now,diagram,now-and-then,"blue, red, green"
 w0004,w0004-p0091-f00,Changes in Fashion,diagram,timeline,black
@@ -105,12 +105,12 @@ w0008,w0008-p0100-f99,Public Libraries in Great Britain,bar,"pictorial, unit, ra
 w0008,w0008-p0104-f99,"BBC Programmes. Size of Audiences, 1947",bar,"pictorial, unit, ratio, diverging","red, gray"
 w0008,w0008-p0116-f99,Football Ground as a Recreation Centre,diagram,building,"green, blue, red, gray"
 w0008,w0008-p0124-f99,Middlesbrough: Present and Proposed Leisure Facilities and Services,map,"choropleth, chart-map","green, blue, red, gray"
-w0011,w0011-p0000-f01,Growth of Coventry,"map, bar","map: choropleth; bar: unit, pictorial, rectangle",black
 w0011,w0011-p0009-f01,United Kingdom Food Requirements for 1945,bar,"pictorial, unit, diverging","green, blue, gray"
 w0011,w0011-p0010-f01,Daily Milk Sales in England and Wales,bar,"pictorial, unit, diverging","green, blue, gray, red"
 w0011,w0011-p0010-f02,Milk Retailer's margin,column,"dot, diverging","red, blue, orange"
 w0011,w0011-p0012-f00,Two Ways of Farming a Hundred Acres,map,symbol,process
-w0011,w0011-p0013-f00,The Pattern of British Farming,map,"isarithmic, symbol",process
+w0011,w0011-p0013-f00,The Pattern of British Farming,map,"isarithmic, symbol-map",process
+w0011,w0011-p0015-f01,Growth of Coventry,"map, bar","map: choropleth; bar: unit, pictorial, rectangle",black
 w0011,w0011-p0019-f01,More Births and Fewer Deaths,bar,"pictorial, unit, ratio","red, gray"
 w0011,w0011-p0020-f01,Coventry at Work,bar,"pictorial, unit, diverging","red, blue, green"
 w0011,w0011-p0037-f00,Integration—and Disintegration,"diagram, bar","diagram: process; bar: unit, pictorial","green, blue, red, orange, gray"

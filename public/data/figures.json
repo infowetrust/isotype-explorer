@@ -1831,7 +1831,7 @@
     "isCombo": true,
     "featuresByType": {
       "map": [
-        "symbol-map"
+        "dot-map"
       ],
       "bar": [
         "unit",
@@ -1843,7 +1843,7 @@
       "unit",
       "pictorial",
       "ratio",
-      "symbol-map"
+      "dot-map"
     ],
     "colors": [
       "blue",
@@ -4261,50 +4261,6 @@
     ]
   },
   {
-    "id": "w0011-p0000-f01",
-    "workId": "w0011",
-    "page": 0,
-    "figureCode": 1,
-    "thumb": "/webp/thumbs/w0011-p0000-f01_h0500.webp",
-    "view": "/webp/views/w0011-p0000-f01_h2400.webp",
-    "title": "Growth of Coventry",
-    "types": [
-      "map",
-      "bar"
-    ],
-    "typesFlat": [
-      "map",
-      "bar"
-    ],
-    "isCombo": true,
-    "featuresByType": {
-      "map": [
-        "choropleth"
-      ],
-      "bar": [
-        "unit",
-        "pictorial",
-        "rectangle"
-      ]
-    },
-    "featuresFlat": [
-      "choropleth",
-      "unit",
-      "pictorial",
-      "rectangle"
-    ],
-    "colors": [],
-    "onlyBlack": true,
-    "themes": [],
-    "aiDescription": null,
-    "ocrText": null,
-    "workYear": 1946,
-    "typeTokens": [
-      "map",
-      "bar"
-    ]
-  },
-  {
     "id": "w0011-p0009-f01",
     "workId": "w0011",
     "page": 9,
@@ -4479,12 +4435,12 @@
     "featuresByType": {
       "map": [
         "isarithmic",
-        "symbol"
+        "symbol-map"
       ]
     },
     "featuresFlat": [
       "isarithmic",
-      "symbol"
+      "symbol-map"
     ],
     "colors": [
       "process"
@@ -4496,6 +4452,50 @@
     "workYear": 1946,
     "typeTokens": [
       "map"
+    ]
+  },
+  {
+    "id": "w0011-p0015-f01",
+    "workId": "w0011",
+    "page": 15,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0011-p0015-f01_h0500.webp",
+    "view": "/webp/views/w0011-p0015-f01_h2400.webp",
+    "title": "Growth of Coventry",
+    "types": [
+      "map",
+      "bar"
+    ],
+    "typesFlat": [
+      "map",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "choropleth"
+      ],
+      "bar": [
+        "unit",
+        "pictorial",
+        "rectangle"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth",
+      "unit",
+      "pictorial",
+      "rectangle"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map",
+      "bar"
     ]
   },
   {
