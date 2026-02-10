@@ -7,7 +7,6 @@ import Lightbox from "./components/Lightbox";
 import Footer from "./components/Footer";
 import { matchesAdvancedFilters, parseAdvancedQuery } from "./lib/advancedQuery";
 import { buildSearchIndex, runSearch } from "./lib/search";
-import { matchesFilters, type FiltersState } from "./lib/filters";
 import { sortFigures, type SortKey } from "./lib/sort";
 import type {
   ChartTypeConfig,
@@ -408,13 +407,6 @@ const App = () => {
   }, [figuresWithWork]);
 
   const { filteredFigures, typeCounts, colorCounts, availableFeatures } = useMemo(() => {
-    const baseFilters: FiltersState = {
-      selectedTypes,
-      selectedFeatures: displaySelectedFeatures,
-      selectedColors,
-      onlyBlack,
-      workId: selectedWorkId
-    };
     const typeCounts: Record<string, number> = {};
     const colorCounts: Record<string, number> = {};
     const filteredFigures: FigureWithWork[] = [];
@@ -430,68 +422,133 @@ const App = () => {
     });
 
     const unselectedTypeIds = typeIds.filter((id) => !selectedTypes.includes(id));
-    const typeFilterById = new Map<string, FiltersState>();
-    unselectedTypeIds.forEach((typeId) => {
-      typeFilterById.set(typeId, {
-        ...baseFilters,
-        selectedTypes: [...selectedTypes, typeId]
-      });
-    });
-
-    const colorFilterById = new Map<string, FiltersState>();
-    colorIds.forEach((colorId) => {
-      const isOnlyBlack = colorId === "only-black";
-      if (isOnlyBlack) {
-        if (!onlyBlack) {
-          colorFilterById.set(colorId, {
-            ...baseFilters,
-            onlyBlack: true,
-            selectedColors: []
-          });
+    const colorCandidates = colorIds
+      .map((colorId) => {
+        if (colorId === "only-black") {
+          if (onlyBlack) {
+            return null;
+          }
+          return { colorId, onlyBlack: true, selectedColors: [] as string[] };
         }
-        return;
-      }
-      const isSelected = !onlyBlack && selectedColors.includes(colorId);
-      if (isSelected) {
-        return;
-      }
-      const nextSelectedColors = selectedColors.includes(colorId)
-        ? selectedColors
-        : [...selectedColors, colorId];
-      colorFilterById.set(colorId, {
-        ...baseFilters,
-        onlyBlack: false,
-        selectedColors: nextSelectedColors
-      });
-    });
+        const isSelected = !onlyBlack && selectedColors.includes(colorId);
+        if (isSelected) {
+          return null;
+        }
+        return {
+          colorId,
+          onlyBlack: false,
+          selectedColors: selectedColors.includes(colorId)
+            ? selectedColors
+            : [...selectedColors, colorId]
+        };
+      })
+      .filter(
+        (item): item is { colorId: string; onlyBlack: boolean; selectedColors: string[] } =>
+          Boolean(item)
+      );
 
-    const featuresFilter = selectedFeatureType
-      ? { ...baseFilters, selectedFeatures: [] }
-      : null;
+    const getSelectedBaseTypes = (types: string[]): string[] =>
+      types.filter((type) => type !== "combo");
+    const hasAny = (source: Set<string>, target: string[]): boolean =>
+      target.some((item) => source.has(item));
+    const hasAll = (source: Set<string>, target: string[]): boolean =>
+      target.every((item) => source.has(item));
+    const matchesType = (figure: FigureWithWork, types: string[]): boolean => {
+      if (types.length === 0) {
+        return true;
+      }
+      const figureTypes = new Set(Array.isArray(figure.types) ? figure.types : []);
+      const baseTypes = getSelectedBaseTypes(types);
+      const wantsCombo = types.includes("combo");
+      const matchesBase = baseTypes.length ? hasAny(figureTypes, baseTypes) : true;
+      const matchesCombo = wantsCombo ? figure.isCombo === true : true;
+      return matchesBase && matchesCombo;
+    };
+    const matchesFeatures = (
+      figure: FigureWithWork,
+      types: string[],
+      features: string[]
+    ): boolean => {
+      if (features.length === 0) {
+        return true;
+      }
+      const baseTypes = getSelectedBaseTypes(types);
+      const selectedType = baseTypes.length === 1 ? baseTypes[0] : null;
+      if (!selectedType) {
+        return false;
+      }
+      const byType = figure.featuresByType ?? {};
+      const normalizedFeatures = (byType[selectedType] ?? []).map((featureId) =>
+        normalizeFeatureForType(featureId, selectedType)
+      );
+      const normalizedSet = new Set(normalizedFeatures);
+      return features.some((featureId) =>
+        normalizedSet.has(normalizeFeatureForType(featureId, selectedType))
+      );
+    };
+    const matchesColors = (
+      figure: FigureWithWork,
+      colorsState: { onlyBlack: boolean; selectedColors: string[] }
+    ): boolean => {
+      if (colorsState.onlyBlack) {
+        return figure.onlyBlack === true;
+      }
+      if (colorsState.selectedColors.length === 0) {
+        return true;
+      }
+      return hasAll(new Set(figure.colors ?? []), colorsState.selectedColors);
+    };
+    const baseColorState = { onlyBlack, selectedColors };
 
     searchBaseAdvanced.forEach((figure) => {
-      if (matchesFilters(figure, baseFilters)) {
+      const matchesWork = !selectedWorkId || figure.workId === selectedWorkId;
+      if (!matchesWork) {
+        return;
+      }
+
+      const matchesBaseType = matchesType(figure, selectedTypes);
+      const matchesBaseFeatures = matchesFeatures(
+        figure,
+        selectedTypes,
+        displaySelectedFeatures
+      );
+      const matchesBaseColors = matchesColors(figure, baseColorState);
+
+      if (matchesBaseType && matchesBaseFeatures && matchesBaseColors) {
         filteredFigures.push(figure);
       }
 
-      if (featuresFilter && matchesFilters(figure, featuresFilter)) {
+      if (selectedFeatureType && matchesBaseType && matchesBaseColors) {
         const byType = figure.featuresByType ?? {};
-        (byType[selectedFeatureType ?? ""] ?? []).forEach((item) =>
+        (byType[selectedFeatureType] ?? []).forEach((item) =>
           featureSet.add(normalizeFeatureForType(item, selectedFeatureType))
         );
       }
 
-      typeFilterById.forEach((filters, typeId) => {
-        if (matchesFilters(figure, filters)) {
-          typeCounts[typeId] = (typeCounts[typeId] ?? 0) + 1;
-        }
-      });
+      if (matchesBaseColors) {
+        unselectedTypeIds.forEach((typeId) => {
+          const candidateTypes = [...selectedTypes, typeId];
+          if (
+            matchesType(figure, candidateTypes) &&
+            matchesFeatures(figure, candidateTypes, displaySelectedFeatures)
+          ) {
+            typeCounts[typeId] = (typeCounts[typeId] ?? 0) + 1;
+          }
+        });
+      }
 
-      colorFilterById.forEach((filters, colorId) => {
-        if (matchesFilters(figure, filters)) {
-          colorCounts[colorId] = (colorCounts[colorId] ?? 0) + 1;
-        }
-      });
+      if (matchesBaseType && matchesBaseFeatures) {
+        colorCandidates.forEach((candidate) => {
+          if (
+            matchesColors(figure, {
+              onlyBlack: candidate.onlyBlack,
+              selectedColors: candidate.selectedColors
+            })
+          ) {
+            colorCounts[candidate.colorId] = (colorCounts[candidate.colorId] ?? 0) + 1;
+          }
+        });
+      }
     });
 
     const currentCount = filteredFigures.length;
