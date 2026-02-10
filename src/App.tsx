@@ -37,6 +37,16 @@ const splitParam = (value: string | null): string[] =>
 const toTitleCase = (value: string): string =>
   value ? `${value[0].toUpperCase()}${value.slice(1)}` : value;
 
+const normalizeFeatureForType = (featureId: string, typeId: string | null): string => {
+  if (
+    typeId === "map" &&
+    (featureId === "symbol" || featureId === "symbol-map")
+  ) {
+    return "symbol-map";
+  }
+  return featureId;
+};
+
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [works, setWorks] = useState<WorkRecord[]>([]);
@@ -154,6 +164,12 @@ const App = () => {
   );
   const selectedFeatureType =
     selectedBaseTypes.length === 1 ? selectedBaseTypes[0] : null;
+  const displaySelectedFeatures = useMemo(() => {
+    const normalized = selectedFeatures.map((featureId) =>
+      normalizeFeatureForType(featureId, selectedFeatureType)
+    );
+    return Array.from(new Set(normalized));
+  }, [selectedFeatureType, selectedFeatures]);
   const prevPrimaryTypeRef = useRef<string | null>(null);
 
   const updateParams = useCallback(
@@ -239,11 +255,15 @@ const App = () => {
     if (!selectedFeatureType) {
       return;
     }
-    const next = new Set(selectedFeatures);
-    if (next.has(id)) {
-      next.delete(id);
+    const normalizedId = normalizeFeatureForType(id, selectedFeatureType);
+    const normalizedSelected = selectedFeatures.map((featureId) =>
+      normalizeFeatureForType(featureId, selectedFeatureType)
+    );
+    const next = new Set(normalizedSelected);
+    if (next.has(normalizedId)) {
+      next.delete(normalizedId);
     } else {
-      next.add(id);
+      next.add(normalizedId);
     }
     updateParams({ features: next.size ? Array.from(next).join(",") : null });
   };
@@ -390,7 +410,7 @@ const App = () => {
   const { filteredFigures, typeCounts, colorCounts, availableFeatures } = useMemo(() => {
     const baseFilters: FiltersState = {
       selectedTypes,
-      selectedFeatures,
+      selectedFeatures: displaySelectedFeatures,
       selectedColors,
       onlyBlack,
       workId: selectedWorkId
@@ -456,7 +476,9 @@ const App = () => {
 
       if (featuresFilter && matchesFilters(figure, featuresFilter)) {
         const byType = figure.featuresByType ?? {};
-        (byType[selectedFeatureType ?? ""] ?? []).forEach((item) => featureSet.add(item));
+        (byType[selectedFeatureType ?? ""] ?? []).forEach((item) =>
+          featureSet.add(normalizeFeatureForType(item, selectedFeatureType))
+        );
       }
 
       typeFilterById.forEach((filters, typeId) => {
@@ -504,7 +526,7 @@ const App = () => {
     onlyBlack,
     searchBaseAdvanced,
     selectedColors,
-    selectedFeatures,
+    displaySelectedFeatures,
     selectedFeatureType,
     selectedTypes,
     selectedWorkId,
@@ -539,7 +561,7 @@ const App = () => {
 
   const activeFilterCount =
     selectedTypes.length +
-    selectedFeatures.length +
+    displaySelectedFeatures.length +
     selectedColors.length +
     (onlyBlack ? 1 : 0);
 
@@ -605,7 +627,7 @@ const App = () => {
           colorCounts={colorCounts}
           colorSortCounts={colorSortCounts}
           selectedTypes={selectedTypes}
-          selectedFeatures={selectedFeatures}
+          selectedFeatures={displaySelectedFeatures}
           selectedColors={selectedColors}
           onlyBlack={onlyBlack}
           sortKey={sortKey}

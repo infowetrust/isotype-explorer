@@ -330,7 +330,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0086-f99_h0500.webp",
     "view": "/webp/views/w0001-p0086-f99_h2400.webp",
-    "title": "w0001-p0086-f99",
+    "title": "The Changing Home: Before",
     "types": [
       "bar"
     ],
@@ -368,7 +368,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0001-p0090-f99_h0500.webp",
     "view": "/webp/views/w0001-p0090-f99_h2400.webp",
-    "title": "The Changing Home To-day",
+    "title": "The Changing Home: To-day",
     "types": [
       "bar"
     ],
@@ -3032,14 +3032,12 @@
     "featuresByType": {
       "diagram": [
         "org",
-        "semi-circle",
-        "symbol"
+        "semi-circle"
       ]
     },
     "featuresFlat": [
       "org",
-      "semi-circle",
-      "symbol"
+      "semi-circle"
     ],
     "colors": [
       "red",
@@ -3194,14 +3192,12 @@
     "featuresByType": {
       "diagram": [
         "org",
-        "semi-circle",
-        "symbol"
+        "semi-circle"
       ]
     },
     "featuresFlat": [
       "org",
-      "semi-circle",
-      "symbol"
+      "semi-circle"
     ],
     "colors": [
       "blue",
@@ -3473,13 +3469,11 @@
     "isCombo": false,
     "featuresByType": {
       "diagram": [
-        "org",
-        "symbol"
+        "org"
       ]
     },
     "featuresFlat": [
-      "org",
-      "symbol"
+      "org"
     ],
     "colors": [
       "blue",
@@ -3735,7 +3729,6 @@
     "featuresByType": {
       "diagram": [
         "org",
-        "symbol",
         "flow"
       ],
       "bar": [
@@ -3745,7 +3738,6 @@
     },
     "featuresFlat": [
       "org",
-      "symbol",
       "flow",
       "pictorial",
       "unit"
@@ -3785,7 +3777,6 @@
     "isCombo": true,
     "featuresByType": {
       "diagram": [
-        "symbol",
         "flow"
       ],
       "bar": [
@@ -3796,7 +3787,6 @@
     "featuresFlat": [
       "pictorial",
       "unit",
-      "symbol",
       "flow"
     ],
     "colors": [
@@ -4261,6 +4251,470 @@
     ]
   },
   {
+    "id": "w0010-p0025-01",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0025-01_h0500.webp",
+    "view": "/webp/views/w0010-p0025-01_h2400.webp",
+    "title": "Changing Industry",
+    "types": [
+      "diagram",
+      "timeline"
+    ],
+    "typesFlat": [
+      "diagram",
+      "timeline"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "symbol"
+      ],
+      "timeline": [
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "green",
+      "orange",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram",
+      "timeline"
+    ],
+    "originalCaption": "Hand-craftsmen in their own workshops gave place to factory-workers with steam-powered, belt-driven machinery. Electric power made it possible for machines to have individual motors, driven from local electricity-supply. Diesel engines, using coal converted into oil, gave power to isolated workshops, dependent however on the limitations of transport to maintain the fuel-supply. Atomic engines, self-contained and self-sustaining, can make industries \"foot-loose\" —geographically unfettered by natural power-resources."
+  },
+  {
+    "id": "w0010-p0026-01",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0026-01_h0500.webp",
+    "view": "/webp/views/w0010-p0026-01_h2400.webp",
+    "title": "Tomorrow's Energy ... and Today's",
+    "types": [
+      "volume",
+      "area"
+    ],
+    "typesFlat": [
+      "volume",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "volume": [
+        "cube"
+      ],
+      "area": [
+        "square"
+      ]
+    },
+    "featuresFlat": [
+      "cube",
+      "square"
+    ],
+    "colors": [
+      "gray",
+      "red",
+      "orange"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "volume",
+      "area"
+    ],
+    "originalCaption": "A comparison of the energy-values of coal and uranium. Uranium ore, obtained from pitchblende, consists of both U235 and U238. For every 140 parts of U238 is found one part of U235 which produces uranium fission and releases atomic energy. U235 is capable of releasing more than a million times as much energy as its equal weight of coal. Expressed in terms of equal weights of pitchblende and coal (see above), atomic energy is represented as 10,000 dots to the single speck of coal-energy. Extraction of uranium ore from ditchblende and the isolation of U235 from the ore involve elaborate and expensive processes and vast industrial pants and the atomic engine for converting energy into a motive power is still very primitive. In time it will be improved and atomic energy will be widely available."
+  },
+  {
+    "id": "w0010-p0026-02",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0026-02_h0500.webp",
+    "view": "/webp/views/w0010-p0026-02_h2400.webp",
+    "title": "Industrial Resources of Today",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map"
+    ],
+    "colors": [
+      "blue",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ],
+    "originalCaption": "The atomic engine, when perfected, will be self-supporting. Areas of the world which have remained undeveloped because of remoteness from sources of coal or oil or hydro-electric power will be opened up. Chart below (left), shows the distribution of iron and coal resources according to continents. Each blue symbol represents 5,000,000,000 tons of iron and each black symbol represents 250,000,000,000 tons of coal. Hitherto the distribution of industry has coincided with the distribution of iron and coal."
+  },
+  {
+    "id": "w0010-p0027-02",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0027-02_h0500.webp",
+    "view": "/webp/views/w0010-p0027-02_h2400.webp",
+    "title": "Industrial Development of Today",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map"
+    ],
+    "colors": [
+      "blue",
+      "gray",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ],
+    "originalCaption": "The right-hand chart expresses, in terms of population, the relative stages of development to-day. Each symbol represents 50,000,000 population. Red stands for modern industry; blue for ancient forms of handicraft and green for primitive forms. so while 750,000,000 people have been aftected by modern industry 1,200,000,000 have remained outside its influences. Atomic energy can provide motive power for industry anywhere. It will provide power sources for peoples now dependent on handcrats. It will open up new areas for agricultural development and raise the living standard of people everywhere. Plastics from growing plants and light metals which are scattered over the surface of the globe will be developed and will completely change the world pattern dictated by the coal-iron economy. Atomic dower can be used to move mountains, change river courses or create great dams. By changing contours it can even alter climate. So there's hope for us yet!"
+  },
+  {
+    "id": "w0010-p0028-00",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0028-00_h0500.webp",
+    "view": "/webp/views/w0010-p0028-00_h2400.webp",
+    "title": "Why Neutrons?",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "green",
+      "orange",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0010-p0049-00",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0049-00_h0500.webp",
+    "view": "/webp/views/w0010-p0049-00_h2400.webp",
+    "title": "The Structure of the Foreign Office",
+    "types": [
+      "diagram",
+      "map"
+    ],
+    "typesFlat": [
+      "diagram",
+      "map"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "symbol"
+      ],
+      "map": [
+        "choropleth"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "symbol",
+      "choropleth"
+    ],
+    "colors": [
+      "blue",
+      "green",
+      "orange",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram",
+      "map"
+    ],
+    "originalCaption": "At the top and right-hand side are the functional and administrative departments; across the bottom are the nine regional departments and also \"Communications\" which serves the whole organisation."
+  },
+  {
+    "id": "w0010-p0050-01",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0050-01_h0500.webp",
+    "view": "/webp/views/w0010-p0050-01_h2400.webp",
+    "title": "The Northern Department of the Foreign Office and its Missions Abroad",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "org",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "org",
+      "symbol"
+    ],
+    "colors": [
+      "blue",
+      "gray",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ],
+    "originalCaption": "Those serving in regional departments are not specially chosen for their personal knowledge of the countries concerned, but for experience in dealing with diplomatic problems on Foreign Office lines. When this chart was compiled only one of the permanent officials in the Northern Department had been stationed in a capital concerned."
+  },
+  {
+    "id": "w0010-p0059-00",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0059-00_h0500.webp",
+    "view": "/webp/views/w0010-p0059-00_h2400.webp",
+    "title": "World Films and Filmgoers",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0010-p0060-01",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0060-01_h0500.webp",
+    "view": "/webp/views/w0010-p0060-01_h2400.webp",
+    "title": "Monopolies of the British Film Industry",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "diverging"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "orange"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ],
+    "originalCaption": "Symbols on the left represent independent units. U.S. interests penetrate the Rank Organisation and the A.B.C. group in varying degrees-up to 37½% in the latter. Only independents are outside the U.S. sphere—there are no independent all-British newsreels."
+  },
+  {
+    "id": "w0010-p0060-02",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0060-02_h0500.webp",
+    "view": "/webp/views/w0010-p0060-02_h2400.webp",
+    "title": "London's West End Cinemas",
+    "types": [
+      "map",
+      "area"
+    ],
+    "typesFlat": [
+      "map",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "symbol"
+      ],
+      "area": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "symbol",
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "orange",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map",
+      "area"
+    ],
+    "originalCaption": "The symbols on the white ground represent seats in independently owned cinemas. Note that the A.B.C. group has no seats in the West End In addition to their own, American interests have a\nlarge stake in the Rank cinema circuits. The independent cinemas are almost all very small (under 600 seats) and five or six concentrate on foreign language films."
+  },
+  {
+    "id": "w0010-p0066-01",
+    "workId": "w0010",
+    "page": null,
+    "figureCode": null,
+    "thumb": "/webp/thumbs/w0010-p0066-01_h0500.webp",
+    "view": "/webp/views/w0010-p0066-01_h2400.webp",
+    "title": "Financial Structure of United States Film Industry",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "flow",
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "flow",
+      "symbol"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
     "id": "w0011-p0009-f01",
     "workId": "w0011",
     "page": 9,
@@ -4399,11 +4853,11 @@
     "isCombo": false,
     "featuresByType": {
       "map": [
-        "symbol"
+        "symbol-map"
       ]
     },
     "featuresFlat": [
-      "symbol"
+      "symbol-map"
     ],
     "colors": [
       "process"

@@ -41,7 +41,16 @@ const expandQuery = (query: string): string[] => {
 
 export const buildSearchIndex = (figures: FigureWithWork[]): SearchIndex => {
   const miniSearch = new MiniSearch<FigureWithWork>({
-    fields: ["ocrText", "aiDescription", "themes", "title", "workTitle", "types", "featuresFlat"],
+    fields: [
+      "ocrText",
+      "originalCaption",
+      "aiDescription",
+      "themes",
+      "title",
+      "workTitle",
+      "types",
+      "featuresFlat"
+    ],
     storeFields: ["id"],
     searchOptions: {
       boost: { title: 2, workTitle: 1.6, themes: 1.2 }

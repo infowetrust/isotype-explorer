@@ -25,6 +25,13 @@ export const extractFeatures = (figure: FigureWithWork): string[] => {
 const getSelectedBaseTypes = (selectedTypes: string[]): string[] =>
   selectedTypes.filter((type) => type !== "combo");
 
+const normalizeFeatureForType = (featureId: string, typeId: string | null): string => {
+  if (typeId === "map" && (featureId === "symbol" || featureId === "symbol-map")) {
+    return "symbol-map";
+  }
+  return featureId;
+};
+
 export const matchesFilters = (
   figure: FigureWithWork,
   filters: FiltersState
@@ -52,7 +59,13 @@ export const matchesFilters = (
     }
     const byType = figure.featuresByType ?? {};
     const features = byType[selectedType] ?? [];
-    if (!hasAny(features, filters.selectedFeatures)) {
+    const normalizedFeatures = features.map((featureId) =>
+      normalizeFeatureForType(featureId, selectedType)
+    );
+    const normalizedSelectedFeatures = filters.selectedFeatures.map((featureId) =>
+      normalizeFeatureForType(featureId, selectedType)
+    );
+    if (!hasAny(normalizedFeatures, normalizedSelectedFeatures)) {
       return false;
     }
   }

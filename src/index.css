@@ -547,6 +547,14 @@ button:focus-visible {
   background: #ffffff;
 }
 
+.color-chip:hover .color-chip-dot-process::before {
+  inset: 2px;
+}
+
+.color-chip:focus-visible .color-chip-dot-process::before {
+  inset: 2px;
+}
+
 .color-chip-dot-process .count-num {
   position: relative;
   z-index: 1;
