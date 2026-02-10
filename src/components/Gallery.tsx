@@ -88,6 +88,7 @@ const Gallery = ({
               if (yearA !== yearB) {
                 return sortKey === "newest" ? yearB - yearA : yearA - yearB;
               }
+              return a.workTitle.localeCompare(b.workTitle);
             }
             const diff = b.count - a.count;
             if (diff !== 0) {
