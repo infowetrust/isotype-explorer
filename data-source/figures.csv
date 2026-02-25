@@ -129,3 +129,14 @@ w0011,w0011-p0038-f01,Tootal's Production Pipelines,diagram,"process, flow","blu
 w0011,w0011-p0046-f01,Half a Century of World Sugar,"column, bar","column: pictorial, unit; bar: pictorial, unit, diverging","green, blue, red, gray"
 w0011,w0011-p0048-f01,World Sugar Market 1938-39,map,"chart-map, flow","green, blue, red, gray"
 w0011,w0011-p0048-f02,Caribbean Sugar in the World Market,"area, diagram","diagram: flow; area: unit, pictorial","green, blue, red"
+w0009,w0009-p0025-f00,The Soviet Union's Foreign Trade with Britain and U.S.A.,diagram,flow,"green, blue, red"
+w0009,w0009-p0026-f00,Each exports what the other needs,diagram,flow,"green, blue, red"
+w0009,w0009-p0032-f00,How Soviet Industry buys Foreign Equipment,diagram,process,"green, red"
+w0009,w0009-p0092-f00,Mountain Chains and Main Water Communications of South-East Europe,map,elevation,process
+w0009,w0009-p0093-f01,Railways and Secondary Roads,"column, bar","column: pictorial, unit, ratio; bar: pictorial, unit, ratio","green, red"
+w0009,w0009-p0093-f02,Food Production and Consumption,area,"pictorial, unit","green, blue, red"
+w0009,w0009-p0094-f01,Cross Sections of the Danube Valley,map,cross-section,"green, blue, red"
+w0009,w0009-p0096-f01,Infant Mortality,map,choropleth,black
+w0009,w0009-p0096-f02,Deaths of Infants Under One Year 1938,bar,"pictorial, unit, ratio",orange
+w0009,w0009-p0096-f03,Water Power—Used and Unused,map,chart-map,"blue, red"
+w0009,w0009-p0097-f00,The altitudes of South-East Europe,map,elevation,process

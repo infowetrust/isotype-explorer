@@ -4251,6 +4251,422 @@
     ]
   },
   {
+    "id": "w0009-p0025-f00",
+    "workId": "w0009",
+    "page": 25,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0009-p0025-f00_h0500.webp",
+    "view": "/webp/views/w0009-p0025-f00_h2400.webp",
+    "title": "The Soviet Union's Foreign Trade with Britain and U.S.A.",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "flow"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0009-p0026-f00",
+    "workId": "w0009",
+    "page": 26,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0009-p0026-f00_h0500.webp",
+    "view": "/webp/views/w0009-p0026-f00_h2400.webp",
+    "title": "Each exports what the other needs",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "flow"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0009-p0032-f00",
+    "workId": "w0009",
+    "page": 32,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0009-p0032-f00_h0500.webp",
+    "view": "/webp/views/w0009-p0032-f00_h2400.webp",
+    "title": "How Soviet Industry buys Foreign Equipment",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process"
+      ]
+    },
+    "featuresFlat": [
+      "process"
+    ],
+    "colors": [
+      "green",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0009-p0092-f00",
+    "workId": "w0009",
+    "page": 92,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0009-p0092-f00_h0500.webp",
+    "view": "/webp/views/w0009-p0092-f00_h2400.webp",
+    "title": "Mountain Chains and Main Water Communications of South-East Europe",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "elevation"
+      ]
+    },
+    "featuresFlat": [
+      "elevation"
+    ],
+    "colors": [
+      "process"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ],
+    "originalCaption": "This map is presented from an unusual aspect. North is to the right instead of at the top. The idea is to show the Danube Valley as the centre of the chart. The reader is looking up stream from the mouth of the river. The Danubian basin appears to be cut in two parts, connected only by the Iron Gate. It will be seen that the more important outlet to the Hungarian plain is southward to Salonika. The distribution of black symbols along the course of the Danube indicates the relative density of river traffic."
+  },
+  {
+    "id": "w0009-p0093-f01",
+    "workId": "w0009",
+    "page": 93,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0009-p0093-f01_h0500.webp",
+    "view": "/webp/views/w0009-p0093-f01_h2400.webp",
+    "title": "Railways and Secondary Roads",
+    "types": [
+      "column",
+      "bar"
+    ],
+    "typesFlat": [
+      "column",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "column": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ],
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "green",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "column",
+      "bar"
+    ],
+    "originalCaption": "Each man represents one-tenth of the total population. Red: urban. Green: rural. Each unit of length represents 1 metre of transport route for every 10 people. Red: railways. Green: secondary roads."
+  },
+  {
+    "id": "w0009-p0093-f02",
+    "workId": "w0009",
+    "page": 93,
+    "figureCode": 2,
+    "thumb": "/webp/thumbs/w0009-p0093-f02_h0500.webp",
+    "view": "/webp/views/w0009-p0093-f02_h2400.webp",
+    "title": "Food Production and Consumption",
+    "types": [
+      "area"
+    ],
+    "typesFlat": [
+      "area"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "area": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "area"
+    ],
+    "originalCaption": "FOOD PRODUCTION AND CONSUMPTION IN DENMARK-modern farming methods enable one agricultural worker to produce enough food for 4 people. Three-fourths of the total produced can therefore be exported. IN DANUBIA—one agricultural worker produces food for only 1½ people. But 50 per cent of the food produced is exported, leaving a 25 per cent deficiency for the home population."
+  },
+  {
+    "id": "w0009-p0094-f01",
+    "workId": "w0009",
+    "page": 94,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0009-p0094-f01_h0500.webp",
+    "view": "/webp/views/w0009-p0094-f01_h2400.webp",
+    "title": "Cross Sections of the Danube Valley",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "cross-section"
+      ]
+    },
+    "featuresFlat": [
+      "cross-section"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0009-p0096-f01",
+    "workId": "w0009",
+    "page": 96,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0009-p0096-f01_h0500.webp",
+    "view": "/webp/views/w0009-p0096-f01_h2400.webp",
+    "title": "Infant Mortality",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "choropleth"
+      ]
+    },
+    "featuresFlat": [
+      "choropleth"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0009-p0096-f02",
+    "workId": "w0009",
+    "page": 96,
+    "figureCode": 2,
+    "thumb": "/webp/thumbs/w0009-p0096-f02_h0500.webp",
+    "view": "/webp/views/w0009-p0096-f02_h2400.webp",
+    "title": "Deaths of Infants Under One Year 1938",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "orange"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0009-p0096-f03",
+    "workId": "w0009",
+    "page": 96,
+    "figureCode": 3,
+    "thumb": "/webp/thumbs/w0009-p0096-f03_h0500.webp",
+    "view": "/webp/views/w0009-p0096-f03_h2400.webp",
+    "title": "Water Power—Used and Unused",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map"
+    ],
+    "colors": [
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0009-p0097-f00",
+    "workId": "w0009",
+    "page": 97,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0009-p0097-f00_h0500.webp",
+    "view": "/webp/views/w0009-p0097-f00_h2400.webp",
+    "title": "The altitudes of South-East Europe",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "elevation"
+      ]
+    },
+    "featuresFlat": [
+      "elevation"
+    ],
+    "colors": [
+      "process"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ],
+    "originalCaption": "Altitudes are an important factor in the development of water power. Rivers running down mountain slopes can feed electric power stations and drive water mills and other devices which help man in his work. The steeper the gradient, the more forceful the fall of water; the greater the bulk of water, the more power available."
+  },
+  {
     "id": "w0010-p0025-01",
     "workId": "w0010",
     "page": null,
