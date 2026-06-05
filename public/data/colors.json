@@ -25,6 +25,11 @@
     "hex": "#8a8a8a"
   },
   {
+    "id": "process",
+    "label": "Process",
+    "hex": "#111111"
+  },
+  {
     "id": "only-black",
     "label": "Only black",
     "hex": "#111111"

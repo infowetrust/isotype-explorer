@@ -1,11 +1,27 @@
 [
   {
+    "id": "abstract",
+    "label": "Abstract"
+  },
+  {
+    "id": "building",
+    "label": "Building"
+  },
+  {
     "id": "chart-map",
     "label": "Chart map"
   },
   {
     "id": "choropleth",
     "label": "Choropleth"
+  },
+  {
+    "id": "cross-section",
+    "label": "Cross-section"
+  },
+  {
+    "id": "cube",
+    "label": "Cube"
   },
   {
     "id": "diverging",
@@ -20,8 +36,24 @@
     "label": "Dot map"
   },
   {
+    "id": "elevation",
+    "label": "Elevation"
+  },
+  {
+    "id": "flow",
+    "label": "Flow"
+  },
+  {
+    "id": "isarithmic",
+    "label": "Isarithmic"
+  },
+  {
     "id": "now-and-then",
     "label": "Now and then"
+  },
+  {
+    "id": "org",
+    "label": "Organizational"
   },
   {
     "id": "pictorial",
@@ -40,8 +72,20 @@
     "label": "Route map"
   },
   {
+    "id": "rectangle",
+    "label": "Rectangle"
+  },
+  {
+    "id": "semi-circle",
+    "label": "Semi-circle"
+  },
+  {
     "id": "snake",
     "label": "Snake"
+  },
+  {
+    "id": "square",
+    "label": "Square"
   },
   {
     "id": "stack",
@@ -60,8 +104,20 @@
     "label": "Symbol map"
   },
   {
+    "id": "temperature",
+    "label": "Temperature"
+  },
+  {
     "id": "timeline",
     "label": "Timeline"
+  },
+  {
+    "id": "timeline-snake",
+    "label": "Timeline snake"
+  },
+  {
+    "id": "triangle",
+    "label": "Triangle"
   },
   {
     "id": "unit",

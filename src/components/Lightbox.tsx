@@ -35,6 +35,8 @@ const Lightbox = ({
   const [isMobile, setIsMobile] = useState(
     window.matchMedia("(max-width: 600px)").matches
   );
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const sortedFigures = useMemo(
     () => sortFiguresByPage(figuresInWork),
@@ -72,9 +74,26 @@ const Lightbox = ({
   }, []);
 
   useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+
+    return () => {
+      document.body.style.overflow = "";
+      if (previouslyFocused instanceof HTMLElement) {
+        previouslyFocused.focus();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+      if (event.key === "Tab") {
+        trapFocus(event, dialogRef.current);
         return;
       }
       if (event.key === "ArrowLeft") {
@@ -157,15 +176,31 @@ const Lightbox = ({
   };
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" onClick={onClose}>
-      <div className="lightbox-inner" onClick={(event) => event.stopPropagation()}>
-        <button type="button" className="lightbox-close" onClick={onClose} aria-label="Close">
+    <div
+      className="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightbox-title"
+      onClick={onClose}
+    >
+      <div
+        className="lightbox-inner"
+        ref={dialogRef}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="lightbox-close"
+          onClick={onClose}
+          aria-label="Close"
+          ref={closeButtonRef}
+        >
           ×
         </button>
         <div className="lightbox-meta">
           <div className="lightbox-heading">
             <div>
-              <h2 className="lightbox-title">{figureTitle}</h2>
+              <h2 className="lightbox-title" id="lightbox-title">{figureTitle}</h2>
               {yearLine ? <div className="lightbox-year">{yearLine}</div> : null}
             </div>
           </div>
@@ -428,6 +463,37 @@ const getSiblingFigure = (
     return null;
   }
   return figures[nextIndex];
+};
+
+const getFocusableElements = (root: HTMLElement): HTMLElement[] =>
+  Array.from(
+    root.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.offsetParent !== null);
+
+const trapFocus = (event: KeyboardEvent, root: HTMLElement | null): void => {
+  if (!root) {
+    return;
+  }
+  const focusable = getFocusableElements(root);
+  if (!focusable.length) {
+    event.preventDefault();
+    root.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const active = document.activeElement;
+
+  if (event.shiftKey && active === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && active === last) {
+    event.preventDefault();
+    first.focus();
+  }
 };
 
 const formatAuthor = (value: string): string => {

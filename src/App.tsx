@@ -56,6 +56,8 @@ const App = () => {
   const [colors, setColors] = useState<ColorConfig[]>([]);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [aboutScrollTarget, setAboutScrollTarget] = useState<null | "terms">(null);
+  const aboutDialogRef = useRef<HTMLDivElement | null>(null);
+  const aboutCloseRef = useRef<HTMLButtonElement | null>(null);
   const termsRef = useRef<HTMLDetailsElement | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(
@@ -303,9 +305,29 @@ const App = () => {
     if (!aboutOpen) {
       return;
     }
+    const previouslyFocused = document.activeElement;
+    document.body.style.overflow = "hidden";
+    window.setTimeout(() => aboutCloseRef.current?.focus(), 0);
+
+    return () => {
+      document.body.style.overflow = "";
+      if (previouslyFocused instanceof HTMLElement) {
+        previouslyFocused.focus();
+      }
+    };
+  }, [aboutOpen]);
+
+  useEffect(() => {
+    if (!aboutOpen) {
+      return;
+    }
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         handleAboutClose();
+        return;
+      }
+      if (event.key === "Tab") {
+        trapFocus(event, aboutDialogRef.current);
       }
     };
     window.addEventListener("keydown", handleKey);
@@ -741,13 +763,24 @@ const App = () => {
           className="about-modal"
           role="dialog"
           aria-modal="true"
+          aria-labelledby="about-title"
           onClick={handleAboutClose}
         >
-          <div className="about-card" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="about-close" onClick={handleAboutClose}>
+          <div
+            className="about-card"
+            ref={aboutDialogRef}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="about-close"
+              onClick={handleAboutClose}
+              aria-label="Close"
+              ref={aboutCloseRef}
+            >
               ×
             </button>
-            <h2>About</h2>
+            <h2 id="about-title">About</h2>
             <p>
               Isotype is a method of showing pictorial information. It consists of standardized methods and abstracted symbols to represent social-scientific data. It was first known as the Vienna Method of Pictorial Statistics due to its 1920s origins at the Gesellschafts-und Wirtschaftsmuseum in Wien (Social and Economic Museum of Vienna). The term Isotype was applied to the method in the 1930s, after its key practitioners were forced to leave Vienna by the rise of Austrian fascism.
             </p>
@@ -844,3 +877,34 @@ const App = () => {
 };
 
 export default App;
+
+const getFocusableElements = (root: HTMLElement): HTMLElement[] =>
+  Array.from(
+    root.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.offsetParent !== null);
+
+const trapFocus = (event: KeyboardEvent, root: HTMLElement | null): void => {
+  if (!root) {
+    return;
+  }
+  const focusable = getFocusableElements(root);
+  if (!focusable.length) {
+    event.preventDefault();
+    root.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const active = document.activeElement;
+
+  if (event.shiftKey && active === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && active === last) {
+    event.preventDefault();
+    first.focus();
+  }
+};
