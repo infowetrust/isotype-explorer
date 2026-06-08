@@ -412,9 +412,9 @@ def main() -> int:
     if args.limit:
         candidates = candidates[: args.limit]
 
-    print(f"Selected {len(candidates)} figure(s).")
+    print(f"Selected {len(candidates)} figure(s).", flush=True)
     for figure in candidates:
-        print(f"  - {figure.get('id')}")
+        print(f"  - {figure.get('id')}", flush=True)
 
     if args.dry_run:
         return 0
@@ -468,13 +468,11 @@ def main() -> int:
         )
         existing[figure_id] = record
         updated += 1
-        print(f"{figure_id}: ok")
+        save_json(Path(args.output), existing)
+        print(f"{figure_id}: ok", flush=True)
 
         if args.sleep > 0:
             time.sleep(args.sleep)
-
-    if updated:
-        save_json(Path(args.output), existing)
 
     print(f"Updated {updated} record(s).")
     print(f"Output: {args.output}")
