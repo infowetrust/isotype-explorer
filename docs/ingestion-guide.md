@@ -2,6 +2,7 @@
 
 This guide covers adding new works and figures to the Isotype Explorer from:
 
+- Local source images processed through the per-work image folders.
 - WEBP derivatives already prepared for the site.
 - A Google Sheet with `works`, `figures`, and `captions` tabs.
 
@@ -24,6 +25,8 @@ Site repository:
 For one work, the source workspace commonly looks like this:
 
 ```sh
+/Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/01-raw-iphone/
+/Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/02-pages-png/
 /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/03-charts-png/
 /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/04-webp/thumbs/
 /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/04-webp/views/
@@ -38,6 +41,95 @@ The site repository must receive:
 /Users/rja19/Documents/github/isotype-charts/data-source/figures.csv
 /Users/rja19/Documents/github/isotype-charts/data-source/captions.csv
 ```
+
+## Source Image Workflow
+
+Each work folder moves forward through four local image folders. The folders are not all copied into the site; they are the working pipeline that produces the final WEBPs.
+
+```text
+01-raw-iphone/
+02-pages-png/
+03-charts-png/
+04-webp/
+  thumbs/
+  views/
+```
+
+Create the folder structure for a new work if it does not already exist:
+
+```sh
+mkdir -p /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/01-raw-iphone
+mkdir -p /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/02-pages-png
+mkdir -p /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/03-charts-png
+mkdir -p /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/04-webp/thumbs
+mkdir -p /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012/04-webp/views
+```
+
+### 01-raw-iphone
+
+Put the original iPhone captures here.
+
+Process these images in Camera Raw:
+
+- Apply the color profile created with Calibrite.
+- Make light exposure edits.
+- Set white balance with the eyedropper.
+
+This folder remains the source/raw archive for the work.
+
+### 02-pages-png
+
+Export page images from Adobe Bridge into this folder.
+
+Use Adobe Bridge's `Export to PNG` function after the Camera Raw edits are set.
+
+These PNGs are page-level images, not final chart crops.
+
+### 03-charts-png
+
+Create one cropped PNG per figure here.
+
+Work from the page PNGs and rename the cropped figure files with the final figure id:
+
+```text
+w0012-p0003-f00.png
+w0012-p0006-f99.png
+w0012-p0084-f01.png
+w0012-p0084-f02.png
+```
+
+Figure-code convention:
+
+- `f99`: one figure spans a spread gutter. Stitch the spread together in Photoshop before cropping.
+- `f00`: one figure is the only figure on that page.
+- `f01`: first figure on a page.
+- `f02`: second figure on a page.
+- Continue `f03`, `f04`, etc. when a page has more figures.
+
+Crop each image to the figure itself. The filename stem must become the `figure_id` used in `figures.csv`.
+
+### 04-webp
+
+Generate site WEBP derivatives from `03-charts-png/` using the local script:
+
+```sh
+python3 /Users/rja19/Documents/PROJECTS/2026-book_explorer/make_webp_derivatives.py /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012
+```
+
+This creates:
+
+```text
+04-webp/thumbs/<figure_id>_h0500.webp
+04-webp/views/<figure_id>_h2400.webp
+```
+
+Use `--overwrite` only when you intentionally want to replace existing WEBPs:
+
+```sh
+python3 /Users/rja19/Documents/PROJECTS/2026-book_explorer/make_webp_derivatives.py --overwrite /Users/rja19/Documents/PROJECTS/2026-book_explorer/w0012
+```
+
+After this step, copy the WEBPs into the site repository as described below.
 
 ## Expected Filenames
 
