@@ -20,6 +20,11 @@
     "hex": "#e07a2d"
   },
   {
+    "id": "yellow",
+    "label": "Yellow",
+    "hex": "#f0c84b"
+  },
+  {
     "id": "gray",
     "label": "Gray",
     "hex": "#8a8a8a"

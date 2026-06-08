@@ -4,5 +4,33 @@
   "w0001-p0046-f99": "The image shows a double-page spread from a book titled \"Professions of Women in 1931.\" It is part of a series called \"The New Democracy,\" published in 1945. The chart on the left page is a bar graph comparing the number of women in various professions, with each bar representing a different profession and its length corresponding to the number of women in that field. On the right page, there's a pictorial representation of the same data, showing silhouettes of people in each profession. The chart uses red and blue bars for comparison, and it is divided into two sections: \"Unit\" and \"Pictorial.\"",
   "w0001-p0067-f00": "Here is a concise description of the image: The map shows the occupation of women in different regions of the United Kingdom in 1921. The data is encoded using color coding to represent various occupations, with symbols indicating the number of women engaged in each occupation within each region.",
   "w0001-p0070-f99": "Here is a concise, accessibility-focused description in exactly 2 sentences: The chart shows weekly earnings of men and women from 1960 to 1980, with blue dots representing average male wages and red dots representing average female wages. The data is encoded using colored dots and bars, with the years labeled along the top and the genders on the left side, and a gray scale used for unit labels.",
-  "w0001-p0074-f99": "Here is a concise, accessibility-focused description of the chart: The chart compares membership in trade unions across different countries, with each country represented by a colored bar corresponding to a specific color code for the number of members. Each bar is divided into sections representing different industries or occupations, and is encoded using bars and pictograms, with red, blue, and gray colors used to distinguish between different categories."
+  "w0001-p0074-f99": "Here is a concise, accessibility-focused description of the chart: The chart compares membership in trade unions across different countries, with each country represented by a colored bar corresponding to a specific color code for the number of members. Each bar is divided into sections representing different industries or occupations, and is encoded using bars and pictograms, with red, blue, and gray colors used to distinguish between different categories.",
+  "w0012-p0003-f00": {
+    "description": "The figure compares the settlement and population growth of Australia from early colonisation through the 1940s, highlighting migration, gold discoveries, transportation of convicts, and the spread of settlement across the continent. It uses a black-and-white timeline at right with pictorial symbols and a labeled map of Australia at left, with repeated human figures and other icons marking events and population amounts.",
+    "visibleTextSummary": "Title: Settlement in Australia; labels include white population in Australia, New Holland, Australia, gold found, assisted immigration, transportation of convicts ends, Commonwealth Constitution Act, Depression, Evian Conference, and a note that each symbol represents 100,000 persons.",
+    "needsReview": false,
+    "confidence": "high",
+    "notes": "",
+    "approved": false,
+    "source": "openai",
+    "model": "gpt-5.4-mini",
+    "detail": "low",
+    "imagePath": "public/webp/views/w0012-p0003-f00_h2400.webp",
+    "promptVersion": "2026-06-08-v1",
+    "generatedAt": "2026-06-08T15:11:09.243976+00:00"
+  },
+  "w0012-p0006-f99": {
+    "description": "A thematic map compares Australia’s vegetation, rainfall zones, and water-supply features across the continent. Rainfall bands are shown with broad translucent color regions, while symbols and colored lines mark towns, crops, livestock, rivers, dams, irrigation systems, mountains, and coastal waters.",
+    "visibleTextSummary": "Title about Australia, vegetation and water supply; rainfall bands under 10, 10–25, and over 25; labels for desert, grassland, cultivated land, towns, rivers, dams, irrigation systems, sheep, cattle, dairying, and crops like grapes, sugar, banana, pineapple, fruit, wheat, and timber.",
+    "needsReview": false,
+    "confidence": "high",
+    "notes": "",
+    "approved": false,
+    "source": "openai",
+    "model": "gpt-5.4-mini",
+    "detail": "low",
+    "imagePath": "public/webp/views/w0012-p0006-f99_h2400.webp",
+    "promptVersion": "2026-06-08-v1",
+    "generatedAt": "2026-06-08T15:11:12.826478+00:00"
+  }
 }

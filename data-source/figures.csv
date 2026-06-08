@@ -140,3 +140,16 @@ w0009,w0009-p0096-f01,Infant Mortality,map,choropleth,black
 w0009,w0009-p0096-f02,Deaths of Infants Under One Year 1938,bar,"pictorial, unit, ratio",orange
 w0009,w0009-p0096-f03,Water Power—Used and Unused,map,chart-map,"blue, red"
 w0009,w0009-p0097-f00,The altitudes of South-East Europe,map,elevation,process
+w0012,w0012-p0003-f00,Settlement in Australia,"map, timeline",map: chart-map; timeline: symbol,black
+w0012,w0012-p0006-f99,"Australia, Vegetation and Water Supply",map,"isarithmic, symbol-map",process
+w0012,w0012-p0049-f00,Britain's Commodity Exports must increase by 75 per cent—Why?,area,"unit, dot","green, red, blue, yellow, gray"
+w0012,w0012-p0050-f99,Commodities Exported,area,"pictorial, unit, dot","green, red, blue, yellow"
+w0012,w0012-p0052-f00,The British Market,bar,"pictorial, unit","red, green, blue"
+w0012,w0012-p0054-f00,"Trade in Electrical Goods, average 1936–38",diagram,flow,black
+w0012,w0012-p0055-f00,World Market for Bicycles,diagram,"flow, now-and-then",black
+w0012,w0012-p0056-f99,World Exports 1938,bar,"pictorial, unit",black
+w0012,w0012-p0061-f00,Reuters' Transmission of News,diagram,"process, flow, org","blue, red, yellow"
+w0012,w0012-p0062-f00,"Reuters' Main Office, Bureaux, Correspondents; Details for Europe and Mediterranean",map,symbol-map,"blue, red, green"
+w0012,w0012-p0083-f00,"Productivity of Land, 1938; Electricity Output by Regions and large Towns, 1939","map, area","map: chart-map; area: pictorial, unit, ratio","green, red"
+w0012,w0012-p0084-f01,Italian Emigrants seeking Work,bar,"pictorial, unit","blue, yellow"
+w0012,w0012-p0084-f02,Agricultural Land and Ownership,"area, bar","area: square, pictorial; bar: diverging","green, blue, red"

@@ -640,7 +640,7 @@
     "figureCode": 99,
     "thumb": "/webp/thumbs/w0002-p0068-f99_h0500.webp",
     "view": "/webp/views/w0002-p0068-f99_h2400.webp",
-    "title": "Social distribution of deaths from heart disease\nand tuberculosis",
+    "title": "Social distribution of deaths from heart disease\r\nand tuberculosis",
     "types": [
       "bar"
     ],
@@ -5674,5 +5674,524 @@
       "area",
       "diagram"
     ]
+  },
+  {
+    "id": "w0012-p0003-f00",
+    "workId": "w0012",
+    "page": 3,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0003-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0003-f00_h2400.webp",
+    "title": "Settlement in Australia",
+    "types": [
+      "map",
+      "timeline"
+    ],
+    "typesFlat": [
+      "map",
+      "timeline"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ],
+      "timeline": [
+        "symbol"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "symbol"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map",
+      "timeline"
+    ],
+    "originalCaption": "The first sixty years of colonisation saw rapid expansion on all sides: the white population increased from 1,019 in 1788 to 405,500 in 1850. From Sydney, Europeans gradually infiltrated west, north and south. The discovery in 1813 of a way over the Blue Mountains into the interior of New South Wales led to expansion of the wool-growing industry. In 1834, sheep farmers from Tasmania, settling in what is now Victoria, had soon occupied a thousand miles of country stretching north to the Queensland border, while two years later settlers from England founded South Australia. In the 1840's free or assisted migration from the British Isles brought more immigrants so that by 1850 a belt of settlement extended from Rockhampton in Queensland to Spencer Gulf."
+  },
+  {
+    "id": "w0012-p0006-f99",
+    "workId": "w0012",
+    "page": 6,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0012-p0006-f99_h0500.webp",
+    "view": "/webp/views/w0012-p0006-f99_h2400.webp",
+    "title": "Australia, Vegetation and Water Supply",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "isarithmic",
+        "symbol-map"
+      ]
+    },
+    "featuresFlat": [
+      "isarithmic",
+      "symbol-map"
+    ],
+    "colors": [
+      "process"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ]
+  },
+  {
+    "id": "w0012-p0049-f00",
+    "workId": "w0012",
+    "page": 49,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0049-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0049-f00_h2400.webp",
+    "title": "Britain's Commodity Exports must increase by 75 per cent—Why?",
+    "types": [
+      "area"
+    ],
+    "typesFlat": [
+      "area"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "area": [
+        "unit",
+        "dot"
+      ]
+    },
+    "featuresFlat": [
+      "unit",
+      "dot"
+    ],
+    "colors": [
+      "green",
+      "red",
+      "blue",
+      "yellow",
+      "gray"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "area"
+    ]
+  },
+  {
+    "id": "w0012-p0050-f99",
+    "workId": "w0012",
+    "page": 50,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0012-p0050-f99_h0500.webp",
+    "view": "/webp/views/w0012-p0050-f99_h2400.webp",
+    "title": "Commodities Exported",
+    "types": [
+      "area"
+    ],
+    "typesFlat": [
+      "area"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "area": [
+        "pictorial",
+        "unit",
+        "dot"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit",
+      "dot"
+    ],
+    "colors": [
+      "green",
+      "red",
+      "blue",
+      "yellow"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "area"
+    ],
+    "originalCaption": "Exports of food, coal and other raw materials, textiles, and iron and steel are not likely to show much increase over pre-war. This means that the deficiency in these will have to be made up from other goods such as those shown on the right. The reduced wartime exports emphasise the vastness of the post-war target."
+  },
+  {
+    "id": "w0012-p0052-f00",
+    "workId": "w0012",
+    "page": 52,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0052-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0052-f00_h2400.webp",
+    "title": "The British Market",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ],
+    "originalCaption": "One-half of British pre-war exports went to Empire countries; in some they accounted for up to 50 per cent of total imports. British exports to these countries can only be increased if their total import capacity is increased. Possible new markets include Russia, which took less than one per cent of British pre-war exports."
+  },
+  {
+    "id": "w0012-p0054-f00",
+    "workId": "w0012",
+    "page": 54,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0054-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0054-f00_h2400.webp",
+    "title": "Trade in Electrical Goods, average 1936–38",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "flow"
+      ]
+    },
+    "featuresFlat": [
+      "flow"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0012-p0055-f00",
+    "workId": "w0012",
+    "page": 55,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0055-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0055-f00_h2400.webp",
+    "title": "World Market for Bicycles",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "flow",
+        "now-and-then"
+      ]
+    },
+    "featuresFlat": [
+      "flow",
+      "now-and-then"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ]
+  },
+  {
+    "id": "w0012-p0056-f99",
+    "workId": "w0012",
+    "page": 56,
+    "figureCode": 99,
+    "thumb": "/webp/thumbs/w0012-p0056-f99_h0500.webp",
+    "view": "/webp/views/w0012-p0056-f99_h2400.webp",
+    "title": "World Exports 1938",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [],
+    "onlyBlack": true,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ]
+  },
+  {
+    "id": "w0012-p0061-f00",
+    "workId": "w0012",
+    "page": 61,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0061-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0061-f00_h2400.webp",
+    "title": "Reuters' Transmission of News",
+    "types": [
+      "diagram"
+    ],
+    "typesFlat": [
+      "diagram"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "diagram": [
+        "process",
+        "flow",
+        "org"
+      ]
+    },
+    "featuresFlat": [
+      "process",
+      "flow",
+      "org"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "yellow"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "diagram"
+    ],
+    "originalCaption": "The London headquarters of Reuters is the nerve centre of a world-wide organisation for the exchange of news. Chart shows the twelve teleprinters delivering their stream of telegrams which are read by an editor, known as a copy taster, who directs sub-editors as to the length and treatment of each news item."
+  },
+  {
+    "id": "w0012-p0062-f00",
+    "workId": "w0012",
+    "page": 62,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0062-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0062-f00_h2400.webp",
+    "title": "Reuters' Main Office, Bureaux, Correspondents; Details for Europe and Mediterranean",
+    "types": [
+      "map"
+    ],
+    "typesFlat": [
+      "map"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "map": [
+        "symbol-map"
+      ]
+    },
+    "featuresFlat": [
+      "symbol-map"
+    ],
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map"
+    ],
+    "originalCaption": "Messages from Reuter offices and correspondents all over the world reach London over the regular commercial cable channels and are relayed by teleprinter to Reuters' Fleet Street office. Nearly a third of the wordage received is rejected by the copy taster (see page 61), who must have a complete grasp of current affairs and an ability to assess news value, as well as a knowledge of the requirements of the world-wide list of Reuter subscribers."
+  },
+  {
+    "id": "w0012-p0083-f00",
+    "workId": "w0012",
+    "page": 83,
+    "figureCode": 0,
+    "thumb": "/webp/thumbs/w0012-p0083-f00_h0500.webp",
+    "view": "/webp/views/w0012-p0083-f00_h2400.webp",
+    "title": "Productivity of Land, 1938; Electricity Output by Regions and large Towns, 1939",
+    "types": [
+      "map",
+      "area"
+    ],
+    "typesFlat": [
+      "map",
+      "area"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "map": [
+        "chart-map"
+      ],
+      "area": [
+        "pictorial",
+        "unit",
+        "ratio"
+      ]
+    },
+    "featuresFlat": [
+      "chart-map",
+      "pictorial",
+      "unit",
+      "ratio"
+    ],
+    "colors": [
+      "green",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "map",
+      "area"
+    ],
+    "originalCaption": "It is usual to talk of the \"Agricultural South\" of Italy, but productivity of the land is actually higher in the North. This is due partly to the natural fertility of the soil; partly to the cheap supply of electricity from highly developed hydro-electric schemes. These facilitate modern irrigation systems and enable industry to provide better farm machinery which is so urgently needed."
+  },
+  {
+    "id": "w0012-p0084-f01",
+    "workId": "w0012",
+    "page": 84,
+    "figureCode": 1,
+    "thumb": "/webp/thumbs/w0012-p0084-f01_h0500.webp",
+    "view": "/webp/views/w0012-p0084-f01_h2400.webp",
+    "title": "Italian Emigrants seeking Work",
+    "types": [
+      "bar"
+    ],
+    "typesFlat": [
+      "bar"
+    ],
+    "isCombo": false,
+    "featuresByType": {
+      "bar": [
+        "pictorial",
+        "unit"
+      ]
+    },
+    "featuresFlat": [
+      "pictorial",
+      "unit"
+    ],
+    "colors": [
+      "blue",
+      "yellow"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "bar"
+    ],
+    "originalCaption": "Italy's population (146.9 to the square kilometre) is steadily rising; by 1970 will reach maximum of about 50 millions. Up to 1915 mass emigration alleviated Italy's demographic problem-peak year was 1913, with over 872,000 emigrants. Slumps and quota restrictions abroad reduced this flow to a trickle. Emigration to Italian colonies was negligible, required heavy subsidies. Australia, New Zealand, Canada, Brazil and France have some room-will they welcome Italians?"
+  },
+  {
+    "id": "w0012-p0084-f02",
+    "workId": "w0012",
+    "page": 84,
+    "figureCode": 2,
+    "thumb": "/webp/thumbs/w0012-p0084-f02_h0500.webp",
+    "view": "/webp/views/w0012-p0084-f02_h2400.webp",
+    "title": "Agricultural Land and Ownership",
+    "types": [
+      "area",
+      "bar"
+    ],
+    "typesFlat": [
+      "area",
+      "bar"
+    ],
+    "isCombo": true,
+    "featuresByType": {
+      "area": [
+        "square",
+        "pictorial"
+      ],
+      "bar": [
+        "diverging"
+      ]
+    },
+    "featuresFlat": [
+      "square",
+      "pictorial",
+      "diverging"
+    ],
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "onlyBlack": false,
+    "themes": [],
+    "aiDescription": null,
+    "ocrText": null,
+    "workYear": 1946,
+    "typeTokens": [
+      "area",
+      "bar"
+    ],
+    "originalCaption": "The chart shows how in 1930 over 25,000,000 hectares of farm land in Italy were divided between North, South and centre, and between estates, large, small and medium. The same total can be broken down roughly as follows: one-tenth owned by ecclesiastical bodies; one-fifth, other public bodies; one-ninth, titled families; one-twenty-sixth, banks and companies; one-thirteenth \"capitalist peasants\"; one-third, other \"bourgeois\" interests; one-eighth, medium peasants; one-tenth, small and poor peasants; and one fifteenth, allotments."
   }
 ]

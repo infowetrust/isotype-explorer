@@ -273,7 +273,7 @@ If you want OCR to prefer original PNGs from the source workspace when available
 python3 scripts/ocr_views.py --png-root /Users/rja19/Documents/PROJECTS/2026-book_explorer
 ```
 
-## Step 5: Optional AI Descriptions
+## Step 5: AI Descriptions
 
 Descriptions are stored in:
 
@@ -281,30 +281,44 @@ Descriptions are stored in:
 public/data/descriptions.json
 ```
 
-This is optional and slower. It requires Ollama running locally with the configured models:
+Use the OpenAI script for the main description workflow. Generated records are stored for review and are marked `approved: false` by default, so they will not appear in the site until reviewed.
+
+```sh
+export OPENAI_API_KEY="..."
+python3 scripts/describe_views_openai.py --limit 5
+```
+
+Preview which figures would be processed without calling the API:
+
+```sh
+python3 scripts/describe_views_openai.py --limit 5 --dry-run
+```
+
+Process specific figure ids:
+
+```sh
+python3 scripts/describe_views_openai.py --ids w0012-p0003-f00,w0012-p0006-f99
+```
+
+Regenerate existing description records only when intended:
+
+```sh
+python3 scripts/describe_views_openai.py --ids w0012-p0003-f00 --force
+```
+
+After reviewing a generated record in `public/data/descriptions.json`, set `approved` to `true`. Then rebuild site data so approved descriptions merge into `public/data/figures.json`:
+
+```sh
+python3 scripts/build_data.py
+```
+
+For local/offline fallback, the older Ollama script still exists:
 
 ```sh
 ollama serve
 ollama pull llava:7b
 ollama pull llama3.1:8b
-```
-
-Trial run:
-
-```sh
 python3 scripts/describe_views_ollama.py --limit 5
-```
-
-Full run:
-
-```sh
-python3 scripts/describe_views_ollama.py
-```
-
-Regenerate existing descriptions only when intended:
-
-```sh
-python3 scripts/describe_views_ollama.py --force
 ```
 
 ## Step 6: Validate

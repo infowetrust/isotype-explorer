@@ -6,6 +6,7 @@ Inputs (default):
   data-source/works.csv
   data-source/figures.csv
   data-source/captions.csv
+  public/data/descriptions.json
 
 Outputs:
   public/data/works.json
@@ -284,10 +285,42 @@ def build_captions(rows: List[Dict[str, str]]) -> Dict[str, str]:
     return dict(sorted(captions_by_id.items()))
 
 
+def load_descriptions(
+    path: Path,
+    include_unreviewed: bool = False,
+) -> Dict[str, str]:
+    if not path.exists():
+        return {}
+    with path.open("r", encoding="utf-8") as handle:
+        raw = json.load(handle)
+    if not isinstance(raw, dict):
+        raise ValueError("Descriptions JSON must be an object keyed by figure id.")
+
+    descriptions: Dict[str, str] = {}
+    for raw_id, value in raw.items():
+        fig_id = normalize_figure_id(str(raw_id))
+        if not fig_id:
+            continue
+
+        description = ""
+        approved = False
+        if isinstance(value, str):
+            description = clean_cell(value)
+            approved = include_unreviewed
+        elif isinstance(value, dict):
+            description = clean_cell(value.get("description"))
+            approved = bool(value.get("approved")) or include_unreviewed
+
+        if description and approved:
+            descriptions[fig_id] = description
+    return descriptions
+
+
 def build_figures(
     rows: List[Dict[str, str]],
     works_by_id: Dict[str, Dict[str, Any]],
-    captions_by_id: Dict[str, str]
+    captions_by_id: Dict[str, str],
+    descriptions_by_id: Dict[str, str],
 ) -> List[Dict[str, Any]]:
     figures: List[Dict[str, Any]] = []
 
@@ -360,7 +393,11 @@ def build_figures(
 
         # Optional long text columns (if you add later)
         ocr_text = get_first(r, "ocr_text", "ocr", "figure_text", "figure text", default="") or None
-        ai_description = get_first(r, "ai_description", "ai description", default="") or None
+        ai_description = (
+            get_first(r, "ai_description", "ai description", default="")
+            or descriptions_by_id.get(fig_id)
+            or None
+        )
         themes_raw = get_first(r, "themes", "topic themes", "topic_themes", default="")
         themes = [clean_cell(x) for x in split_csvish(themes_raw)]
 
@@ -414,6 +451,16 @@ def main() -> None:
     parser.add_argument("--works", default="data-source/works.csv", help="Path to works.csv")
     parser.add_argument("--figures", default="data-source/figures.csv", help="Path to figures.csv")
     parser.add_argument("--captions", default="data-source/captions.csv", help="Path to captions.csv")
+    parser.add_argument(
+        "--descriptions",
+        default="public/data/descriptions.json",
+        help="Path to reviewed descriptions JSON.",
+    )
+    parser.add_argument(
+        "--include-unreviewed-descriptions",
+        action="store_true",
+        help="Merge legacy string descriptions and unapproved generated records.",
+    )
     parser.add_argument("--out", default="public/data", help="Output folder for JSON files")
     args = parser.parse_args()
 
@@ -421,6 +468,7 @@ def main() -> None:
     works_path = (repo_root / args.works).resolve()
     figures_path = (repo_root / args.figures).resolve()
     captions_path = (repo_root / args.captions).resolve()
+    descriptions_path = (repo_root / args.descriptions).resolve()
     out_dir = (repo_root / args.out).resolve()
 
     if not works_path.exists():
@@ -435,8 +483,12 @@ def main() -> None:
     works = build_works(works_rows)
     works_by_id = {w["workId"]: w for w in works}
     captions_by_id = build_captions(caption_rows)
+    descriptions_by_id = load_descriptions(
+        descriptions_path,
+        include_unreviewed=args.include_unreviewed_descriptions,
+    )
 
-    figures = build_figures(fig_rows, works_by_id, captions_by_id)
+    figures = build_figures(fig_rows, works_by_id, captions_by_id, descriptions_by_id)
 
     # warnings: figures referencing unknown works
     missing_works = sorted({f["workId"] for f in figures if f.get("workId") and f["workId"] not in works_by_id})
