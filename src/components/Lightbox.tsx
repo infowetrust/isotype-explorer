@@ -239,7 +239,7 @@ const Lightbox = ({
               ) : null}
               {figure.aiDescription ? (
                 <div className="meta-block">
-                  <div className="meta-label">AI description</div>
+                  <div className="meta-label">Image description</div>
                   <div className="meta-value">{figure.aiDescription}</div>
                 </div>
               ) : null}
@@ -288,7 +288,7 @@ const Lightbox = ({
               ) : null}
               {figure.aiDescription ? (
                 <div className="meta-block">
-                  <div className="meta-label">AI description</div>
+                  <div className="meta-label">Image description</div>
                   <div className="meta-value">{figure.aiDescription}</div>
                 </div>
               ) : null}

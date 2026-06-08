@@ -39,9 +39,26 @@ const expandQuery = (query: string): string[] => {
   return Array.from(variants);
 };
 
+const stringifyField = (value: unknown): string => {
+  if (Array.isArray(value)) {
+    return value.join(" ");
+  }
+  if (value === null || value === undefined) {
+    return "";
+  }
+  return String(value);
+};
+
 export const buildSearchIndex = (figures: FigureWithWork[]): SearchIndex => {
   const miniSearch = new MiniSearch<FigureWithWork>({
     fields: [
+      "id",
+      "workId",
+      "workYear",
+      "workAuthors",
+      "workPublisher",
+      "workPublisherCity",
+      "workSeries",
       "ocrText",
       "originalCaption",
       "aiDescription",
@@ -51,9 +68,20 @@ export const buildSearchIndex = (figures: FigureWithWork[]): SearchIndex => {
       "types",
       "featuresFlat"
     ],
+    extractField: (figure, fieldName) =>
+      stringifyField(figure[fieldName as keyof FigureWithWork]),
     storeFields: ["id"],
     searchOptions: {
-      boost: { title: 2, workTitle: 1.6, themes: 1.2 }
+      boost: {
+        id: 2.4,
+        workId: 2,
+        title: 2,
+        workTitle: 1.6,
+        workYear: 1.4,
+        workAuthors: 1.3,
+        workSeries: 1.3,
+        themes: 1.2
+      }
     }
   });
 
