@@ -55,6 +55,8 @@ Each work folder moves forward through four local image folders. The folders are
   views/
 ```
 
+Newer work folders use `01-raw-iphone`. Earlier folders `w0001` through `w0008` currently use `01-raw_iphone`; treat that as older naming, not the convention for new work folders.
+
 Create the folder structure for a new work if it does not already exist:
 
 ```sh
